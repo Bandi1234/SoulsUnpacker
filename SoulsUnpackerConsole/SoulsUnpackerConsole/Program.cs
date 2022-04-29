@@ -1,5 +1,6 @@
 ﻿using System;
 using SoulsUnpackTools;
+using System.IO;
 
 namespace SoulsUnpackerConsole {
     internal class Program {
@@ -55,10 +56,10 @@ namespace SoulsUnpackerConsole {
                         RepackTextMenu();
                         break;
                     case 3:
-                        UnpackFontMenu();
+                        SetupFontUnpack();
                         break;
                     case 4:
-                        RepackFontMenu();
+                        SetupFontRepack();
                         break;
                     case 5:
                         About();
@@ -72,19 +73,61 @@ namespace SoulsUnpackerConsole {
         }
 
         static void UnpackTextMenu() {
+            while (true) {
+                Console.Clear();
+                string[] options = { "Unpack to raw text", "Unpack to pure text", "Back" };
+                for (int i = 0; i < options.Length; i++) {
+                    if (i < options.Length - 1) {
+                        Console.WriteLine("(" + (i + 1) + ") " + options[i]);
+                    } else {
+                        Console.WriteLine("(0) " + options[i]);
+                    }
+                }
 
+                int choice = GetKeyNum(Console.ReadKey().Key);
+                if (choice == -1 || choice >= options.Length) {
+                    continue;
+                }
+
+                switch (choice) {
+                    case 0: return;
+                    case 1:
+                        SetupRawUnpack();
+                        return;
+                    case 2:
+                        SetupPureUnpack();
+                        return;
+                }
+            }
         }
 
-        static void RepackTextMenu() { 
-            
-        }
+        static void RepackTextMenu() {
+            while (true) {
+                Console.Clear();
+                string[] options = { "Repack from raw text", "Repack from pure text", "Back" };
+                for (int i = 0; i < options.Length; i++) {
+                    if (i < options.Length - 1) {
+                        Console.WriteLine("(" + (i + 1) + ") " + options[i]);
+                    } else {
+                        Console.WriteLine("(0) " + options[i]);
+                    }
+                }
 
-        static void UnpackFontMenu() { 
-            
-        }
+                int choice = GetKeyNum(Console.ReadKey().Key);
+                if (choice == -1 || choice >= options.Length) {
+                    continue;
+                }
 
-        static void RepackFontMenu() { 
-            
+                switch (choice) {
+                    case 0: return;
+                    case 1:
+                        SetupRawRepack();
+                        return;
+                    case 2:
+                        SetupPureRepack();
+                        return;
+                }
+            }
         }
 
         static void About() {
@@ -103,6 +146,188 @@ namespace SoulsUnpackerConsole {
                     break;
                 }
             }
+        }
+
+        static void SetupRawUnpack() {
+            Console.Clear();
+
+            if (!File.Exists("item.msgbnd.dcx") || !File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Couldn't find dark souls msgbnd files.");
+                Console.WriteLine("Please place both item.msgbnd.dcx and menu.msgbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item.msgbnd.dcx and menu.msgbnd.dcx found!");
+
+            if (Directory.Exists("item")) {
+                Console.WriteLine("Deleting old /item folder...");
+                Directory.Delete("item", true);
+            }
+            if (Directory.Exists("menu")) {
+                Console.WriteLine("Deleting old /menu folder...");
+                Directory.Delete("menu", true);
+            }
+
+            //TODO setup listeners
+            //TODO unpack raw
+
+            Console.Clear();
+            Console.WriteLine("Finished unpacking raw text into /item and /menu");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        static void SetupPureUnpack() {
+            Console.Clear();
+
+            if (!File.Exists("item.msgbnd.dcx") || !File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Couldn't find dark souls msgbnd files.");
+                Console.WriteLine("Please place both item.msgbnd.dcx and menu.msgbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item.msgbnd.dcx and menu.msgbnd.dcx found!");
+
+            if (Directory.Exists("item")) {
+                Console.WriteLine("Deleting old /item folder...");
+                Directory.Delete("item", true);
+            }
+            if (Directory.Exists("menu")) {
+                Console.WriteLine("Deleting old /menu folder...");
+                Directory.Delete("menu", true);
+            }
+
+            //TODO setup listeners
+            //TODO unpack pure
+
+            Console.Clear();
+            Console.WriteLine("Finished unpacking pure text into /item and /menu");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        static void SetupRawRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("item") || !Directory.Exists("menu")) {
+                Console.WriteLine("Couldn't find raw text libraries.");
+                Console.WriteLine("Please place both your item and menu folders in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item and menu folders found!");
+
+            if (File.Exists("item.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old item dcx...");
+                File.Delete("item.msgbnd.dcx");
+            }
+            if (File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old menu dcx...");
+                File.Delete("menu.msgbnd.dcx");
+            }
+
+            //TODO setup listeners
+            //TODO repack raw
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking raw text into item.msgbnd.dcx and menu.msgbnd.dcx");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        static void SetupPureRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("item") || !Directory.Exists("menu")) {
+                Console.WriteLine("Couldn't find pure text libraries.");
+                Console.WriteLine("Please place both your item and menu folders in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item and menu folders found!");
+
+            if (File.Exists("item.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old item dcx...");
+                File.Delete("item.msgbnd.dcx");
+            }
+            if (File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old menu dcx...");
+                File.Delete("menu.msgbnd.dcx");
+            }
+
+            //TODO setup listeners
+            //TODO repack pure
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking pure text into item.msgbnd.dcx and menu.msgbnd.dcx");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        static void SetupFontUnpack() {
+            Console.Clear();
+
+            if (!File.Exists("DSFont24.ccm.dcx") || !File.Exists("TalkFont24.tpf.dcx")) {
+                Console.WriteLine("Couldn't find DS font files.");
+                Console.WriteLine("Please place DSFont24.ccm.dcx and Talkfont24.tpf.dcx in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("DSFont24.ccm.dcx and Talkfont24.tpf.dcx found!");
+
+            if (Directory.Exists("DSFont24_TPF")) {
+                Console.WriteLine("Deleting old /DSFont24_TPF...");
+                Directory.Delete("DSFont24_TPF", true);
+            }
+
+            if (Directory.Exists("TalkFont24_TPF")) {
+                Console.WriteLine("Deleting old /TalkFont24_TPF...");
+                Directory.Delete("TalkFont24_TPF", true);
+            }
+
+            //TODO setup listeners
+            //TODO unpack font
+
+            Console.Clear();
+            Console.WriteLine("Finished unpacking fonts into /DSFont24_TPF and /TalkFont24_TPF");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        static void SetupFontRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("DSFont24_TPF") || !Directory.Exists("TalkFont24_TPF")) {
+                Console.WriteLine("Couldn't find DS font libraries.");
+                Console.WriteLine("Please place both your DSFont24_TPF and TalkFont24_TPF folders in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("DSFont24_TPF and Talkfont24_TPF folders found!");
+
+            if (File.Exists("DSFont24.ccm.dcx")) {
+                Console.WriteLine("Deleting old DSFont24.ccm.dcx...");
+                File.Delete("DSFont24.ccm.dcx");
+            }
+
+            if (File.Exists("TalkFont24.ccm.dcx")) {
+                Console.WriteLine("Deleting old TalkFont24.ccm.dcx...");
+                File.Delete("TalkFont24.ccm.dcx");
+            }
+
+            //TODO setup listeners
+            //TODO repack font
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking fonts into DSFont24.ccm.dcx and TalkFont24.ccm.dcx");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
         }
 
         static int GetKeyNum(ConsoleKey key) {
