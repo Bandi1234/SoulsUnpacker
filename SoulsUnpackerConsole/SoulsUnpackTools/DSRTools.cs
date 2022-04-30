@@ -59,6 +59,88 @@ namespace SoulsUnpackTools {
             }
         }
 
+        public static void RepackRawText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, TextObserver observer) { 
+            
+            string[] itemFolders = Directory.GetDirectories(itemFolder);
+            string[] menuFolders = Directory.GetDirectories(menuFolder);
+
+            int maxItemEntries = 0;
+            int itemEntries = 0;
+            int maxMenuEntries = 0;
+            int menuEntries = 0;
+
+            foreach (string folder in itemFolders) {
+                maxItemEntries += Directory.GetFiles(folder).Length;
+            }
+            foreach (string folder in menuFolders) {
+                maxMenuEntries += Directory.GetFiles(folder).Length;                
+            }
+
+            observer.onItemStart(maxItemEntries);
+
+            BND3 itemBnd = new BND3();
+            itemBnd.Version = "07D7R6";
+            foreach (string folder in itemFolders) {
+                FMG fmg = new FMG();
+                fmg.Version = FMG.FMGVersion.DarkSouls1;
+                fmg.Compression = DCX.Type.None;
+                string[] files = Directory.GetFiles(folder);
+                foreach (string file in files) {
+                    int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
+                    StreamReader sr = new StreamReader(file);
+                    string full = sr.ReadToEnd();
+                    sr.Close();
+                    FMG.Entry entry = new FMG.Entry(id, full);
+                    fmg.Entries.Add(entry);
+                    itemEntries++;
+                    observer.onItemProgress(itemEntries, maxItemEntries);
+                }
+                BinderFile bFile = new BinderFile();
+                string fName = folder.Split('\\').Last().Split('€').Last();
+                string fId = folder.Split('\\').Last().Split('€').First();
+                bFile.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fName + ".fmg";
+                bFile.ID = int.Parse(fId);
+                bFile.CompressionType = DCX.Type.Zlib;
+                bFile.Bytes = fmg.Write();
+                itemBnd.Files.Add(bFile);
+            }
+            File.Create(itemTarget).Close();
+            File.WriteAllBytes(itemTarget, DCX.Compress(itemBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+
+            observer.onMenuStart(maxMenuEntries);
+
+            BND3 menuBnd = new BND3();
+            menuBnd.Version = "07D7R6";
+            foreach (string folder in menuFolders) {
+                FMG fmg = new FMG();
+                fmg.Version = FMG.FMGVersion.DarkSouls1;
+                fmg.Compression = DCX.Type.None;
+                string[] files = Directory.GetFiles(folder);
+                foreach (string file in files) {
+                    int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
+                    StreamReader sr = new StreamReader(file);
+                    string full = sr.ReadToEnd();
+                    sr.Close();
+                    FMG.Entry entry = new FMG.Entry(id, full);
+                    fmg.Entries.Add(entry);
+                    menuEntries++;
+                    observer.onMenuProgress(menuEntries, maxMenuEntries);
+                }
+                BinderFile bFile = new BinderFile();
+                string fName = folder.Split('\\').Last().Split('€').Last();
+                string fId = folder.Split('\\').Last().Split('€').First();
+                bFile.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fName + ".fmg";
+                bFile.ID = int.Parse(fId);
+                bFile.CompressionType = DCX.Type.Zlib;
+                bFile.Bytes = fmg.Write();
+                menuBnd.Files.Add(bFile);
+            }
+            File.Create(menuTarget).Close();
+            File.WriteAllBytes(menuTarget, DCX.Compress(menuBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+
+
+        }
+
         private class FmgHandler {
             public FMG fmgData;
             public string name;
