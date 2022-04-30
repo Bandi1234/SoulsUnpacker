@@ -169,8 +169,13 @@ namespace SoulsUnpackerConsole {
             }
 
             //TODO setup listeners
-            DSRTools.UnpackRawText("item.msgbnd.dcx", "menu.msgbnd.dcx", "item", "menu", (string status, int current, int max) => {
-                
+            ConsoleLoadingBar lb = new ConsoleLoadingBar("Unpacking raw text...", 0, 0);
+            DSRTools.UnpackRawText("item.msgbnd.dcx", "menu.msgbnd.dcx", "item", "menu", (int current, int max) => {
+                if (current == 0) {
+                    lb = new ConsoleLoadingBar("Unpacking raw text...", current, max);
+                } else {
+                    lb.Update(current);
+                }
             });
 
             Console.Clear();

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SoulsUnpackTools {
     public static class DSRTools {
-        public static void UnpackRawText(string itemSource, string menuSource, string itemTarget, string menuTarget, Action<string, int, int> onProgress) {
+        public static void UnpackRawText(string itemSource, string menuSource, string itemTarget, string menuTarget, Action<int, int> onProgress) {
             Directory.CreateDirectory(itemTarget);
             Directory.CreateDirectory(menuTarget);
 
@@ -28,7 +28,7 @@ namespace SoulsUnpackTools {
                 menuFmgs.Add(handler);
             }
 
-            onProgress("Unpacking item...", currentEntries, maxEntries);
+            onProgress(currentEntries, maxEntries);
 
             foreach (FmgHandler handler in itemFmgs) {
                 string dirName = handler.id + "€" + handler.name.Split('\\').Last().Split('.')[0];
@@ -38,7 +38,7 @@ namespace SoulsUnpackTools {
                     sw.Write(entry.Text);
                     sw.Close();
                     currentEntries++;
-                    onProgress("Unpacking item...", currentEntries, maxEntries);
+                    onProgress(currentEntries, maxEntries);
                 }
             }
 
@@ -50,7 +50,7 @@ namespace SoulsUnpackTools {
                     sw.Write(entry.Text);
                     sw.Close();
                     currentEntries++;
-                    onProgress("Unpacking menu...", currentEntries, maxEntries);
+                    onProgress(currentEntries, maxEntries);
                 }
             }
         }
