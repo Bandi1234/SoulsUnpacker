@@ -168,15 +168,22 @@ namespace SoulsUnpackerConsole {
                 Directory.Delete("menu", true);
             }
 
-            //TODO setup listeners
-            ConsoleLoadingBar lb = new ConsoleLoadingBar("Unpacking raw text...", 0, 0);
-            DSRTools.UnpackRawText("item.msgbnd.dcx", "menu.msgbnd.dcx", "item", "menu", (int current, int max) => {
-                if (current == 0) {
-                    lb = new ConsoleLoadingBar("Unpacking raw text...", current, max);
-                } else {
-                    lb.Update(current);
+            ConsoleLoadingBar lb = null;
+            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking raw text from item.msgbnd.dcx...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking raw text from menu.msgbnd.dcx...", 0, maxMenuEntries);
+                },
+                (int menuEntries, int maxMenuEntries) => {
+                    lb.Update(menuEntries);
                 }
-            });
+            );
+            DSRTools.UnpackRawText("item.msgbnd.dcx", "menu.msgbnd.dcx", "item", "menu", observer);
 
             Console.Clear();
             Console.WriteLine("Finished unpacking raw text into /item and /menu");
