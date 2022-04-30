@@ -4,7 +4,6 @@ using System.IO;
 
 namespace SoulsUnpackerConsole {
     internal class Program {
-
         internal static string name = "Souls Unpacker";
         internal static string version = "0.0.1";
         internal static string author = "Zelenák András";
@@ -44,7 +43,7 @@ namespace SoulsUnpackerConsole {
                 if (choice == -1 || choice >= options.Length) {
                     continue;
                 }
-                
+
                 switch (choice) {
                     case 0:
                         done = true;
@@ -170,7 +169,9 @@ namespace SoulsUnpackerConsole {
             }
 
             //TODO setup listeners
-            //TODO unpack raw
+            DSRTools.UnpackRawText("item.msgbnd.dcx", "menu.msgbnd.dcx", "item", "menu", (string status, int current, int max) => {
+                
+            });
 
             Console.Clear();
             Console.WriteLine("Finished unpacking raw text into /item and /menu");
@@ -336,7 +337,7 @@ namespace SoulsUnpackerConsole {
                 case ConsoleKey.NumPad0:
                     return 0;
                 case ConsoleKey.D1:
-                case ConsoleKey.NumPad1: 
+                case ConsoleKey.NumPad1:
                     return 1;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
@@ -362,7 +363,7 @@ namespace SoulsUnpackerConsole {
                 case ConsoleKey.D9:
                 case ConsoleKey.NumPad9:
                     return 9;
-                default: 
+                default:
                     return -1;
             }
         }
