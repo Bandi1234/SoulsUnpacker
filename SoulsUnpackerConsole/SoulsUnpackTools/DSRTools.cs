@@ -251,7 +251,7 @@ namespace SoulsUnpackTools {
                             break;
                     }
                     StreamWriter sw = new StreamWriter(target);
-                    sw.WriteLine(entry.Text);
+                    sw.Write(entry.Text);
                     sw.Close();
                     itemEntries++;
                     observer.onItemProgress(itemEntries, maxItemEntries);
@@ -324,7 +324,7 @@ namespace SoulsUnpackTools {
                             break;
                     }
                     StreamWriter sw = new StreamWriter(target);
-                    sw.WriteLine(entry.Text);
+                    sw.Write(entry.Text);
                     sw.Close();
                     menuEntries++;
                     observer.onMenuProgress(menuEntries, maxMenuEntries);
