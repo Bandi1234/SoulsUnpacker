@@ -141,6 +141,199 @@ namespace SoulsUnpackTools {
 
         }
 
+        public static void UnpackPureText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+            Directory.CreateDirectory(itemTarget);
+
+            BND3 itemBnd = BND3.Read(itemSource);
+
+            int maxItemEntries = 0;
+            int itemEntries = 0;
+            List<PureFmgHandler> itemFmgs = new List<PureFmgHandler>();
+
+            foreach (BinderFile file in itemBnd.Files) {
+                if (itemFmgs.Exists((PureFmgHandler fmgH) => fmgH.name == file.Name)) {
+                    itemFmgs.Find((PureFmgHandler fmgH) => fmgH.name == file.Name).id2 = file.ID;
+                } else {
+                    PureFmgHandler handler = new PureFmgHandler(FMG.Read(file.Bytes), file.Name, file.ID);
+                    maxItemEntries += handler.fmgData.Entries.Count;
+                    itemFmgs.Add(handler);
+                }
+            }
+
+            StreamWriter compIdWriter = new StreamWriter(itemTarget + "/compressionIds.DSRInfo");
+            foreach (PureFmgHandler handler in itemFmgs) {
+                string hName = handler.name.Split('\\').Last().Split('.')[0];
+                compIdWriter.WriteLine(hName + "\t" + handler.id1 + "\t" + handler.id2);
+                Directory.CreateDirectory(Path.Combine(itemTarget, hName));
+            }
+            compIdWriter.Close();
+
+            observer.onItemStart(maxItemEntries);
+
+            foreach (PureFmgHandler handler in itemFmgs) {
+                string hName = handler.name.Split('\\').Last().Split('.')[0];
+                string targetBaseDir = Path.Combine(itemTarget, hName);
+                StreamWriter emptyWriter = new StreamWriter(Path.Combine(targetBaseDir, "empty.DSRInfo"));
+                StreamWriter spaceWriter = new StreamWriter(Path.Combine(targetBaseDir, "spaces.DSRInfo"));
+                foreach (FMG.Entry entry in handler.fmgData.Entries) {
+                    if (entry.Text == "" || entry.Text == null) { 
+                        emptyWriter.WriteLine(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        continue;
+                    }
+                    if (entry.Text == " ") { 
+                        spaceWriter.WriteLine(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        continue;
+                    }
+                    string name = entry.ID + ".txt";
+                    string target = Path.Combine(targetBaseDir, name);
+                    switch (hName) {
+                        case "Weapon_description_":
+                        case "Weapon_long_desc_":
+                        case "Weapon_name_":
+                            string wType = DSRUtils.GetWeaponTypeFolder(name);
+                            string wName = DSRUtils.GetWeaponNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, wType, wName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, wType, wName));
+                            target = Path.Combine(targetBaseDir, wType, wName, name);
+                            break;
+                        case "Place_name_":
+                            string pType = DSRUtils.GetPlaceTypeFolder(name);
+                            string pName = DSRUtils.GetPlaceNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, pType, pName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, pType, pName));
+                            target = Path.Combine(targetBaseDir, pType, pName, name);
+                            break;
+                        case "Accessory_description_":
+                        case "Accessory_long_desc_":
+                        case "Accessory_name_":
+                            string aName = DSRUtils.GetAccessoryNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, aName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, aName));
+                            target = Path.Combine(targetBaseDir, aName, name);
+                            break;
+                        case "NPC_name_":
+                            string nType = DSRUtils.GetNpcTypeFolder(name);
+                            string nName = DSRUtils.GetNpcNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, nType, nName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, nType, nName));
+                            target = Path.Combine(targetBaseDir, nType, nName, name);
+                            break;
+                        case "Magic_description_":
+                        case "Magic_long_desc_":
+                        case "Magic_name_":
+                            string mType = DSRUtils.GetMagicTypeFolder(name);
+                            string mName = DSRUtils.GetMagicNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, mType, mName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, mType, mName));
+                            target = Path.Combine(targetBaseDir, mType, mName, name);
+                            break;
+                        case "Armor_description_":
+                        case "Armor_long_desc_":
+                        case "Armor_name_":
+                            string arType = DSRUtils.GetArmorTypeFolder(name);
+                            string arName = DSRUtils.GetArmorNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, arType, arName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, arType, arName));
+                            target = Path.Combine(targetBaseDir, arType, arName, name);
+                            break;
+                        case "Item_description_":
+                        case "Item_long_desc_":
+                        case "Item_name_":
+                            string iType = DSRUtils.GetItemTypeFolder(name);
+                            string iName = DSRUtils.GetItemNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, iType, iName)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, iType, iName));
+                            target = Path.Combine(targetBaseDir, iType, iName, name);
+                            break;
+                    }
+                    StreamWriter sw = new StreamWriter(target);
+                    sw.WriteLine(entry.Text);
+                    sw.Close();
+                    itemEntries++;
+                    observer.onItemProgress(itemEntries, maxItemEntries);
+                }
+                emptyWriter.Close();
+                spaceWriter.Close();
+            }
+
+            Directory.CreateDirectory(menuTarget);
+
+            BND3 menuBnd = BND3.Read(menuSource);
+
+            int maxMenuEntries = 0;
+            int menuEntries = 0;
+            List<PureFmgHandler> menuFmgs = new List<PureFmgHandler>();
+
+            foreach (BinderFile file in menuBnd.Files) {
+                if (menuFmgs.Exists((PureFmgHandler fmgH) => fmgH.name == file.Name)) {
+                    menuFmgs.Find((PureFmgHandler fmgH) => fmgH.name == file.Name).id2 = file.ID;
+                } else {
+                    PureFmgHandler handler = new PureFmgHandler(FMG.Read(file.Bytes), file.Name, file.ID);
+                    maxMenuEntries += handler.fmgData.Entries.Count;
+                    menuFmgs.Add(handler);
+                }
+            }
+
+            compIdWriter = new StreamWriter(menuTarget + "/compressionIds.DSRInfo");
+            foreach (PureFmgHandler handler in menuFmgs) {
+                string hName = handler.name.Split('\\').Last().Split('.')[0];
+                compIdWriter.WriteLine(hName + "\t" + handler.id1 + "\t" + handler.id2);
+                Directory.CreateDirectory(Path.Combine(menuTarget, hName));
+            }
+            compIdWriter.Close();
+
+            observer.onMenuStart(maxMenuEntries);
+
+            foreach (PureFmgHandler handler in menuFmgs) {
+                string hName = handler.name.Split('\\').Last().Split('.')[0];
+                string targetBaseDir = Path.Combine(menuTarget, hName);
+                StreamWriter emptyWriter = new StreamWriter(Path.Combine(targetBaseDir, "empty.DSRInfo"));
+                StreamWriter spaceWriter = new StreamWriter(Path.Combine(targetBaseDir, "spaces.DSRInfo"));
+                foreach (FMG.Entry entry in handler.fmgData.Entries) {
+                    if (entry.Text == "" || entry.Text == null) {
+                        emptyWriter.WriteLine(entry.ID);
+                        menuEntries++;
+                        observer.onMenuProgress(menuEntries, maxMenuEntries);
+                        continue;
+                    }
+                    if (entry.Text == " ") {
+                        spaceWriter.WriteLine(entry.ID);
+                        menuEntries++;
+                        observer.onMenuProgress(menuEntries, maxMenuEntries);
+                        continue;
+                    }
+                    string name = entry.ID + ".txt";
+                    string target = Path.Combine(targetBaseDir, name);
+                    switch (hName) {
+                        case "Movie_subtitles_":
+                            string mSub = DSRUtils.GetMovSubFolder(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, mSub)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, mSub));
+                            target = Path.Combine(targetBaseDir, mSub, name);
+                            break;
+                        case "Conversation_":
+                            string cNpc = DSRUtils.GetConversationNPC(name);
+                            string cDia = DSRUtils.GetConversationDialogue(name);
+                            if (!Directory.Exists(Path.Combine(targetBaseDir, cNpc, cDia)))
+                                Directory.CreateDirectory(Path.Combine(targetBaseDir, cNpc, cDia));
+                            target = Path.Combine(targetBaseDir, cNpc, cDia, name);
+                            break;
+                    }
+                    StreamWriter sw = new StreamWriter(target);
+                    sw.WriteLine(entry.Text);
+                    sw.Close();
+                    menuEntries++;
+                    observer.onMenuProgress(menuEntries, maxMenuEntries);
+                }
+                emptyWriter.Close();
+                spaceWriter.Close();
+            }
+        }
+
         private class FmgHandler {
             public FMG fmgData;
             public string name;
@@ -148,6 +341,19 @@ namespace SoulsUnpackTools {
 
             public FmgHandler(FMG fmgData, string name, int id) {
                 this.id = id;
+                this.name = name;
+                this.fmgData = fmgData;
+            }
+        }
+
+        private class PureFmgHandler {
+            public FMG fmgData;
+            public string name;
+            public int id1;
+            public int id2 = -1;
+
+            public PureFmgHandler(FMG fmgData, string name, int id1) {
+                this.id1 = id1;
                 this.name = name;
                 this.fmgData = fmgData;
             }

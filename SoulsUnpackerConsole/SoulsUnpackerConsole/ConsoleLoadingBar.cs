@@ -18,7 +18,7 @@ namespace SoulsUnpackerConsole {
             this.currentProgress = currentProgress;
             this.totalProgress = totalProgress;
             this.consoleWidth = Console.WindowWidth - 2;
-            this.maxSigns = consoleWidth - 4;
+            this.maxSigns = consoleWidth - 5;
 
             FirstDraw();
         }
