@@ -334,6 +334,179 @@ namespace SoulsUnpackTools {
             }
         }
 
+        public static void RepackPureText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, TextObserver observer) {
+            string[] itemFolders = Directory.GetDirectories(itemFolder);
+            string[] menuFolders = Directory.GetDirectories(menuFolder);
+
+            int maxItemEntries = 0;
+            int itemEntries = 0;
+            int maxMenuEntries = 0;
+            int menuEntries = 0;
+
+            maxItemEntries = Directory.GetFiles(itemFolder, "*.*", SearchOption.AllDirectories).Length;
+            maxMenuEntries = Directory.GetFiles(menuFolder, "*.*", SearchOption.AllDirectories).Length;
+
+            observer.onItemStart(maxItemEntries);
+
+            StreamReader fmgInfoReader = new StreamReader(Path.Combine(itemFolder, "compressionIds.DSRInfo"));
+            List<FmgInfo> itemInfos = new List<FmgInfo>();
+            while (!fmgInfoReader.EndOfStream) {
+                itemInfos.Add(new FmgInfo(fmgInfoReader.ReadLine()));
+            }
+
+            itemEntries++;
+            observer.onItemProgress(itemEntries, maxItemEntries);
+
+            BND3 itemBnd = new BND3();
+            itemBnd.Version = "07D7R6";
+            foreach (FmgInfo info in itemInfos) {
+                string folder = Path.Combine(itemFolder, info.name);
+                FMG fmg1 = new FMG();
+                FMG fmg2 = new FMG();
+                fmg1.Version = FMG.FMGVersion.DarkSouls1;
+                fmg2.Version = FMG.FMGVersion.DarkSouls1;
+                using (StreamReader reader = new StreamReader(Path.Combine(folder, "empty.DSRInfo"))) {
+                    while (!reader.EndOfStream) { 
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry1 = new FMG.Entry(int.Parse(line), "");
+                            fmg1.Entries.Add(entry1);
+                            if (info.id2 != -1) {
+                                FMG.Entry entry2 = new FMG.Entry(int.Parse(line), "");
+                                fmg2.Entries.Add(entry2);
+                            }
+                        }
+                    }
+                }
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
+                using (StreamReader reader = new StreamReader(Path.Combine(folder, "spaces.DSRInfo"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry1 = new FMG.Entry(int.Parse(line), " ");
+                            fmg1.Entries.Add(entry1);
+                            if (info.id2 != -1) {
+                                FMG.Entry entry2 = new FMG.Entry(int.Parse(line), " ");
+                                fmg2.Entries.Add(entry2);
+                            }
+                        }
+                    }
+                }
+                string[] files = Directory.GetFiles(folder, "*.txt", SearchOption.AllDirectories);
+                foreach (string file in files) {
+                    int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
+                    StreamReader reader = new StreamReader(file);
+                    string full = reader.ReadToEnd();
+                    reader.Close();
+                    FMG.Entry entry1 = new FMG.Entry(id, full);
+                    fmg1.Entries.Add(entry1);
+                    if (info.id2 != -1) {
+                        FMG.Entry entry2 = new FMG.Entry(id, full);
+                        fmg2.Entries.Add(entry2);
+                    }
+                    itemEntries++;
+                    observer.onItemProgress(itemEntries, maxItemEntries);
+                }
+                BinderFile bFile1 = new BinderFile();
+                BinderFile bFile2 = new BinderFile();
+                bFile1.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + info.name + ".fmg";
+                bFile1.ID = info.id1;
+                bFile1.CompressionType = DCX.Type.Zlib;
+                bFile1.Bytes = fmg1.Write();
+                itemBnd.Files.Add(bFile1);
+                if (info.id2 != -1) {
+                    bFile2.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + info.name + ".fmg";
+                    bFile2.ID = info.id2;
+                    bFile2.CompressionType = DCX.Type.Zlib;
+                    bFile2.Bytes = fmg2.Write();
+                    itemBnd.Files.Add(bFile2);
+                }
+            }
+            File.Create(itemTarget).Close();
+            File.WriteAllBytes(itemTarget, DCX.Compress(itemBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+
+            observer.onMenuStart(maxMenuEntries);
+
+            fmgInfoReader = new StreamReader(Path.Combine(menuFolder, "compressionIds.DSRInfo"));
+            List<FmgInfo> menuInfos = new List<FmgInfo>();
+            while (!fmgInfoReader.EndOfStream) {
+                menuInfos.Add(new FmgInfo(fmgInfoReader.ReadLine()));
+            }
+
+            menuEntries++;
+            observer.onMenuProgress(menuEntries, maxMenuEntries);
+
+            BND3 menuBnd = new BND3();
+            menuBnd.Version = "07D7R6";
+            foreach (FmgInfo info in menuInfos) {
+                string folder = Path.Combine(menuFolder, info.name);
+                FMG fmg1 = new FMG();
+                FMG fmg2 = new FMG();
+                fmg1.Version = FMG.FMGVersion.DarkSouls1;
+                fmg2.Version = FMG.FMGVersion.DarkSouls1;
+                using (StreamReader reader = new StreamReader(Path.Combine(folder, "empty.DSRInfo"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry1 = new FMG.Entry(int.Parse(line), "");
+                            fmg1.Entries.Add(entry1);
+                            if (info.id2 != -1) {
+                                FMG.Entry entry2 = new FMG.Entry(int.Parse(line), "");
+                                fmg2.Entries.Add(entry2);
+                            }
+                        }
+                    }
+                }
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
+                using (StreamReader reader = new StreamReader(Path.Combine(folder, "spaces.DSRInfo"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry1 = new FMG.Entry(int.Parse(line), " ");
+                            fmg1.Entries.Add(entry1);
+                            if (info.id2 != -1) {
+                                FMG.Entry entry2 = new FMG.Entry(int.Parse(line), " ");
+                                fmg2.Entries.Add(entry2);
+                            }
+                        }
+                    }
+                }
+                string[] files = Directory.GetFiles(folder, "*.txt", SearchOption.AllDirectories);
+                foreach (string file in files) {
+                    int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
+                    StreamReader reader = new StreamReader(file);
+                    string full = reader.ReadToEnd();
+                    reader.Close();
+                    FMG.Entry entry1 = new FMG.Entry(id, full);
+                    fmg1.Entries.Add(entry1);
+                    if (info.id2 != -1) {
+                        FMG.Entry entry2 = new FMG.Entry(id, full);
+                        fmg2.Entries.Add(entry2);
+                    }
+                    menuEntries++;
+                    observer.onMenuProgress(menuEntries, maxMenuEntries);
+                }
+                BinderFile bFile1 = new BinderFile();
+                BinderFile bFile2 = new BinderFile();
+                bFile1.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + info.name + ".fmg";
+                bFile1.ID = info.id1;
+                bFile1.CompressionType = DCX.Type.Zlib;
+                bFile1.Bytes = fmg1.Write();
+                menuBnd.Files.Add(bFile1);
+                if (info.id2 != -1) {
+                    bFile2.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + info.name + ".fmg";
+                    bFile2.ID = info.id2;
+                    bFile2.CompressionType = DCX.Type.Zlib;
+                    bFile2.Bytes = fmg2.Write();
+                    menuBnd.Files.Add(bFile2);
+                }
+            }
+            File.Create(menuTarget).Close();
+            File.WriteAllBytes(menuTarget, DCX.Compress(menuBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+        }
+
         private class FmgHandler {
             public FMG fmgData;
             public string name;
@@ -356,6 +529,18 @@ namespace SoulsUnpackTools {
                 this.id1 = id1;
                 this.name = name;
                 this.fmgData = fmgData;
+            }
+        }
+
+        private class FmgInfo {
+            public string name;
+            public int id1;
+            public int id2;
+
+            public FmgInfo(string line) {
+                this.name = line.Split('\t')[0];
+                this.id1 = int.Parse(line.Split('\t')[1]);
+                this.id2 = int.Parse(line.Split('\t')[2]);
             }
         }
 

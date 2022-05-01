@@ -256,8 +256,6 @@ namespace SoulsUnpackerConsole {
                 File.Delete("menu.msgbnd.dcx");
             }
 
-            //TODO setup listeners
-            //TODO repack raw
             ConsoleLoadingBar lb = null;
             DSRTools.TextObserver observer = new DSRTools.TextObserver(
                 (int maxItemEntries) => {
@@ -302,8 +300,22 @@ namespace SoulsUnpackerConsole {
                 File.Delete("menu.msgbnd.dcx");
             }
 
-            //TODO setup listeners
-            //TODO repack pure
+            ConsoleLoadingBar lb = null;
+            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking pure text into item.msgbnd.dcx...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking pure text into menu.msgbnd.dcx...", 0, maxMenuEntries);
+                },
+                (int menuEntries, int maxMenuEntries) => {
+                    lb.Update(menuEntries);
+                }
+            );
+            DSRTools.RepackPureText("item", "menu", "item.msgbnd.dcx", "menu.msgbnd.dcx", observer);
 
             Console.Clear();
             Console.WriteLine("Finished repacking pure text into item.msgbnd.dcx and menu.msgbnd.dcx");
