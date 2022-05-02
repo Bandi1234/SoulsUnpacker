@@ -507,6 +507,144 @@ namespace SoulsUnpackTools {
             File.WriteAllBytes(menuTarget, DCX.Compress(menuBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
         }
 
+        public static void UnpackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+            StreamWriter itemWriter = new StreamWriter(itemTarget);
+
+            BND3 itemBnd = BND3.Read(itemSource);
+
+            int maxItemEntries = 0;
+            int itemEntries = 0;
+            List<PureFmgHandler> itemFmgs = new List<PureFmgHandler>();
+
+            foreach (BinderFile file in itemBnd.Files) {
+                if (itemFmgs.Exists((PureFmgHandler fmgH) => fmgH.name == file.Name)) {
+                    itemFmgs.Find((PureFmgHandler fmgH) => fmgH.name == file.Name).id2 = file.ID;
+                } else {
+                    PureFmgHandler handler = new PureFmgHandler(FMG.Read(file.Bytes), file.Name, file.ID);
+                    maxItemEntries += handler.fmgData.Entries.Count;
+                    itemFmgs.Add(handler);
+                }
+            }
+
+            observer.onItemStart(maxItemEntries);
+
+            foreach (PureFmgHandler handler in itemFmgs) {
+                string hName = handler.name.Split('\\').Last().Split('.')[0];
+                itemWriter.WriteLine(hName + "\t" + handler.id1 + "\t" + handler.id2);
+                List<int> emptyIds = new List<int>();
+                List<int> spaceIds = new List<int>();
+
+                foreach (FMG.Entry entry in handler.fmgData.Entries) {
+                    if (entry.Text == "" || entry.Text == null) { 
+                        emptyIds.Add(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        continue;
+                    }
+                    if (entry.Text == " ") { 
+                        spaceIds.Add(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        continue;
+                    }
+                    itemWriter.WriteLine(entry.ID);
+                    itemWriter.WriteLine(entry.Text);
+                    itemWriter.WriteLine("€");
+                    itemEntries++;
+                    observer.onItemProgress(itemEntries, maxItemEntries);
+                }
+                string emptyLine = "";
+                for (int i = 0; i < emptyIds.Count; i++) {
+                    emptyLine += emptyIds[i];
+                    if (i < emptyIds.Count - 1) {
+                        emptyLine += "\t";
+                    }
+                }
+                itemWriter.WriteLine(emptyLine);
+                string spaceLine = "";
+                for (int i = 0; i < spaceIds.Count; i++) { 
+                    spaceLine += spaceIds[i];
+                    if (i < spaceIds.Count - 1) {
+                        spaceLine += "\t";
+                    }
+                }
+                itemWriter.WriteLine(spaceLine);
+                itemWriter.WriteLine("€€€");
+            }
+            itemWriter.Write("€€€€€");
+            itemWriter.Close();
+
+            StreamWriter menuWriter = new StreamWriter(menuTarget);
+
+            BND3 menuBnd = BND3.Read(menuSource);
+
+            int maxMenuEntries = 0;
+            int menuEntries = 0;
+            List<PureFmgHandler> menuFmgs = new List<PureFmgHandler>();
+
+            foreach (BinderFile file in menuBnd.Files) {
+                if (menuFmgs.Exists((PureFmgHandler fmgH) => fmgH.name == file.Name)) {
+                    menuFmgs.Find((PureFmgHandler fmgH) => fmgH.name == file.Name).id2 = file.ID;
+                } else {
+                    PureFmgHandler handler = new PureFmgHandler(FMG.Read(file.Bytes), file.Name, file.ID);
+                    maxMenuEntries += handler.fmgData.Entries.Count;
+                    menuFmgs.Add(handler);
+                }
+            }
+
+            observer.onMenuStart(maxMenuEntries);
+
+            foreach (PureFmgHandler handler in menuFmgs) {
+                string hName = handler.name.Split('\\').Last().Split('.')[0];
+                menuWriter.WriteLine(hName + "\t" + handler.id1 + "\t" + handler.id2);
+                List<int> emptyIds = new List<int>();
+                List<int> spaceIds = new List<int>();
+
+                foreach (FMG.Entry entry in handler.fmgData.Entries) {
+                    if (entry.Text == "" || entry.Text == null) {
+                        emptyIds.Add(entry.ID);
+                        menuEntries++;
+                        observer.onMenuProgress(menuEntries, maxMenuEntries);
+                        continue;
+                    }
+                    if (entry.Text == " ") {
+                        spaceIds.Add(entry.ID);
+                        menuEntries++;
+                        observer.onMenuProgress(menuEntries, maxMenuEntries);
+                        continue;
+                    }
+                    menuWriter.WriteLine(entry.ID);
+                    menuWriter.WriteLine(entry.Text);
+                    menuWriter.WriteLine("€");
+                    menuEntries++;
+                    observer.onMenuProgress(menuEntries, maxMenuEntries);
+                }
+                string emptyLine = "";
+                for (int i = 0; i < emptyIds.Count; i++) {
+                    emptyLine += emptyIds[i];
+                    if (i < emptyIds.Count - 1) {
+                        emptyLine += "\t";
+                    }
+                }
+                menuWriter.WriteLine(emptyLine);
+                string spaceLine = "";
+                for (int i = 0; i < spaceIds.Count; i++) {
+                    spaceLine += spaceIds[i];
+                    if (i < spaceIds.Count - 1) {
+                        spaceLine += "\t";
+                    }
+                }
+                menuWriter.WriteLine(spaceLine);
+                menuWriter.WriteLine("€€€");
+            }
+            menuWriter.Write("€€€€€");
+            menuWriter.Close();
+        }
+
+        public static void RepackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+
+        }
+
         private class FmgHandler {
             public FMG fmgData;
             public string name;

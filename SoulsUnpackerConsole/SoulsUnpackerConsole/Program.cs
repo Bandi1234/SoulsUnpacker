@@ -74,7 +74,7 @@ namespace SoulsUnpackerConsole {
         static void UnpackTextMenu() {
             while (true) {
                 Console.Clear();
-                string[] options = { "Unpack to raw text", "Unpack to pure text", "Back" };
+                string[] options = { "Unpack to raw text", "Unpack to pure text", "Unpack to DSRText format", "Back" };
                 for (int i = 0; i < options.Length; i++) {
                     if (i < options.Length - 1) {
                         Console.WriteLine("(" + (i + 1) + ") " + options[i]);
@@ -95,6 +95,9 @@ namespace SoulsUnpackerConsole {
                         return;
                     case 2:
                         SetupPureUnpack();
+                        return;
+                    case 3:
+                        SetupDSRTUnpack();
                         return;
                 }
             }
@@ -319,6 +322,50 @@ namespace SoulsUnpackerConsole {
 
             Console.Clear();
             Console.WriteLine("Finished repacking pure text into item.msgbnd.dcx and menu.msgbnd.dcx");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        static void SetupDSRTUnpack() {
+            Console.Clear();
+
+            if (!File.Exists("item.msgbnd.dcx") || !File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Couldn't find dark souls msgbnd files.");
+                Console.WriteLine("Please place both item.msgbnd.dcx and menu.msgbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item.msgbnd.dcx and menu.msgbnd.dcx found!");
+
+            if (File.Exists("item.DSRText")) {
+                Console.WriteLine("Deleting old item.DSRText file...");
+                File.Delete("item.DSRText");
+            }
+            if (File.Exists("menu.DSRText")) {
+                Console.WriteLine("Deleting old menu.DSRText file...");
+                File.Delete("menu.DSRText");
+            }
+
+            ConsoleLoadingBar lb = null;
+            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking DSRT from item.msgbnd.dcx...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking DSRT from menu.msgbnd.dcx...", 0, maxMenuEntries);
+                },
+                (int menuEntries, int maxMenuEntries) => {
+                    lb.Update(menuEntries);
+                }
+            );
+            DSRTools.UnpackDSRText("item.msgbnd.dcx", "menu.msgbnd.dcx", "item.DSRText", "menu.DSRText", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished unpacking DSRT into item.DSRText and menu.DSRText");
             Console.WriteLine("< Press any key to continue >");
             Console.ReadKey();
         }
