@@ -553,6 +553,7 @@ namespace SoulsUnpackTools {
                     itemEntries++;
                     observer.onItemProgress(itemEntries, maxItemEntries);
                 }
+                itemWriter.WriteLine("€€€");
                 string emptyLine = "";
                 for (int i = 0; i < emptyIds.Count; i++) {
                     emptyLine += emptyIds[i];
@@ -569,7 +570,6 @@ namespace SoulsUnpackTools {
                     }
                 }
                 itemWriter.WriteLine(spaceLine);
-                itemWriter.WriteLine("€€€");
             }
             itemWriter.Write("€€€€€");
             itemWriter.Close();
@@ -619,6 +619,7 @@ namespace SoulsUnpackTools {
                     menuEntries++;
                     observer.onMenuProgress(menuEntries, maxMenuEntries);
                 }
+                menuWriter.WriteLine("€€€");
                 string emptyLine = "";
                 for (int i = 0; i < emptyIds.Count; i++) {
                     emptyLine += emptyIds[i];
@@ -635,14 +636,223 @@ namespace SoulsUnpackTools {
                     }
                 }
                 menuWriter.WriteLine(spaceLine);
-                menuWriter.WriteLine("€€€");
             }
             menuWriter.Write("€€€€€");
             menuWriter.Close();
         }
 
         public static void RepackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+            int maxItemEntries = 0;
+            int itemEntries = 0;
+            StreamReader itemReader = new StreamReader(itemSource);
+            while (!itemReader.EndOfStream) {
+                itemReader.ReadLine();
+                maxItemEntries++;
+            }
 
+            observer.onItemStart(maxItemEntries);
+
+            itemReader.Close();
+            itemReader = new StreamReader(itemSource);
+
+            BND3 itemBnd = new BND3();
+            itemBnd.Version = "07D7R6";
+
+            while (true) {
+                string fmgLine = itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
+                if (fmgLine == "€€€€€") {
+                    break;
+                }
+                FmgInfo fmgInfo = new FmgInfo(fmgLine);
+                FMG fmg1 = new FMG();
+                FMG fmg2 = new FMG();
+                fmg1.Version = FMG.FMGVersion.DarkSouls1;
+                fmg2.Version = FMG.FMGVersion.DarkSouls1;
+                while (true) {
+                    string entryIdLine = itemReader.ReadLine();
+                    itemEntries++;
+                    observer.onItemProgress(itemEntries, maxItemEntries);
+                    if (entryIdLine == "€€€") {
+                        break;
+                    }
+                    List<string> entryContentLines = new List<string>();
+                    while (true) {
+                        string nextLine = itemReader.ReadLine();
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        if (nextLine == "€") {
+                            break;
+                        }
+                        entryContentLines.Add(nextLine);
+                    }
+                    string entryContent = "";
+                    for (int i = 0; i < entryContentLines.Count; i++) {
+                        entryContent += entryContentLines[i];
+                        if (i < entryContentLines.Count - 1) {
+                            entryContent += "\n";
+                        }
+                    }
+                    FMG.Entry entry1 = new FMG.Entry(int.Parse(entryIdLine), entryContent);
+                    fmg1.Entries.Add(entry1);
+                    if (fmgInfo.id2 != -1) {
+                        FMG.Entry entry2 = new FMG.Entry(int.Parse(entryIdLine), entryContent);
+                        fmg2.Entries.Add(entry2);
+                    }
+                }
+                string emptyLine = itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
+                if (emptyLine != "") {
+                    string[] empties = emptyLine.Split('\t');
+                    foreach (string empty in empties) {
+                        FMG.Entry entry1 = new FMG.Entry(int.Parse(empty), "");
+                        fmg1.Entries.Add(entry1);
+                        if (fmgInfo.id2 != -1) {
+                            FMG.Entry entry2 = new FMG.Entry(int.Parse(empty), "");
+                            fmg2.Entries.Add(entry2);
+                        }
+                    }
+                }
+                string spacesLine = itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
+                if (spacesLine != "") {
+                    string[] spaces = spacesLine.Split('\t');
+                    foreach (string space in spaces) {
+                        FMG.Entry entry1 = new FMG.Entry(int.Parse(space), " ");
+                        fmg1.Entries.Add(entry1);
+                        if (fmgInfo.id2 != -1) {
+                            FMG.Entry entry2 = new FMG.Entry(int.Parse(space), " ");
+                            fmg2.Entries.Add(entry2);
+                        }
+                    }
+                }
+                BinderFile bFile1 = new BinderFile();
+                BinderFile bFile2 = new BinderFile();
+                bFile1.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fmgInfo.name + ".fmg";
+                bFile1.ID = fmgInfo.id1;
+                bFile1.CompressionType = DCX.Type.Zlib;
+                bFile1.Bytes = fmg1.Write();
+                itemBnd.Files.Add(bFile1);
+                if (fmgInfo.id2 != -1) {
+                    bFile2.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fmgInfo.name + ".fmg";
+                    bFile2.ID = fmgInfo.id2;
+                    bFile2.CompressionType = DCX.Type.Zlib;
+                    bFile2.Bytes = fmg2.Write();
+                    itemBnd.Files.Add(bFile2);
+                }
+            }
+            File.Create(itemTarget).Close();
+            File.WriteAllBytes(itemTarget, DCX.Compress(itemBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+            itemReader.Close();
+
+            int maxMenuEntries = 0;
+            int menuEntries = 0;
+            StreamReader menuReader = new StreamReader(menuSource);
+            while (!menuReader.EndOfStream) {
+                menuReader.ReadLine();
+                maxMenuEntries++;
+            }
+
+            observer.onMenuStart(maxMenuEntries);
+
+            menuReader.Close();
+            menuReader = new StreamReader(menuSource);
+
+            BND3 menuBnd = new BND3();
+            menuBnd.Version = "07D7R6";
+
+            while (true) {
+                string fmgLine = menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
+                if (fmgLine == "€€€€€") {
+                    break;
+                }
+                FmgInfo fmgInfo = new FmgInfo(fmgLine);
+                FMG fmg1 = new FMG();
+                FMG fmg2 = new FMG();
+                fmg1.Version = FMG.FMGVersion.DarkSouls1;
+                fmg2.Version = FMG.FMGVersion.DarkSouls1;
+                while (true) {
+                    string entryIdLine = menuReader.ReadLine();
+                    menuEntries++;
+                    observer.onMenuProgress(menuEntries, maxMenuEntries);
+                    if (entryIdLine == "€€€") {
+                        break;
+                    }
+                    List<string> entryContentLines = new List<string>();
+                    while (true) {
+                        string nextLine = menuReader.ReadLine();
+                        menuEntries++;
+                        observer.onMenuProgress(menuEntries, maxMenuEntries);
+                        if (nextLine == "€") {
+                            break;
+                        }
+                        entryContentLines.Add(nextLine);
+                    }
+                    string entryContent = "";
+                    for (int i = 0; i < entryContentLines.Count; i++) {
+                        entryContent += entryContentLines[i];
+                        if (i < entryContentLines.Count - 1) {
+                            entryContent += "\n";
+                        }
+                    }
+                    FMG.Entry entry1 = new FMG.Entry(int.Parse(entryIdLine), entryContent);
+                    fmg1.Entries.Add(entry1);
+                    if (fmgInfo.id2 != -1) {
+                        FMG.Entry entry2 = new FMG.Entry(int.Parse(entryIdLine), entryContent);
+                        fmg2.Entries.Add(entry2);
+                    }
+                }
+                string emptyLine = menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
+                if (emptyLine != "") {
+                    string[] empties = emptyLine.Split('\t');
+                    foreach (string empty in empties) {
+                        FMG.Entry entry1 = new FMG.Entry(int.Parse(empty), "");
+                        fmg1.Entries.Add(entry1);
+                        if (fmgInfo.id2 != -1) {
+                            FMG.Entry entry2 = new FMG.Entry(int.Parse(empty), "");
+                            fmg2.Entries.Add(entry2);
+                        }
+                    }
+                }
+                string spacesLine = menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
+                if (spacesLine != "") {
+                    string[] spaces = spacesLine.Split('\t');
+                    foreach (string space in spaces) {
+                        FMG.Entry entry1 = new FMG.Entry(int.Parse(space), " ");
+                        fmg1.Entries.Add(entry1);
+                        if (fmgInfo.id2 != -1) {
+                            FMG.Entry entry2 = new FMG.Entry(int.Parse(space), " ");
+                            fmg2.Entries.Add(entry2);
+                        }
+                    }
+                }
+                BinderFile bFile1 = new BinderFile();
+                BinderFile bFile2 = new BinderFile();
+                bFile1.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fmgInfo.name + ".fmg";
+                bFile1.ID = fmgInfo.id1;
+                bFile1.CompressionType = DCX.Type.Zlib;
+                bFile1.Bytes = fmg1.Write();
+                menuBnd.Files.Add(bFile1);
+                if (fmgInfo.id2 != -1) {
+                    bFile2.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fmgInfo.name + ".fmg";
+                    bFile2.ID = fmgInfo.id2;
+                    bFile2.CompressionType = DCX.Type.Zlib;
+                    bFile2.Bytes = fmg2.Write();
+                    menuBnd.Files.Add(bFile2);
+                }
+            }
+            File.Create(menuTarget).Close();
+            File.WriteAllBytes(menuTarget, DCX.Compress(menuBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+            menuReader.Close();
         }
 
         private class FmgHandler {
