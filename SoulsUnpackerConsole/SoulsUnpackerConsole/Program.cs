@@ -420,14 +420,14 @@ namespace SoulsUnpackerConsole {
         static void SetupFontUnpack() {
             Console.Clear();
 
-            if (!File.Exists("DSFont24.ccm.dcx") || !File.Exists("TalkFont24.tpf.dcx")) {
+            if (!File.Exists("DSFont24.tpf.dcx") || !File.Exists("TalkFont24.tpf.dcx")) {
                 Console.WriteLine("Couldn't find DS font files.");
-                Console.WriteLine("Please place DSFont24.ccm.dcx and Talkfont24.tpf.dcx in the same folder as this tool.");
+                Console.WriteLine("Please place DSFont24.tpf.dcx and Talkfont24.tpf.dcx in the same folder as this tool.");
                 Console.WriteLine("< Press any key to continue >");
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("DSFont24.ccm.dcx and Talkfont24.tpf.dcx found!");
+            Console.WriteLine("DSFont24.tpf.dcx and Talkfont24.tpf.dcx found!");
 
             if (Directory.Exists("DSFont24_TPF")) {
                 Console.WriteLine("Deleting old /DSFont24_TPF...");
@@ -439,8 +439,22 @@ namespace SoulsUnpackerConsole {
                 Directory.Delete("TalkFont24_TPF", true);
             }
 
-            //TODO setup listeners
-            //TODO unpack font
+            ConsoleLoadingBar lb = null;
+            DSRTools.FontObserver observer = new DSRTools.FontObserver(
+                (int maxDsFEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking font textures from DSFont24.tpf.dcx...", 0, maxDsFEntries);
+                },
+                (int dsFEntries, int maxDsFEntries) => {
+                    lb.Update(dsFEntries);
+                },
+                (int maxTalkFEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking font textures from TalkFont24.tpf.dcx...", 0, maxTalkFEntries);
+                },
+                (int talkFEntries, int maxTalkFEntries) => {
+                    lb.Update(talkFEntries);
+                }
+            );
+            DSRTools.UnpackFont("DSFont24.tpf.dcx", "Talkfont24.tpf.dcx", "DSFont24_TPF", "TalkFont24_TPF", observer);
 
             Console.Clear();
             Console.WriteLine("Finished unpacking fonts into /DSFont24_TPF and /TalkFont24_TPF");
@@ -460,18 +474,32 @@ namespace SoulsUnpackerConsole {
             }
             Console.WriteLine("DSFont24_TPF and Talkfont24_TPF folders found!");
 
-            if (File.Exists("DSFont24.ccm.dcx")) {
-                Console.WriteLine("Deleting old DSFont24.ccm.dcx...");
-                File.Delete("DSFont24.ccm.dcx");
+            if (File.Exists("DSFont24.tpf.dcx")) {
+                Console.WriteLine("Deleting old DSFont24.tpf.dcx...");
+                File.Delete("DSFont24.tpf.dcx");
             }
 
-            if (File.Exists("TalkFont24.ccm.dcx")) {
-                Console.WriteLine("Deleting old TalkFont24.ccm.dcx...");
-                File.Delete("TalkFont24.ccm.dcx");
+            if (File.Exists("TalkFont24.tpf.dcx")) {
+                Console.WriteLine("Deleting old TalkFont24.tpf.dcx...");
+                File.Delete("TalkFont24.tpf.dcx");
             }
 
-            //TODO setup listeners
-            //TODO repack font
+            ConsoleLoadingBar lb = null;
+            DSRTools.FontObserver observer = new DSRTools.FontObserver(
+                (int maxDsFEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking font textures into DSFont24.tpf.dcx...", 0, maxDsFEntries);
+                },
+                (int dsFEntries, int maxDsFEntries) => {
+                    lb.Update(dsFEntries);
+                },
+                (int maxTalkFEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking font textures into TalkFont24.tpf.dcx...", 0, maxTalkFEntries);
+                },
+                (int talkFEntries, int maxTalkFEntries) => {
+                    lb.Update(talkFEntries);
+                }
+            );
+            DSRTools.RepackFont("DSFont24_TPF", "TalkFont24_TPF", "DSFont24.tpf.dcx", "Talkfont24.tpf.dcx", observer);
 
             Console.Clear();
             Console.WriteLine("Finished repacking fonts into DSFont24.ccm.dcx and TalkFont24.ccm.dcx");

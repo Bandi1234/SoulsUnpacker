@@ -855,6 +855,89 @@ namespace SoulsUnpackTools {
             menuReader.Close();
         }
 
+        public static void UnpackFont(string dsFSource, string talkFSource, string dsFTarget, string talkFTarget, FontObserver observer) {
+
+            int maxDsFEntries = 0;
+            int dsFEntries = 0;
+
+            Directory.CreateDirectory(dsFTarget);
+            TPF dSFontTextures = TPF.Read(dsFSource);
+            maxDsFEntries = dSFontTextures.Textures.Count;
+
+            observer.onDSFontStart(maxDsFEntries);
+
+            foreach (TPF.Texture texture in dSFontTextures.Textures) {
+                string targetFile = Path.Combine(dsFTarget, texture.Name + ".dds");
+                File.Create(targetFile).Close();
+                File.WriteAllBytes(targetFile, texture.Bytes);
+                dsFEntries++;
+                observer.onDSFontProgress(dsFEntries, maxDsFEntries);  
+            }
+
+            int maxTalkFEntries = 0;
+            int talkFEntries = 0;
+
+            Directory.CreateDirectory(talkFTarget);
+            TPF talkFontTextures = TPF.Read(talkFSource);
+            maxTalkFEntries = talkFontTextures.Textures.Count;
+
+            observer.onTalkFontStart(maxTalkFEntries);
+
+            foreach (TPF.Texture texture in talkFontTextures.Textures) {
+                string targetFile = Path.Combine(talkFTarget, texture.Name + ".dds");
+                File.Create(targetFile).Close();
+                File.WriteAllBytes(targetFile, texture.Bytes);
+                talkFEntries++;
+                observer.onTalkFontProgress(talkFEntries, maxTalkFEntries);
+            }
+        }
+
+        public static void RepackFont(string dsFSource, string talkFSource, string dsFTarget, string talkFTarget, FontObserver observer) {
+            
+            int maxDsFEntries = 0;
+            int dsFEntries = 0;
+            
+            string[] dsFontFiles = Directory.GetFiles(dsFSource);
+            maxDsFEntries = dsFontFiles.Length;
+
+            observer.onDSFontStart(maxDsFEntries);
+
+            TPF dsFontTextures = new TPF();
+            dsFontTextures.Encoding = 2;
+            dsFontTextures.Flag2 = 3;
+            dsFontTextures.Platform = TPF.TPFPlatform.PC;
+            foreach (string file in dsFontFiles) {
+                TPF.Texture texture = new TPF.Texture(Path.GetFileName(file).Split('.')[0], 5, 0, File.ReadAllBytes(file));
+                dsFontTextures.Textures.Add(texture);
+                dsFEntries++;
+                observer.onDSFontProgress(dsFEntries, maxDsFEntries);
+            }
+            File.Create(dsFTarget).Close();
+            File.WriteAllBytes(dsFTarget, DCX.Compress(dsFontTextures.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+
+            int maxTalkFEntries = 0;
+            int talkFEntries = 0;
+
+            string[] talkFontFiles = Directory.GetFiles(talkFSource);
+            maxTalkFEntries = talkFontFiles.Length;
+
+            observer.onTalkFontStart(maxTalkFEntries);
+
+            TPF talkFontTextures = new TPF();
+            talkFontTextures.Encoding = 2;
+            talkFontTextures.Flag2 = 3;
+            talkFontTextures.Platform = TPF.TPFPlatform.PC;
+            foreach (string file in talkFontFiles) {
+                TPF.Texture texture = new TPF.Texture(Path.GetFileName(file).Split('.')[0], 5, 0, File.ReadAllBytes(file));
+                talkFontTextures.Textures.Add(texture);
+                talkFEntries++;
+                observer.onTalkFontProgress(talkFEntries, maxTalkFEntries);
+            }
+            File.Create(talkFTarget).Close();
+            File.WriteAllBytes(talkFTarget, DCX.Compress(talkFontTextures.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+
+        }
+
         private class FmgHandler {
             public FMG fmgData;
             public string name;
