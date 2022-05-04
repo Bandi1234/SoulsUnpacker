@@ -499,7 +499,7 @@ namespace SoulsUnpackerConsole {
                     lb.Update(talkFEntries);
                 }
             );
-            DSRTools.RepackFont("DSFont24_TPF", "TalkFont24_TPF", "DSFont24.tpf.dcx", "Talkfont24.tpf.dcx", observer);
+            DSRTools.RepackFont("DSFont24_TPF", "TalkFont24_TPF", "DSFont24.tpf.dcx", "TalkFont24.tpf.dcx", observer);
 
             Console.Clear();
             Console.WriteLine("Finished repacking fonts into DSFont24.ccm.dcx and TalkFont24.ccm.dcx");
