@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsUnpackTools", "SoulsUn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "SoulsFormats\SoulsFormats.csproj", "{98A7657B-4BEC-4D91-9E64-EED3CCF2D516}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsUnpackerGUI", "SoulsUnpackerGUI\SoulsUnpackerGUI.csproj", "{161DD7AB-E67F-4848-B8D2-6C75BF5ED9A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{98A7657B-4BEC-4D91-9E64-EED3CCF2D516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98A7657B-4BEC-4D91-9E64-EED3CCF2D516}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98A7657B-4BEC-4D91-9E64-EED3CCF2D516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161DD7AB-E67F-4848-B8D2-6C75BF5ED9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161DD7AB-E67F-4848-B8D2-6C75BF5ED9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161DD7AB-E67F-4848-B8D2-6C75BF5ED9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161DD7AB-E67F-4848-B8D2-6C75BF5ED9A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
