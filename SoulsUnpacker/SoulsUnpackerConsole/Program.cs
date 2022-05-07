@@ -5,14 +5,15 @@ using System.IO;
 namespace SoulsUnpackerConsole {
     internal class Program {
         internal static string name = "Souls Unpacker";
-        internal static string version = "0.0.1";
-        internal static string author = "Zelenák András";
+        internal static string version = "0.1.0";
         internal static string[] description = {
-            "A tool designed mainly for people looking into translating DS-Remastered.",
+            "A tool designed mainly for people looking into translating From Software titles.",
+            "Currently the only supported game is DSR (Dark Souls Remastered).",
             "This tool is capable of unpacking text bounds into a library of raw text or a slightly modified library for better use.",
             "We call this modified library a pure DS text library, which contains no repetion of entries, no empty files, better categories for items, etc.",
             "Naturally repacking text into their original form is also possible from both a raw and a clean library of files.",
             "Apart from text, the tool also support font un- and repacking, which may be useful when dealing with special, language specific characters.",
+            "For more information, please read readme.md",
             "The tool is based on the SoulsFormats library made by the one and only JKAnderson."
         };
 
@@ -26,7 +27,6 @@ namespace SoulsUnpackerConsole {
                 Console.Clear();
 
                 Console.WriteLine(name);
-                Console.WriteLine("Made by: " + author);
                 Console.WriteLine("Navigate using num keys");
                 Console.WriteLine();
 
@@ -139,7 +139,6 @@ namespace SoulsUnpackerConsole {
             while (true) {
                 Console.Clear();
                 Console.WriteLine(name + " " + version);
-                Console.WriteLine("Made by: " + author);
                 Console.WriteLine();
                 foreach (string line in description) {
                     Console.WriteLine(line);
