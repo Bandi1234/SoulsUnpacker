@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonUtils.cs" />
     <Compile Include="DSRTools.cs" />
     <Compile Include="DSRUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

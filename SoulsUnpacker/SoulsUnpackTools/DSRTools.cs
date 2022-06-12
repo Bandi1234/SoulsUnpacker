@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SoulsUnpackTools {
     public static class DSRTools {
-        public static void UnpackRawText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+        public static void UnpackRawText(string itemSource, string menuSource, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {
             Directory.CreateDirectory(itemTarget);
             Directory.CreateDirectory(menuTarget);
 
@@ -59,7 +59,7 @@ namespace SoulsUnpackTools {
             }
         }
 
-        public static void RepackRawText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, TextObserver observer) { 
+        public static void RepackRawText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) { 
             
             string[] itemFolders = Directory.GetDirectories(itemFolder);
             string[] menuFolders = Directory.GetDirectories(menuFolder);
@@ -141,7 +141,7 @@ namespace SoulsUnpackTools {
 
         }
 
-        public static void UnpackPureText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+        public static void UnpackPureText(string itemSource, string menuSource, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {
             Directory.CreateDirectory(itemTarget);
 
             BND3 itemBnd = BND3.Read(itemSource);
@@ -334,7 +334,7 @@ namespace SoulsUnpackTools {
             }
         }
 
-        public static void RepackPureText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, TextObserver observer) {
+        public static void RepackPureText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {
             string[] itemFolders = Directory.GetDirectories(itemFolder);
             string[] menuFolders = Directory.GetDirectories(menuFolder);
 
@@ -353,6 +353,7 @@ namespace SoulsUnpackTools {
             while (!fmgInfoReader.EndOfStream) {
                 itemInfos.Add(new FmgInfo(fmgInfoReader.ReadLine()));
             }
+            fmgInfoReader.Close();
 
             itemEntries++;
             observer.onItemProgress(itemEntries, maxItemEntries);
@@ -433,6 +434,7 @@ namespace SoulsUnpackTools {
             while (!fmgInfoReader.EndOfStream) {
                 menuInfos.Add(new FmgInfo(fmgInfoReader.ReadLine()));
             }
+            fmgInfoReader.Close();
 
             menuEntries++;
             observer.onMenuProgress(menuEntries, maxMenuEntries);
@@ -507,7 +509,7 @@ namespace SoulsUnpackTools {
             File.WriteAllBytes(menuTarget, DCX.Compress(menuBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
         }
 
-        public static void UnpackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+        public static void UnpackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {
             StreamWriter itemWriter = new StreamWriter(itemTarget);
 
             BND3 itemBnd = BND3.Read(itemSource);
@@ -641,7 +643,7 @@ namespace SoulsUnpackTools {
             menuWriter.Close();
         }
 
-        public static void RepackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, TextObserver observer) {
+        public static void RepackDSRText(string itemSource, string menuSource, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {
             int maxItemEntries = 0;
             int itemEntries = 0;
             StreamReader itemReader = new StreamReader(itemSource);
@@ -855,7 +857,7 @@ namespace SoulsUnpackTools {
             menuReader.Close();
         }
 
-        public static void UnpackFont(string dsFSource, string talkFSource, string dsFTarget, string talkFTarget, FontObserver observer) {
+        public static void UnpackFont(string dsFSource, string talkFSource, string dsFTarget, string talkFTarget, CommonUtils.FontObserver observer) {
 
             int maxDsFEntries = 0;
             int dsFEntries = 0;
@@ -892,7 +894,7 @@ namespace SoulsUnpackTools {
             }
         }
 
-        public static void RepackFont(string dsFSource, string talkFSource, string dsFTarget, string talkFTarget, FontObserver observer) {
+        public static void RepackFont(string dsFSource, string talkFSource, string dsFTarget, string talkFTarget, CommonUtils.FontObserver observer) {
             
             int maxDsFEntries = 0;
             int dsFEntries = 0;
@@ -972,42 +974,6 @@ namespace SoulsUnpackTools {
                 this.name = line.Split('\t')[0];
                 this.id1 = int.Parse(line.Split('\t')[1]);
                 this.id2 = int.Parse(line.Split('\t')[2]);
-            }
-        }
-
-        public class TextObserver {
-            public Action<int> onItemStart;
-            public Action<int, int> onItemProgress;
-            public Action<int> onMenuStart;
-            public Action<int, int> onMenuProgress;
-
-            public TextObserver(
-                Action<int> onItemStart, 
-                Action<int, int> onItemProgress,
-                Action<int> onMenuStart,
-                Action<int, int> onMenuProgress) {
-                this.onItemStart = onItemStart;
-                this.onItemProgress = onItemProgress;
-                this.onMenuStart = onMenuStart;
-                this.onMenuProgress = onMenuProgress;
-            }
-        }
-
-        public class FontObserver {
-            public Action<int> onDSFontStart;
-            public Action<int, int> onDSFontProgress;
-            public Action<int> onTalkFontStart;
-            public Action<int, int> onTalkFontProgress;
-
-            public FontObserver(
-                Action<int> onDSFontStart,
-                Action<int, int> onDSFontProgress,
-                Action<int> onTalkFontStart,
-                Action<int, int> onTalkFontProgress) {
-                this.onDSFontStart = onDSFontStart;
-                this.onDSFontProgress = onDSFontProgress;
-                this.onTalkFontStart = onTalkFontStart;
-                this.onTalkFontProgress = onTalkFontProgress;
             }
         }
     }

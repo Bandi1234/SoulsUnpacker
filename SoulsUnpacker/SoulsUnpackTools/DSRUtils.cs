@@ -205,14 +205,16 @@ namespace SoulsUnpackTools {
                     string name = line.Split('\t')[1];
                     if (id == entryName) {
                         return name
-                            .Replace(' ', '_')
                             .Replace('/', '_')
                             .Replace('\\', '_')
                             .Replace(":", "")
                             .Replace(".", "")
-                            .Replace(",", "")
                             .Replace("?", "")
-                            .Replace("!", "");
+                            .Replace("!", "")
+                            .Replace("\"", "")
+                            .Replace("<", "")
+                            .Replace(">", "")
+                            .Replace("|", "");
                     }
                 }
             }

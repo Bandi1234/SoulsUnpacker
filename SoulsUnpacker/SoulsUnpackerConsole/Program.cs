@@ -174,7 +174,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
                 (int maxItemEntries) => {
                     lb = new ConsoleLoadingBar("Unpacking raw text from item.msgbnd.dcx...", 0, maxItemEntries);
                 },
@@ -218,7 +218,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
                 (int maxItemEntries) => {
                     lb = new ConsoleLoadingBar("Unpacking pure text from item.msgbnd.dcx...", 0, maxItemEntries);
                 },
@@ -262,7 +262,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
                 (int maxItemEntries) => {
                     lb = new ConsoleLoadingBar("Repacking raw text into item.msgbnd.dcx...", 0, maxItemEntries);
                 },
@@ -306,7 +306,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
                 (int maxItemEntries) => {
                     lb = new ConsoleLoadingBar("Repacking pure text into item.msgbnd.dcx...", 0, maxItemEntries);
                 },
@@ -350,7 +350,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
                 (int maxItemEntries) => {
                     lb = new ConsoleLoadingBar("Unpacking DSRT from item.msgbnd.dcx...", 0, maxItemEntries);
                 },
@@ -394,7 +394,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.TextObserver observer = new DSRTools.TextObserver(
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
                 (int maxItemEntries) => {
                     lb = new ConsoleLoadingBar("Repacking DSRText content into item.msgbnd.dcx...", 0, maxItemEntries);
                 },
@@ -439,7 +439,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.FontObserver observer = new DSRTools.FontObserver(
+            CommonUtils.FontObserver observer = new CommonUtils.FontObserver(
                 (int maxDsFEntries) => {
                     lb = new ConsoleLoadingBar("Unpacking font textures from DSFont24.tpf.dcx...", 0, maxDsFEntries);
                 },
@@ -484,7 +484,7 @@ namespace SoulsUnpackerConsole {
             }
 
             ConsoleLoadingBar lb = null;
-            DSRTools.FontObserver observer = new DSRTools.FontObserver(
+            CommonUtils.FontObserver observer = new CommonUtils.FontObserver(
                 (int maxDsFEntries) => {
                     lb = new ConsoleLoadingBar("Repacking font textures into DSFont24.tpf.dcx...", 0, maxDsFEntries);
                 },
