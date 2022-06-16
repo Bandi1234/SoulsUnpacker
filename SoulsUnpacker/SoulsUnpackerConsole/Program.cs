@@ -5,7 +5,7 @@ using System.IO;
 namespace SoulsUnpackerConsole {
     internal class Program {
         internal static string name = "Souls Unpacker";
-        internal static string version = "0.1.1";
+        internal static string version = "0.2.0";
 
         static void Main(string[] args) {
             ConsoleMenu gameMenu = new ConsoleMenu(new string[] {name});
@@ -59,14 +59,14 @@ namespace SoulsUnpackerConsole {
             ds3Menu.options.Add(new ConsoleOption("Repack text", () => ds3RepackMenu.show(), false));
             ds3Menu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //TODO unpack to raw
-            //TODO unpack to pure
-            //TODO unpack to DSXText
+            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS3Setup.SetupRawUnpack(), true));
+            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS3Setup.SetupPureUnpack(), true));
+            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to DSRText format", () => DS3Setup.SetupDSRTUnpack(), true));
             ds3UnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //TODO repack from raw
-            //TODO repack from pure
-            //TODO repack from DSXText
+            ds3RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS3Setup.SetupRawRepack(), true));
+            ds3RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS3Setup.SetupPureRepack(), true));
+            ds3RepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DS3Setup.SetupDSRTRepack(), true));
             ds3RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             //TODO Sekiro!!!

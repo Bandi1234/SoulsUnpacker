@@ -53,7 +53,7 @@ namespace SoulsUnpackTools {
             fileName = fileName.Split('.')[0];
             string withoutLevel = fileName.Substring(0, fileName.Length - 3);
 
-            return FindEntryIn("pureInfo/WeaponNames.DSRInfo", withoutLevel);
+            return CommonUtils.FindEntryIn("pureInfo/WeaponNames.DSRInfo", withoutLevel);
         }
 
         public static string GetPlaceTypeFolder(string fileName) {
@@ -69,13 +69,13 @@ namespace SoulsUnpackTools {
         public static string GetPlaceNameFolder(string fileName) {
             fileName = fileName.Split('.')[0];
 
-            return FindEntryIn("pureInfo/PlaceNames.DSRInfo", fileName);
+            return CommonUtils.FindEntryIn("pureInfo/PlaceNames.DSRInfo", fileName);
         }
 
         public static string GetAccessoryNameFolder(string fileName) {
             fileName = fileName.Split('.')[0];
 
-            return FindEntryIn("pureInfo/AccessoryNames.DSRInfo", fileName);
+            return CommonUtils.FindEntryIn("pureInfo/AccessoryNames.DSRInfo", fileName);
         }
 
         public static string GetNpcTypeFolder(string fileName) {
@@ -90,19 +90,19 @@ namespace SoulsUnpackTools {
         public static string GetNpcNameFolder(string fileName) {
             fileName = fileName.Split('.')[0];
 
-            return FindEntryIn("pureInfo/NpcNames.DSRInfo", fileName);
+            return CommonUtils.FindEntryIn("pureInfo/NpcNames.DSRInfo", fileName);
         }
 
         public static string GetMagicTypeFolder(string fileName) {
             string typeChar = fileName.Substring(0, 1);
 
-            return FindEntryIn("pureInfo/MagicTypes.DSRInfo", typeChar);
+            return CommonUtils.FindEntryIn("pureInfo/MagicTypes.DSRInfo", typeChar);
         }
 
         public static string GetMagicNameFolder(string fileName) {
             fileName = fileName.Split('.')[0];
 
-            return FindEntryIn("pureInfo/MagicNames.DSRInfo", fileName);
+            return CommonUtils.FindEntryIn("pureInfo/MagicNames.DSRInfo", fileName);
         }
 
         public static string GetArmorTypeFolder(string fileName) {
@@ -137,7 +137,7 @@ namespace SoulsUnpackTools {
                 searchId = fileName.Substring(0, fileName.Length - 3);
             }
 
-            return FindEntryIn("pureInfo/ArmorNames.DSRInfo", searchId);
+            return CommonUtils.FindEntryIn("pureInfo/ArmorNames.DSRInfo", searchId);
         }
 
         public static string GetItemTypeFolder(string fileName) {
@@ -150,14 +150,14 @@ namespace SoulsUnpackTools {
                 typeId = fileName.Substring(0, 2);
             }
 
-            return FindEntryIn("pureInfo/ItemTypes.DSRInfo", typeId);
+            return CommonUtils.FindEntryIn("pureInfo/ItemTypes.DSRInfo", typeId);
 
         }
 
         public static string GetItemNameFolder(string fileName) {
             fileName = fileName.Split('.')[0];
 
-            return FindEntryIn("pureInfo/ItemNames.DSRInfo", fileName);
+            return CommonUtils.FindEntryIn("pureInfo/ItemNames.DSRInfo", fileName);
         }
 
         public static string GetMovSubFolder(string fileName) {
@@ -184,7 +184,7 @@ namespace SoulsUnpackTools {
             }
             string npcId = fileName.Substring(0, 2);
 
-            return FindEntryIn("pureInfo/ConversationNpcNames.DSRInfo", npcId);
+            return CommonUtils.FindEntryIn("pureInfo/ConversationNpcNames.DSRInfo", npcId);
         }
 
         public static string GetConversationDialogue(string fileName) {
@@ -194,31 +194,7 @@ namespace SoulsUnpackTools {
             fileName = fileName.Split('.')[0];
             string diaId = fileName.Substring(0, fileName.Length - 2);
 
-            return FindEntryIn("pureInfo/ConversationNpcDialogues.DSRInfo", diaId);
-        }
-
-        public static string FindEntryIn(string infoFile, string entryName) {
-            using (StreamReader reader = new StreamReader(infoFile)) {
-                while (!reader.EndOfStream) {
-                    string line = reader.ReadLine();
-                    string id = line.Split('\t')[0];
-                    string name = line.Split('\t')[1];
-                    if (id == entryName) {
-                        return name
-                            .Replace('/', '_')
-                            .Replace('\\', '_')
-                            .Replace(":", "")
-                            .Replace(".", "")
-                            .Replace("?", "")
-                            .Replace("!", "")
-                            .Replace("\"", "")
-                            .Replace("<", "")
-                            .Replace(">", "")
-                            .Replace("|", "");
-                    }
-                }
-            }
-            return "";
+            return CommonUtils.FindEntryIn("pureInfo/ConversationNpcDialogues.DSRInfo", diaId);
         }
     }
 }

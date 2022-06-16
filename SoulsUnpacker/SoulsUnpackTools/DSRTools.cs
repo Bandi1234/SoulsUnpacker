@@ -59,8 +59,7 @@ namespace SoulsUnpackTools {
             }
         }
 
-        public static void RepackRawText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) { 
-            
+        public static void RepackRawText(string itemFolder, string menuFolder, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {  
             string[] itemFolders = Directory.GetDirectories(itemFolder);
             string[] menuFolders = Directory.GetDirectories(menuFolder);
 
@@ -137,8 +136,6 @@ namespace SoulsUnpackTools {
             }
             File.Create(menuTarget).Close();
             File.WriteAllBytes(menuTarget, DCX.Compress(menuBnd.Write(), DCX.Type.DCX_DFLT_10000_24_9));
-
-
         }
 
         public static void UnpackPureText(string itemSource, string menuSource, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {
@@ -394,6 +391,8 @@ namespace SoulsUnpackTools {
                         }
                     }
                 }
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
                 string[] files = Directory.GetFiles(folder, "*.txt", SearchOption.AllDirectories);
                 foreach (string file in files) {
                     int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
@@ -475,6 +474,8 @@ namespace SoulsUnpackTools {
                         }
                     }
                 }
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
                 string[] files = Directory.GetFiles(folder, "*.txt", SearchOption.AllDirectories);
                 foreach (string file in files) {
                     int id = int.Parse(file.Split('\\').Last().Split('.')[0]);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SoulsUnpackTools {
     public static class CommonUtils {
@@ -40,6 +41,30 @@ namespace SoulsUnpackTools {
                 this.onTalkFontStart = onTalkFontStart;
                 this.onTalkFontProgress = onTalkFontProgress;
             }
+        }
+
+        public static string FindEntryIn(string infoFile, string entryName) {
+            using (StreamReader reader = new StreamReader(infoFile)) {
+                while (!reader.EndOfStream) {
+                    string line = reader.ReadLine();
+                    string id = line.Split('\t')[0];
+                    string name = line.Split('\t')[1];
+                    if (id == entryName) {
+                        return name
+                            .Replace('/', '_')
+                            .Replace('\\', '_')
+                            .Replace(":", "")
+                            .Replace(".", "")
+                            .Replace("?", "")
+                            .Replace("!", "")
+                            .Replace("\"", "")
+                            .Replace("<", "")
+                            .Replace(">", "")
+                            .Replace("|", "");
+                    }
+                }
+            }
+            return "";
         }
     }
 }

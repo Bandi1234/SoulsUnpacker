@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonUtils.cs" />
+    <Compile Include="DS3Tools.cs" />
+    <Compile Include="DS3Utils.cs" />
     <Compile Include="DSRTools.cs" />
     <Compile Include="DSRUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
