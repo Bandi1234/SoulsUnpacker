@@ -194,7 +194,7 @@ namespace SoulsUnpackTools {
             fileName = fileName.Split('.')[0];
             string diaId = fileName.Substring(0, fileName.Length - 2);
 
-            return CommonUtils.FindEntryIn("pureInfo/ConversationNpcDialogues.DSRInfo", diaId);
+            return CommonUtils.CropDialogue(CommonUtils.FindEntryIn("pureInfo/ConversationNpcDialogues.DSRInfo", diaId));
         }
     }
 }

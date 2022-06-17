@@ -66,5 +66,12 @@ namespace SoulsUnpackTools {
             }
             return "";
         }
+
+        public static string CropDialogue(string dialogue) {
+            if (dialogue.Length > 60) {
+                dialogue = dialogue.Substring(0, 56) + "...]";
+            }
+            return dialogue;
+        } 
     }
 }

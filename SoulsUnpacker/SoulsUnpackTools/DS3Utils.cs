@@ -230,7 +230,7 @@ namespace SoulsUnpackTools {
         public static string GetDialogueConversationFolder(string name) {
             name = name.Split('.')[0];
             name = name.Substring(0, name.Length - 2);
-            return CommonUtils.FindEntryIn("pureInfo/DialogueNames.DS3Info", name);
+            return CommonUtils.CropDialogue(CommonUtils.FindEntryIn("pureInfo/DialogueNames.DS3Info", name));
         }
 
         public static string GetDialogueTypeFolder1(string name) {
@@ -246,7 +246,7 @@ namespace SoulsUnpackTools {
         public static string GetDialogueConversationFolder1(string name) {
             name = name.Split('.')[0];
             name = name.Substring(0, name.Length - 2);
-            return CommonUtils.FindEntryIn("pureInfo/DialogueNames1.Ds3Info", name);
+            return CommonUtils.CropDialogue(CommonUtils.FindEntryIn("pureInfo/DialogueNames1.Ds3Info", name));
         }
 
         public static string GetDialogueTypeFolder2(string name) {
@@ -262,7 +262,7 @@ namespace SoulsUnpackTools {
         public static string GetDialogueConversationFolder2(string name) {
             name = name.Split('.')[0];
             name = name.Substring(0, name.Length - 2);
-            return CommonUtils.FindEntryIn("pureInfo/DialogueNames2.Ds3Info", name);
+            return CommonUtils.CropDialogue(CommonUtils.FindEntryIn("pureInfo/DialogueNames2.Ds3Info", name));
         }
 
         public static string GetGoodsNameFolder(string name) {
