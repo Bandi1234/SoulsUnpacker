@@ -27,18 +27,22 @@ namespace SoulsUnpackerConsole {
             ConsoleMenu ds3Menu = new ConsoleMenu(new string[] {"Dark Souls 3"});
             ConsoleMenu ds3UnpackMenu = new ConsoleMenu(new string[] {"Unpack DS3 text"});
             ConsoleMenu ds3RepackMenu = new ConsoleMenu(new string[] {"Repack DS3 text"});
+            ConsoleMenu sekMenu = new ConsoleMenu(new string[] {"Sekiro"});
+            ConsoleMenu sekUnpackMenu = new ConsoleMenu(new string[] {"Unpack Sekiro text"});
+            ConsoleMenu sekRepackMenu = new ConsoleMenu(new string[] {"Repack Sekiro text"});
 
-            gameMenu.options.Add(new ConsoleOption("Dark Souls Remastered", () => dsrMenu.show(), false));
-            gameMenu.options.Add(new ConsoleOption("Dark Souls 3", () => ds3Menu.show(), false));
-            gameMenu.options.Add(new ConsoleOption("About", () => aboutMenu.show(), false));
+            gameMenu.options.Add(new ConsoleOption("Dark Souls Remastered", () => dsrMenu.Show(), false));
+            gameMenu.options.Add(new ConsoleOption("Dark Souls 3", () => ds3Menu.Show(), false));
+            gameMenu.options.Add(new ConsoleOption("Sekiro", () => sekMenu.Show(), false));
+            gameMenu.options.Add(new ConsoleOption("About", () => aboutMenu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Exit", () => { }, true));
 
             aboutMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             //TODO DeS!!!
 
-            dsrMenu.options.Add(new ConsoleOption("Unpack text", () => dsrUnpackMenu.show(), false));
-            dsrMenu.options.Add(new ConsoleOption("Repack text", () => dsrRepackMenu.show(), false));
+            dsrMenu.options.Add(new ConsoleOption("Unpack text", () => dsrUnpackMenu.Show(), false));
+            dsrMenu.options.Add(new ConsoleOption("Repack text", () => dsrRepackMenu.Show(), false));
             dsrMenu.options.Add(new ConsoleOption("Unpack font", () => DSRSetup.SetupFontUnpack(), false));
             dsrMenu.options.Add(new ConsoleOption("Repack font", () => DSRSetup.SetupFontRepack(), false));
             dsrMenu.options.Add(new ConsoleOption("Back", () => { }, true));
@@ -55,8 +59,8 @@ namespace SoulsUnpackerConsole {
 
             //TODO DS2!!!
 
-            ds3Menu.options.Add(new ConsoleOption("Unpack text", () => ds3UnpackMenu.show(), false));
-            ds3Menu.options.Add(new ConsoleOption("Repack text", () => ds3RepackMenu.show(), false));
+            ds3Menu.options.Add(new ConsoleOption("Unpack text", () => ds3UnpackMenu.Show(), false));
+            ds3Menu.options.Add(new ConsoleOption("Repack text", () => ds3RepackMenu.Show(), false));
             ds3Menu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS3Setup.SetupRawUnpack(), true));
@@ -69,11 +73,20 @@ namespace SoulsUnpackerConsole {
             ds3RepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DS3Setup.SetupDSRTRepack(), true));
             ds3RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //TODO Sekiro!!!
+            sekMenu.options.Add(new ConsoleOption("Unpack text", () => sekUnpackMenu.Show(), false));
+            sekMenu.options.Add(new ConsoleOption("Repack text", () => sekRepackMenu.Show(), false));
+            sekMenu.options.Add(new ConsoleOption("Back", () => { }, true));
+
+            sekUnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => SEKSetup.SetupRawUnpack(), true));
+            sekUnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => SEKSetup.SetupPureUnpack(), true));
+            sekUnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
+
+            sekRepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => SEKSetup.SetupRawRepack(), true));
+            sekRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             //TODO Elden Ring!!!
 
-            gameMenu.show();
+            gameMenu.Show();
         }
     }
 }

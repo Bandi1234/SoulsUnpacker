@@ -1,0 +1,297 @@
+h10	Shaved
+10	Catarina Helm
+100	Helm of Favor
+1000	Dragon Head
+1001	Dragon Body
+1002	Dragon Arms
+1003	Dragon Legs
+101	Embraced Armor of Favor
+1010	Egg
+102	Gauntlets of Favor
+103	Leggings of Favor
+h11	Receding
+11	Catarina Armor
+110	Helm of the Wise
+111	Armor of the Glorious
+112	Gauntlets of the Vanquisher
+113	Boots of the Explorer
+h12	Short
+12	Catarina Gauntlets
+120	Stone Helm
+121	Stone Armor
+122	Stone Gauntlets
+123	Stone Leggings
+h13	Swept Back
+13	Catarina Leggings
+130	Crystalline Helm
+131	Crystalline Armor
+132	Crystalline Gauntlets
+133	Crystalline Leggings
+h14	Ponytail
+140	Mask of the Sealer
+141	Crimson Robe
+142	Crimson Gloves
+143	Crimson Waistcloth
+h15	Wild
+150	Mask of Velka
+151	Black Cleric Robe
+152	Black Manchette
+153	Black Tights
+h16	Parted Center
+160	Iron Helm
+161	Armor of the Sun
+162	Iron Bracelet
+163	Iron Leggings
+h17	Semi-Long
+170	Chain Helm
+171	Chain Armor
+172	Leather Gauntlets
+173	Chain Leggings
+h18	Curly
+180	Cleric Helm
+181	Cleric Armor
+182	Cleric Gauntlets
+183	Cleric Leggings
+h19	Bobbed
+190	Sunlight Maggot
+h20	Male 11
+20	Paladin Helm
+200	Helm of Thorns
+201	Armor of Thorns
+202	Gauntlets of Thorns
+203	Leggings of Thorns
+h21	Male 12
+21	Paladin Armor
+210	Standard Helm
+211	Hard Leather Armor
+212	Hard Leather Gauntlets
+213	Hard Leather Boots
+h22	Male 13
+22	Paladin Gauntlets
+220	Sorcerer Hat
+221	Sorcerer Cloak
+222	Sorcerer Gauntlets
+223	Sorcerer Boots
+h23	Male 14
+23	Paladin Leggings
+230	Tattered Cloth Hood
+231	Tattered Cloth Robe
+232	Tattered Cloth Manchette
+233	Heavy Boots
+h24	Male 15
+240	Pharis's Hat
+241	Leather Armor
+242	Leather Gloves
+243	Leather Boots
+h25	Male 16
+250	Painting Guardian Hood
+251	Painting Guardian Robe
+252	Painting Guardian Gloves
+253	Painting Guardian Waistcloth
+h26	Male 17
+h27	Male 18
+270	Ornstein's Helm
+271	Ornstein's Armor
+272	Ornstein's Gauntlets
+273	Ornstein's Leggings
+h28	Male 19
+280	Eastern Helm
+281	Eastern Armor
+282	Eastern Gauntlets
+283	Eastern Leggings
+h29	Male 20
+290	Xanthous Crown
+291	Xanthous Overcoat
+292	Xanthous Gloves
+293	Xanthous Waistcloth
+h30	Shaved
+300	Thief Mask
+301	Black Leather Armor
+302	Black Leather Gloves
+303	Black Leather Boots
+h31	Very Short
+310	Priest's Hat
+311	Holy Robe
+312	Traveling Gloves
+313	Holy Trousers
+h32	Wave
+320	Black Knight Helm
+321	Black Knight Armor
+322	Black Knight Gauntlets
+323	Black Knight Leggings
+h33	Straight A
+330	Crown of Dusk
+331	Antiquated Dress
+332	Antiquated Gloves
+333	Antiquated Skirt
+h34	Straight B
+340	Witch Hat
+341	Witch Cloak
+342	Witch Gloves
+343	Witch Skirt
+h35	Ponytail A
+350	Elite Knight Helm
+351	Elite Knight Armor
+352	Elite Knight Gauntlets
+353	Elite Knight Leggings
+h36	Ponytail B
+360	Wanderer Hood
+361	Wanderer Coat
+362	Wanderer Manchette
+363	Wanderer Boots
+h37	Pigtails
+370	Mage Smith Hat
+371	Mage Smith Coat
+372	Mage Smith Gauntlets
+373	Mage Smith Boots
+h38	Bun
+380	Big Hat
+381	Sage Robe
+382	Traveling Gloves
+383	Traveling Boots
+h39	Braided
+390	Knight Helm
+391	Knight Armor
+392	Knight Gauntlets
+393	Knight Leggings
+h40	Female 11
+40	Dark Mask
+400	Dingy Hood
+401	Dingy Robe
+402	Dingy Gloves
+403	Blood-Stained Skirt
+h41	Female 12
+41	Dark Armor
+410	Maiden Hood
+411	Maiden Robe
+412	Maiden Gloves
+413	Maiden Skirt
+h42	Female 13
+42	Dark Gauntlets
+420	Silver Knight Helm
+421	Silver Knight Armor
+422	Silver Knight Gauntlets
+423	Silver Knight Leggings
+h43	Female 14
+43	Dark Leggings
+h44	Female 15
+440	Havel's Helm
+441	Havel's Armor
+442	Havel's Gauntlets
+443	Havel's Leggings
+h45	Female 16
+450	Brass Helm
+451	Brass Armor
+452	Brass Gauntlets
+453	Brass Leggings
+h46	Female 17
+460	Gold-Hemmed Black Hood
+461	Gold-Hemmed Black Cloak
+462	Gold-Hemmed Black Gloves
+463	Gold-Hemmed Black Skirt
+h47	Female 18
+470	Golem Helm
+471	Golem Armor
+472	Golem Gauntlets
+473	Golem Leggings
+h48	Female 19
+480	Hollow Soldier Helm
+481	Hollow Soldier Armor
+482	Soldier's Gloves
+483	Hollow Soldier Waistcloth
+h49	Female 20
+490	Steel Helm
+491	Steel Armor
+492	Steel Gauntlets
+493	Steel Leggings
+h50	Travel Hairstyle
+50	Brigand Hood
+500	Hollow Thief's Hood
+501	Hollow Thief's Leather Armor
+502	Thief's Gloves
+503	Hollow Thief's Tights
+51	Brigand Armor
+510	Balder Helm
+511	Balder Armor
+512	Balder Gauntlets
+513	Balder Leggings
+52	Brigand Gauntlets
+520	Hollow Warrior Helm
+521	Hollow Warrior Armor
+522	Warrior's Gloves
+523	Hollow Warrior Waistcloth
+53	Brigand Trousers
+530	Giant Helm
+531	Giant Armor
+532	Giant Gauntlets
+533	Giant Leggings
+540	Crown of the Dark Sun
+541	Moonlight Robe
+542	Moonlight Gloves
+543	Moonlight Waistcloth
+550	Crown of the Great Lord
+551	Robe of the Great Lord
+552	Bracelet of the Great Lord
+553	Anklet of the Great Lord
+560	Sack
+570	Symbol of Avarice
+580	Royal Helm
+590	Mask of the Father
+60	Shadow Mask
+600	Mask of the Mother
+61	Shadow Garb
+610	Mask of the Child
+62	Shadow Gauntlets
+620	Fang Boar Helm
+63	Shadow Leggings
+630	Gargoyle Helm
+640	Black Sorcerer Hat
+641	Black Sorcerer Cloak
+642	Black Sorcerer Gauntlets
+643	Black Sorcerer Boots
+650	Elite Cleric Helm
+651	Elite Cleric Armor
+652	Elite Cleric Gauntlets
+653	Elite Cleric Leggings
+660	Helm of Artorias
+661	Armor of Artorias
+662	Gauntlets of Artorias
+663	Leggings of Artorias
+670	Porcelain Mask
+671	Lord's Blade Robe
+672	Lord's Blade Gloves
+673	Lord's Blade Waistcloth
+680	Gough's Helm
+681	Gough's Armor
+682	Gough's Gauntlets
+683	Gough's Leggings
+690	Guardian Helm
+691	Guardian Armor
+692	Guardian Gauntlets
+693	Guardian Leggings
+70	Black Iron Helm
+700	Snickering Top Hat
+701	Chester's Long Coat
+702	Chester's Gloves
+703	Chester's Trousers
+71	Black Iron Armor
+710	Bloated Head
+72	Black Iron Gauntlets
+720	Bloated Sorcerer Head
+73	Black Iron Leggings
+80	Smough's Helm
+81	Smough's Armor
+82	Smough's Gauntlets
+83	Smough's Leggings
+90	Six-Eyed Helm of the Channelers
+900	Head
+901	Body
+902	Arms
+903	Legs
+91	Robe of the Channelers
+92	Gauntlets of the Channelers
+93	Waistcloth of the Channelers
+950	No Travel Gear / Head
+951	No Travel Gear / Body
+952	No Travel Gear / Arms
+953	No Travel Gear / Legs

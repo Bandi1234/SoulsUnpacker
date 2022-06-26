@@ -1,0 +1,669 @@
+h1000	Shaved
+10	Catarina Helm
+100	Helm of Favor
+1000	Dragon Head
+1001	Dragon Body
+1002	Dragon Arms
+1003	Dragon Legs
+101	Embraced Armor of Favor
+102	Gauntlets of Favor
+103	Leggings of Favor
+h1100	Receding
+11	Catarina Armor
+110	Helm of the Wise
+111	Armor of the Glorious
+112	Gauntlets of the Vanquisher
+113	Boots of the Explorer
+h1200	Short
+12	Catarina Gauntlets
+120	Stone Helm
+121	Stone Armor
+122	Stone Gauntlets
+123	Stone Leggings
+h1300	Swept Back
+13	Catarina Leggings
+130	Crystalline Helm
+131	Crystalline Armor
+132	Crystalline Gauntlets
+133	Crystalline Leggings
+h1400	Ponytail
+140	Mask of the Sealer
+141	Crimson Robe
+142	Crimson Gloves
+143	Crimson Waistcloth
+h1500	Wild
+150	Mask of Velka
+151	Black Cleric Robe
+152	Black Manchette
+153	Black Tights
+h1600	Parted Center
+160	Iron Helm
+161	Armor of the Sun
+162	Iron Bracelet
+163	Iron Leggings
+h1700	Semi-Long
+170	Chain Helm
+171	Chain Armor
+172	Leather Gauntlets
+173	Chain Leggings
+h1800	Curly
+180	Cleric Helm
+181	Cleric Armor
+182	Cleric Gauntlets
+183	Cleric Leggings
+h1900	Bobbed
+190	Sunlight Maggot
+19000	Fallen Knight Helm
+19001	Fallen Knight Armor
+19002	Fallen Knight Gauntlets
+19003	Fallen Knight Trousers
+19500	Knight Helm
+19501	Knight Armor
+19502	Knight Gauntlets
+19503	Knight Leggings
+h2000	Male 11
+20	Paladin Helm
+200	Helm of Thorns
+201	Armor of Thorns
+202	Gauntlets of Thorns
+203	Leggings of Thorns
+h2100	Male 12
+21	Paladin Armor
+210	Standard Helm
+21000	Firelink Helm
+21001	Firelink Armor
+21002	Firelink Gauntlets
+21003	Firelink Leggings
+211	Hard Leather Armor
+212	Hard Leather Gauntlets
+213	Hard Leather Boots
+21500	Sellsword Helm
+21501	Sellsword Armor
+21502	Sellsword Gauntlet
+21503	Sellsword Trousers
+h2200	Male 13
+22	Paladin Gauntlets
+220	Sorcerer Hat
+22000	Herald Helm
+22001	Herald Armor
+22002	Herald Gloves
+22003	Herald Trousers
+221	Sorcerer Cloak
+222	Sorcerer Gauntlets
+223	Sorcerer Boots
+22500	Sunless Veil
+22501	Sunless Armor
+22502	Sunless Gauntlets
+22503	Sunless Leggings
+h2300	Male 14
+23	Paladin Leggings
+230	Tattered Cloth Hood
+23000	Black Hand Hat
+23001	Black Hand Armor
+23002	Assassin Gloves
+23003	Assassin Trousers
+231	Tattered Cloth Robe
+23100	Assassin Hood
+23101	Assassin Armor
+232	Tattered Cloth Manchette
+233	Heavy Boots
+23500	Xanthous Crown
+23501	Xanthous Overcoat
+23502	Xanthous Gloves
+23503	Xanthous Trousers
+h2400	Male 15
+240	Pharis's Hat
+24000	Northern Helm
+24001	Northern Armor
+24002	Northern Gloves
+24003	Northern Trousers
+241	Leather Armor
+242	Leather Gloves
+243	Leather Boots
+24500	Morne's Helm
+24501	Morne's Armor
+24502	Morne's Gauntlets
+24503	Morne's Leggings
+h2500	Male 16
+250	Painting Guardian Hood
+25000	Silver Mask
+25001	Leonhard's Garb
+25002	Leonhard's Gauntlets
+25003	Leonhard's Trousers
+251	Painting Guardian Robe
+252	Painting Guardian Gloves
+253	Painting Guardian Waistcloth
+25500	Sneering Mask
+25501	Pale Shade Robe
+25502	Pale Shade Gloves
+25503	Pale Shade Trousers
+h2600	Male 17
+26000	Sunset Helm
+26001	Sunset Armor
+26002	Sunset Gauntlets
+26003	Sunset Leggings
+26500	Old Sage's Blindfold
+26501	Cornyx's Garb
+26502	Cornyx's Wrap
+26503	Cornyx's Skirt
+h2700	Male 18
+270	Ornstein's Helm
+27000	Executioner Helm
+27001	Executioner Armor
+27002	Executioner Gauntlets
+27003	Executioner Leggings
+271	Ornstein's Armor
+272	Ornstein's Gauntlets
+273	Ornstein's Leggings
+27500	Billed Mask
+27501	Black Dress
+27502	Black Gauntlets
+27503	Black Leggings
+h2800	Male 19
+280	Eastern Helm
+28000	Pyromancer Crown
+28001	Pyromancer Garb
+28002	Pyromancer Wrap
+28003	Pyromancer Trousers
+281	Eastern Armor
+282	Eastern Gauntlets
+283	Eastern Leggings
+h2900	Male 20
+290	Xanthous Crown
+29000	Court Sorcerer Hood
+29001	Court Sorcerer Robe
+29002	Court Sorcerer Gloves
+29003	Court Sorcerer Trousers
+291	Xanthous Overcoat
+292	Xanthous Gloves
+293	Xanthous Waistcloth
+h3000	Shaved
+300	Thief Mask
+30000	Sorcerer Hood
+30001	Sorcerer Robe
+30002	Sorcerer Gloves
+30003	Sorcerer Trousers
+301	Black Leather Armor
+30101	Clandestine Coat
+302	Black Leather Gloves
+303	Black Leather Boots
+h3100	Very Short
+310	Priest's Hat
+31000	Cleric Hat
+31001	Cleric Blue Robe
+31002	Cleric Gloves
+31003	Cleric Trousers
+311	Holy Robe
+31101	Dingy Maiden's Overcoat
+312	Traveling Gloves
+313	Holy Trousers
+h3200	Wave
+320	Black Knight Helm
+321	Black Knight Armor
+322	Black Knight Gauntlets
+323	Black Knight Leggings
+h3300	Straight A
+330	Crown of Dusk
+33000	Grotto Hat
+33001	Grotto Robe
+33002	Grotto Wrap
+33003	Grotto Trousers
+331	Antiquated Dress
+332	Antiquated Gloves
+333	Antiquated Skirt
+h3400	Straight B
+340	Witch Hat
+341	Witch Cloak
+342	Witch Gloves
+343	Witch Skirt
+h3500	Ponytail A
+350	Elite Knight Helm
+351	Elite Knight Armor
+352	Elite Knight Gauntlets
+353	Elite Knight Leggings
+h3600	Ponytail B
+360	Wanderer Hood
+361	Wanderer Coat
+362	Wanderer Manchette
+363	Wanderer Boots
+h3700	Pigtails
+370	Mage Smith Hat
+371	Mage Smith Coat
+372	Mage Smith Gauntlets
+373	Mage Smith Boots
+h3800	Bun
+380	Big Hat
+381	Sage Robe
+382	Traveling Gloves
+383	Traveling Boots
+h3900	Braided
+390	Knight Helm
+391	Knight Armor
+392	Knight Gauntlets
+393	Knight Leggings
+h4000	Female 11
+40	Dark Mask
+400	Dingy Hood
+40000	Steel Soldier Helm
+40001	Deserter Armor
+40002	Soldier's Gauntlets
+40003	Deserter Trousers
+401	Dingy Robe
+40100	Soldier's Hood
+402	Dingy Gloves
+40200	Thief Mask
+403	Blood-Stained Skirt
+h4100	Female 12
+41	Dark Armor
+410	Maiden Hood
+411	Maiden Robe
+412	Maiden Gloves
+413	Maiden Skirt
+h4200	Female 13
+42	Dark Gauntlets
+420	Silver Knight Helm
+421	Silver Knight Armor
+422	Silver Knight Gauntlets
+423	Silver Knight Leggings
+h4300	Female 14
+43	Dark Leggings
+43000	Sage's Big Hat
+43001	Elder's Robe
+h4400	Female 15
+440	Havel's Helm
+44000	Aristocrat's Mask
+44001	Jailer Robe
+44002	Jailer Gloves
+44003	Jailer Trousers
+441	Havel's Armor
+442	Havel's Gauntlets
+443	Havel's Leggings
+44500	Saint's Veil
+44501	Saint's Dress
+h4500	Female 16
+450	Brass Helm
+45000	Footman's Hood
+45001	Footman's Overcoat
+45002	Footman's Bracelets
+45003	Footman's Trousers
+451	Brass Armor
+452	Brass Gauntlets
+453	Brass Leggings
+h4600	Female 17
+460	Gold-Hemmed Black Hood
+46000	Grave Warden Hood
+46001	Grave Warden Robe
+46002	Grave Warden Wrap
+46003	Grave Warden Skirt
+461	Gold-Hemmed Black Cloak
+462	Gold-Hemmed Black Gloves
+463	Gold-Hemmed Black Skirt
+h4700	Female 18
+470	Golem Helm
+47000	Worker Hat
+47001	Worker Garb
+47002	Worker Gloves
+47003	Worker Trousers
+471	Golem Armor
+472	Golem Gauntlets
+473	Golem Leggings
+47500	Thrall Hood
+h4800	Female 19
+480	Hollow Soldier Helm
+48000	Evangelist Hat
+48001	Evangelist Robe
+48002	Evangelist Gloves
+48003	Evangelist Trousers
+481	Hollow Soldier Armor
+482	Soldier's Gloves
+483	Hollow Soldier Waistcloth
+48500	Scholar's Shed Skin
+48501	Scholar's Robe
+h4900	Female 20
+490	Steel Helm
+49000	Winged Knight Helm
+49001	Winged Knight Armor
+49002	Winged Knight Gauntlets
+49003	Winged Knight Leggings
+491	Steel Armor
+492	Steel Gauntlets
+493	Steel Leggings
+h5000	Travel Hairstyle
+50	Brigand Hood
+500	Hollow Thief's Hood
+501	Hollow Thief's Leather Armor
+502	Thief's Gloves
+503	Hollow Thief's Tights
+50500	Cathedral Knight Helm
+50501	Cathedral Knight Armor
+50502	Cathedral Knight Gauntlets
+50503	Cathedral Knight Leggings
+51	Brigand Armor
+510	Balder Helm
+511	Balder Armor
+512	Balder Gauntlets
+513	Balder Leggings
+52	Brigand Gauntlets
+520	Hollow Warrior Helm
+52000	Lothric Knight Helm
+52001	Lothric Knight Armor
+52002	Lothric Knight Gauntlets
+52003	Lothric Knight Leggings
+521	Hollow Warrior Armor
+522	Warrior's Gloves
+523	Hollow Warrior Waistcloth
+53	Brigand Trousers
+530	Giant Helm
+53000	Outrider Knight Helm
+53001	Outrider Knight Armor
+53002	Outrider Knight Gauntlets
+53003	Outrider Knight Leggings
+531	Giant Armor
+532	Giant Gauntlets
+533	Giant Leggings
+540	Crown of the Dark Sun
+54000	Black Knight Helm
+54001	Black Knight Armor
+54002	Black Knight Gauntlets
+54003	Black Knight Leggings
+541	Moonlight Robe
+542	Moonlight Gloves
+543	Moonlight Waistcloth
+54500	Dark Mask
+54501	Dark Armor
+54502	Dark Gauntlets
+54503	Dark Leggings
+550	Crown of the Great Lord
+55000	Exile Mask
+55001	Exile Armor
+55002	Exile Gauntlets
+55003	Exile Leggings
+551	Robe of the Great Lord
+552	Bracelet of the Great Lord
+553	Anklet of the Great Lord
+560	Sack
+56000	Pontiff Knight Crown
+56001	Pontiff Knight Armor
+56002	Pontiff Knight Gauntlets
+56003	Pontiff Knight Leggings
+570	Symbol of Avarice
+57000	Golden Crown
+57001	Dragonscale Armor
+57002	Golden Bracelets
+57003	Dragonscale Waistcloth
+57500	Wolnir's Crown
+580	Royal Helm
+58000	Undead Legion Helm
+58001	Undead Legion Armor
+58002	Undead Legion Gauntlet
+58003	Undead Legion Leggings
+590	Mask of the Father
+59500	Man Serpent's Mask
+59501	Man Serpent's Robe
+60	Shadow Mask
+600	Mask of the Mother
+60000	Fire Witch Helm
+60001	Fire Witch Armor
+60002	Fire Witch Gauntlets
+60003	Fire Witch Leggings
+61	Shadow Garb
+610	Mask of the Child
+61000	Lorian's Helm
+61001	Lorian's Armor
+61002	Lorian's Gauntlets
+61003	Lorian's Leggings
+61500	Hood of Prayer
+61501	Robe of Prayer
+61503	Skirt of Prayer
+62	Shadow Gauntlets
+620	Fang Boar Helm
+62000	Giant's crown
+62001	Giant's Armor
+62002	Giant's Gauntlets
+62003	Giant's Leggings
+63	Shadow Leggings
+630	Gargoyle Helm
+63000	Dancer's Crown
+63001	Dancer's Armor
+63002	Dancer's Gauntlets
+63003	Dancer's Leggings
+640	Black Sorcerer Hat
+64000	Gundyr's Helm
+64001	Gundyr's Armor
+64002	Gundyr's Gauntlets
+64003	Gundyr's Leggings
+641	Black Sorcerer Cloak
+642	Black Sorcerer Gauntlets
+643	Black Sorcerer Boots
+650	Elite Cleric Helm
+65000	Old Monarch's Crown
+65001	Old Monarch's Robe
+651	Elite Cleric Armor
+652	Elite Cleric Gauntlets
+653	Elite Cleric Leggings
+66000	Archdeacon White Crown
+66001	Archdeacon Holy Garb
+66003	Archdeacon Skirt
+66501	Deacon Robe
+66503	Deacon Skirt
+67000	Frigid Valley Mask
+68000	Dingy Hood
+68001	Fire Keeper Robe
+68002	Fire Keeper Gloves
+68003	Fire Keeper Skirt
+70	Black Iron Helm
+70000	Chain Helm
+70001	Chain Armor
+70002	Leather Gauntlets
+70003	Chain Leggings
+71	Black Iron Armor
+71000	Nameless Knight Helm
+71001	Nameless Knight Armor
+71002	Nameless Knight Gauntlets
+71003	Nameless Knight Leggings
+72	Black Iron Gauntlets
+72000	Elite Knight Helm
+72001	Elite Knight Armor
+72002	Elite Knight Gauntlets
+72003	Elite Knight Leggings
+73	Black Iron Leggings
+73000	Faraam Helm
+73001	Faraam Armor
+73002	Faraam Gauntlets
+73003	Faraam Boots
+74000	Catarina Helm
+74001	Catarina Armor
+74002	Catarina Gauntlets
+74003	Catarina Leggings
+74500	Standard Helm
+74501	Hard Leather Armor
+74502	Hard Leather Gauntlets
+74503	Hard Leather Boots
+75000	Havel's Helm
+75001	Havel's Armor
+75002	Havel's Gauntlets
+75003	Havel's Leggings
+75500	Brigand Hood
+75501	Brigand Armor
+75502	Brigand Gauntlets
+75503	Brigand Trousers
+76000	Pharis's Hat
+76001	Leather Armor
+76002	Leather Gloves
+76003	Leather Boots
+76500	Ragged Mask
+76501	Master's Attire
+76502	Master's Gloves
+76503	Loincloth
+77000	Old Sorcerer Hat
+77001	Old Sorcerer Coat
+77002	Old Sorcerer Gauntlets
+77003	Old Sorcerer Boots
+77500	Conjurator Hood
+77501	Conjurator Robe
+77502	Conjurator Manchettes
+77503	Conjurator Boots
+78000	Thief Mask
+78001	Black Leather Armor
+78002	Black Leather Gloves
+78003	Black Leather Boots
+78500	Symbol of Avarice
+79000	Creighton's Steel Mask
+79001	Mirrah Chain Mail
+79002	Mirrah Chain Gloves
+79003	Mirrah Chain Leggings
+79500	Maiden Hood
+79501	Maiden Robe
+79502	Maiden Gloves
+79503	Maiden Skirt
+80	Smough's Helm
+80000	Alva Helm
+80001	Alva Armor
+80002	Alva Gauntlets
+80003	Alva Leggings
+81	Smough's Armor
+81000	Shadow Mask
+81001	Shadow Garb
+81002	Shadow Gauntlets
+81003	Shadow Leggings
+82	Smough's Gauntlets
+82000	Eastern Helm
+82001	Eastern Armor
+82002	Eastern Gauntlets
+82003	Eastern Leggings
+83	Smough's Leggings
+83000	Helm of Favor
+83001	Embraced Armor of Favor
+83002	Gauntlets of Favor
+83003	Leggings of Favor
+84000	Brass Helm
+84001	Brass Armor
+84002	Brass Gauntlets
+84003	Brass Leggings
+85000	Silver Knight Helm
+85001	Silver Knight Armor
+85002	Silver Knight Gauntlets
+85003	Silver Knight Leggings
+86000	Lucatiel's Mask
+86001	Mirrah Vest
+86002	Mirrah Gloves
+86003	Mirrah Trousers
+87000	Iron Helm
+87001	Armor of the Sun
+87002	Iron Bracelets
+87003	Iron Leggings
+88000	Drakeblood Helm
+88001	Drakeblood Armor
+88002	Drakeblood Gauntlets
+88003	Drakeblood Leggings
+89001	Drang Armor
+89002	Drang Gauntlets
+89003	Drang Shoes
+90	Six-Eyed Helm of the Channelers
+900	Head
+90000	Black Iron Helm
+90001	Black Iron Armor
+90002	Black Iron Gauntlets
+90003	Black Iron Leggings
+901	Body
+902	Arms
+903	Legs
+91	Robe of the Channelers
+91000	Painting Guardian Hood
+91001	Painting Guardian Gown
+91002	Painting Guardian Gloves
+91003	Painting Guardian Waistcloth
+92	Gauntlets of the Channelers
+92000	Wolf Knight Helm
+92001	Wolf Knight Armor
+92002	Wolf Knight Gauntlets
+92003	Wolf Knight Leggings
+93	Waistcloth of the Channelers
+93000	Dragonslayer Helm
+93001	Dragonslayer Armor
+93002	Dragonslayer Gauntlets
+93003	Dragonslayer Leggings
+94000	Smough's Helm
+94001	Smough's Armor
+94002	Smough's Gauntlets
+94003	Smough's Leggings
+950	No Travel Gear / Head
+95000	Hexer's Hood
+95001	Hexer's Robes
+95002	Hexer's Gloves
+95003	Hexer's Boots
+951	No Travel Gear / Body
+952	No Travel Gear / Arms
+953	No Travel Gear / Legs
+96000	Helm of Thorns
+96001	Armor of Thorns
+96002	Gauntlets of Thorns
+96003	Leggings of Thorns
+97000	Varangian Helm
+97001	Varangian Armor
+97002	Varangian Cuffs
+97003	Varangian Leggings
+98000	Crown of Dusk
+98001	Antiquated Dress
+98002	Antiquated Gloves
+98003	Antiquated Skirt
+99000	Karla's Pointed Hat
+99001	Karla's Coat
+99002	Karla's Gloves
+99003	Karla's Trousers
+20000	Vilhelm's Helm
+20001	Vilhelm's Armor
+20002	Vilhelm's Gauntlets
+20003	Vilhelm's Leggings
+55500	Slave Knight Hood
+55501	Slave Knight Armor
+55502	Slave Knight Gauntlets
+55503	Slave Knight Leggings
+56500	Ordained Hood
+56501	Ordained Dress
+56503	Ordained Trousers
+58500	Follower Helm
+58501	Follower Armor
+58502	Follower Gloves
+58503	Follower Boots
+60500	Millwood Knight Helm
+60501	Millwood Knight Armor
+60502	Millwood Knight Gauntlets
+60503	Millwood Knight Leggings
+28501	Antiquated Plain Garb
+28502	Violet Wrappings
+28503	Loincloth
+29500	Shira's Crown
+29501	Shira's Armor
+29502	Shira's Gloves
+29503	Shira's Trousers
+32000	Lapp's Helm
+32001	Lapp's Armor
+32002	Lapp's Gauntlets
+32003	Lapp's Leggings
+63500	Ringed Knight Hood
+63501	Ringed Knight Armor
+63502	Ringed Knight Gauntlets
+63503	Ringed Knight Leggings
+64501	Harald Legion Armor
+64502	Harald Legion Gauntlets
+64503	Harald Legion Leggings
+67500	Iron Dragonslayer Helm
+67501	Iron Dragonslayer Armor
+67502	Iron Dragonslayer Gauntlets
+67503	Iron Dragonslayer Leggings
+68500	White Preacher Head
+80500	Ruin Helm
+80501	Ruin Armor
+80502	Ruin Gauntlets
+80503	Ruin Leggings
+81500	Desert Pyromancer Hood
+81501	Desert Pyromancer Garb
+81502	Desert Pyromancer Gloves
+81503	Desert Pyromancer Skirt
+82500	Black Witch Hat
+82501	Black Witch Garb
+82502	Black Witch Wrappings
+82503	Black Witch Trousers
+83500	Black Witch Veil
+84500	Blindfold Mask

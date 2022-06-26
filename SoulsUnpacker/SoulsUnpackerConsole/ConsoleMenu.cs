@@ -13,7 +13,7 @@ namespace SoulsUnpackerConsole {
             this.text = text;
         }
 
-        public void show() {
+        public void Show() {
             while (true) {
                 Console.Clear();
                 

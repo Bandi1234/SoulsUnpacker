@@ -1,0 +1,24 @@
+メニューその他	Short menu text, including starting classes
+イベントテキスト	In-game prompts and NPC menu text
+会話	NPC dialogue
+血文字	Soapstone guidance messages
+FDP_メニューテキスト	FDP_menu text
+FDP_一行ヘルプ	FDP_One-line help
+FDP_キーガイド	FDP_Key Guide
+FDP_システムメッセージ	FDP_system message
+FDP_ダイアログ	FDP_dialog
+ムービー字幕	Movie subtitles
+インゲームメニュー	In-game menu
+メニュー共通テキスト	Menu common text
+ダイアログ	dialog
+キーガイド	Key guide
+一行ヘルプ	One line help
+項目ヘルプ	Item help
+テキスト表示用タグ一覧	List of tags for text display
+NTC_メニューテキスト	NTC_menu text
+NTC_一行ヘルプ	NTC_One-line help
+NTC_キーガイド	NTC_Key Guide
+NTC_システムメッセージ	NTC_system message
+NTC_ダイアログ	NTC_dialog
+ローディングタイトル	Loading title
+ローディングテキスト	Loading text
