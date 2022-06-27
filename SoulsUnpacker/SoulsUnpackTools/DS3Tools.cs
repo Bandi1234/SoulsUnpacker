@@ -602,7 +602,6 @@ namespace SoulsUnpackTools {
             }
             menuWriter.Write("€€€€€");
             menuWriter.Close();
-
         }
 
         public static void RepackDS3Text(string itemSource, string menuSource, string itemTarget, string menuTarget, CommonUtils.TextObserver observer) {

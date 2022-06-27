@@ -79,9 +79,12 @@ namespace SoulsUnpackerConsole {
 
             sekUnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => SEKSetup.SetupRawUnpack(), true));
             sekUnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => SEKSetup.SetupPureUnpack(), true));
+            sekUnpackMenu.options.Add(new ConsoleOption("Unpack to SEKText format", () => SEKSetup.SetupSEKTUnpack(), true));
             sekUnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             sekRepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => SEKSetup.SetupRawRepack(), true));
+            sekRepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => SEKSetup.SetupPureRepack(), true));
+            sekRepackMenu.options.Add(new ConsoleOption("Repack from SEKTExt format", () => SEKSetup.SetupSEKTRepack(), true));
             sekRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             //TODO Elden Ring!!!
