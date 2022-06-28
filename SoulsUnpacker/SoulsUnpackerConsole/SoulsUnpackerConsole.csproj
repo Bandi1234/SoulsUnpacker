@@ -66,6 +66,7 @@
     <Compile Include="ConsoleLoadingBar.cs" />
     <Compile Include="ConsoleMenu.cs" />
     <Compile Include="ConsoleOption.cs" />
+    <Compile Include="DS2Setup.cs" />
     <Compile Include="DS3Setup.cs" />
     <Compile Include="DSRSetup.cs" />
     <Compile Include="Program.cs" />

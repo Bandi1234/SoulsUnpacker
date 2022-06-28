@@ -13,7 +13,7 @@ namespace SoulsUnpackerConsole {
 
             if (!File.Exists("item_dlc2.msgbnd.dcx") || !File.Exists("menu_dlc2.msgbnd.dcx")) {
                 Console.WriteLine("Couldn't find dark souls msgbnd files.");
-                Console.WriteLine("Please palce both item_dlc2.msgbnd.dcx and menu_dlc2.msgbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("Please place both item_dlc2.msgbnd.dcx and menu_dlc2.msgbnd.dcx in the same folder as this tool.");
                 Console.WriteLine("< Press any key to continue >");
                 Console.ReadKey();
                 return;
@@ -57,7 +57,7 @@ namespace SoulsUnpackerConsole {
 
             if (!File.Exists("item_dlc2.msgbnd.dcx") || !File.Exists("menu_dlc2.msgbnd.dcx")) {
                 Console.WriteLine("Couldn't find dark souls msgbnd files.");
-                Console.WriteLine("Please palce both item_dlc2.msgbnd.dcx and menu_dlc2.msgbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("Please place both item_dlc2.msgbnd.dcx and menu_dlc2.msgbnd.dcx in the same folder as this tool.");
                 Console.WriteLine("< Press any key to continue >");
                 Console.ReadKey();
                 return;
@@ -189,7 +189,7 @@ namespace SoulsUnpackerConsole {
 
             if (!File.Exists("item_dlc2.msgbnd.dcx") || !File.Exists("menu_dlc2.msgbnd.dcx")) {
                 Console.WriteLine("Couldn't find dark souls msgbnd files.");
-                Console.WriteLine("Please palce both item_dlc2.msgbnd.dcx and menu_dlc2.msgbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("Please place both item_dlc2.msgbnd.dcx and menu_dlc2.msgbnd.dcx in the same folder as this tool.");
                 Console.WriteLine("< Press any key to continue >");
                 Console.ReadKey();
                 return;

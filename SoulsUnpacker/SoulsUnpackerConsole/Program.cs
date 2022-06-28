@@ -24,6 +24,9 @@ namespace SoulsUnpackerConsole {
             ConsoleMenu dsrMenu = new ConsoleMenu(new string[] {"Dark Souls Remastered"});
             ConsoleMenu dsrUnpackMenu = new ConsoleMenu(new string[] {"Unpack DSR text"});
             ConsoleMenu dsrRepackMenu = new ConsoleMenu(new string[] {"Repack DSR text"});
+            ConsoleMenu ds2Menu = new ConsoleMenu(new string[] { "Dark souls 2 SOTFS" });
+            ConsoleMenu ds2UnpackMenu = new ConsoleMenu(new string[] { "Unpack DS2 text" });
+            ConsoleMenu ds2RepackMenu = new ConsoleMenu(new string[] { "Repack DS2 text" });
             ConsoleMenu ds3Menu = new ConsoleMenu(new string[] {"Dark Souls 3"});
             ConsoleMenu ds3UnpackMenu = new ConsoleMenu(new string[] {"Unpack DS3 text"});
             ConsoleMenu ds3RepackMenu = new ConsoleMenu(new string[] {"Repack DS3 text"});
@@ -32,6 +35,7 @@ namespace SoulsUnpackerConsole {
             ConsoleMenu sekRepackMenu = new ConsoleMenu(new string[] {"Repack Sekiro text"});
 
             gameMenu.options.Add(new ConsoleOption("Dark Souls Remastered", () => dsrMenu.Show(), false));
+            gameMenu.options.Add(new ConsoleOption("Dark souls 2 SOTFS", () => ds2Menu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Dark Souls 3", () => ds3Menu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Sekiro", () => sekMenu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("About", () => aboutMenu.Show(), false));
@@ -57,7 +61,20 @@ namespace SoulsUnpackerConsole {
             dsrRepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DSRSetup.SetupDSRTRepack(), true));
             dsrRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //TODO DS2!!!
+            //TODO DS2
+            ds2Menu.options.Add(new ConsoleOption("Unpack text", () => ds2UnpackMenu.Show(), false));
+            ds2Menu.options.Add(new ConsoleOption("Repack text", () => ds2RepackMenu.Show(), false));
+            ds2Menu.options.Add(new ConsoleOption("Back", () => { }, true));
+
+            ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS2Setup.SetupRawUnpack(), true));
+            //ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS2Setup.SetupPureUnpack(), true));
+            //ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to DS2Text format", () => DS2Setup.SetupDSRTUnpack(), true));
+            ds2UnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
+
+            ds2RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS2Setup.SetupRawRepack(), true));
+            //ds2RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS2Setup.SetupPureRepack(), true));
+            //ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDSRTRepack(), true));
+            ds2RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3Menu.options.Add(new ConsoleOption("Unpack text", () => ds3UnpackMenu.Show(), false));
             ds3Menu.options.Add(new ConsoleOption("Repack text", () => ds3RepackMenu.Show(), false));
