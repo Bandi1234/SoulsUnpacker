@@ -109,6 +109,102 @@ namespace SoulsUnpackTools {
             }
         }
 
+        public static void UnpackDS2Text(string sourceFolder, string targetFile, CommonUtils.TextObserver observer) {
+            string[] baseFmgs = Directory.GetFiles(sourceFolder, "*.fmg", SearchOption.TopDirectoryOnly);
+            string[] talkFmgs = Directory.GetFiles(Path.Combine(sourceFolder, "talk"), "*.fmg", SearchOption.TopDirectoryOnly);
+            string[] bmFmgs = Directory.GetFiles(Path.Combine(sourceFolder, "bloodmes"), "*.fmg", SearchOption.TopDirectoryOnly);
+            StreamWriter sw = new StreamWriter(targetFile);
+            List<PureDS2FMGHandler> handlers = new List<PureDS2FMGHandler>();
+
+            int maxEntries = 0;
+            int entries = 0;
+
+            foreach (string file in baseFmgs) {
+                FMG fmg = FMG.Read(file);
+                maxEntries += fmg.Entries.Count;
+                string name = file.Split('\\').Last().Split('.')[0];
+                handlers.Add(new PureDS2FMGHandler(file, fmg, "", name));
+            }
+            foreach (string file in talkFmgs) {
+                FMG fmg = FMG.Read(file);
+                maxEntries += fmg.Entries.Count;
+                string name = file.Split('\\').Last().Split('.')[0];
+                handlers.Add(new PureDS2FMGHandler(file, fmg, "talk", name));
+            }
+            foreach (string file in baseFmgs) {
+                FMG fmg = FMG.Read(file);
+                maxEntries += fmg.Entries.Count;
+                string name = file.Split('\\').Last().Split('.')[0];
+                handlers.Add(new PureDS2FMGHandler(file, fmg, "bloodmes", name));
+            }
+
+            observer.onItemStart(maxEntries);
+
+            foreach (PureDS2FMGHandler handler in handlers) {
+                if (handler.fmgDir == "") {
+                    sw.WriteLine(handler.fmgName);
+                } else {
+                    sw.WriteLine(handler.fmgDir + "\t" + handler.fmgName);
+                }
+                List<int> emptyIds = new List<int>();
+                List<int> spaceIds = new List<int>();
+
+                foreach (FMG.Entry entry in handler.fmgData.Entries) {
+                    if (entry.Text == "" || entry.Text == null) {
+                        emptyIds.Add(entry.ID);
+                        entries++;
+                        observer.onItemProgress(entries, maxEntries);
+                        continue;
+                    }
+                    if (entry.Text == " ") {
+                        spaceIds.Add(entry.ID);
+                        entries++;
+                        observer.onItemProgress(entries, maxEntries);
+                        continue;
+                    }
+                    sw.WriteLine(entry.ID);
+                    sw.WriteLine(entry.Text);
+                    sw.WriteLine("€");
+                    entries++;
+                    observer.onItemProgress(entries, maxEntries);
+                }
+                sw.WriteLine("€€€");
+                string emptyLine = "";
+                for (int i = 0; i < emptyIds.Count; i++) {
+                    emptyLine += emptyIds[i];
+                    if (i < emptyIds.Count - 1) {
+                        emptyLine += "\t";
+                    }
+                }
+                sw.WriteLine(emptyLine);
+                string spaceLine = "";
+                for (int i = 0; i < spaceIds.Count; i++) {
+                    spaceLine += spaceIds[i];
+                    if (i < spaceIds.Count - 1) {
+                        spaceLine += "\t";
+                    }
+                }
+                sw.WriteLine(spaceLine);
+            }
+            sw.Write("€€€€€");
+            sw.Close();
+        }
+
+        private class PureDS2FMGHandler {
+            public string fmgFile;
+            public FMG fmgData;
+            public string fmgDir;
+            public string fmgName;
+
+            public PureDS2FMGHandler(string fmgFile, FMG fmgData, string fmgDir, string fmgName) { 
+                this.fmgFile = fmgFile;
+                this.fmgData = fmgData;
+                this.fmgDir = fmgDir;
+                this.fmgName = fmgName;
+            }
+
+        }
+
         private class DS2FMGHandler {
             public string fmgFile;
             public FMG fmgData;

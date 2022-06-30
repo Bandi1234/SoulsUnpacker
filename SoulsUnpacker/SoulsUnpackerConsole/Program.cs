@@ -68,12 +68,12 @@ namespace SoulsUnpackerConsole {
 
             ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS2Setup.SetupRawUnpack(), true));
             //ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS2Setup.SetupPureUnpack(), true));
-            //ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to DS2Text format", () => DS2Setup.SetupDSRTUnpack(), true));
+            ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to DS2Text format", () => DS2Setup.SetupDS2TUnpack(), true));
             ds2UnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds2RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS2Setup.SetupRawRepack(), true));
             //ds2RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS2Setup.SetupPureRepack(), true));
-            //ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDSRTRepack(), true));
+            //ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDS2TRepack(), true));
             ds2RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3Menu.options.Add(new ConsoleOption("Unpack text", () => ds3UnpackMenu.Show(), false));
@@ -82,12 +82,12 @@ namespace SoulsUnpackerConsole {
 
             ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS3Setup.SetupRawUnpack(), true));
             ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS3Setup.SetupPureUnpack(), true));
-            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to DSRText format", () => DS3Setup.SetupDSRTUnpack(), true));
+            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to DSRText format", () => DS3Setup.SetupDS3TUnpack(), true));
             ds3UnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS3Setup.SetupRawRepack(), true));
             ds3RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS3Setup.SetupPureRepack(), true));
-            ds3RepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DS3Setup.SetupDSRTRepack(), true));
+            ds3RepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DS3Setup.SetupDS3TRepack(), true));
             ds3RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             sekMenu.options.Add(new ConsoleOption("Unpack text", () => sekUnpackMenu.Show(), false));

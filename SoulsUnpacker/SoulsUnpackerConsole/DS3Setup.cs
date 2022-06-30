@@ -184,7 +184,7 @@ namespace SoulsUnpackerConsole {
             Console.ReadKey();
         }
 
-        public static void SetupDSRTUnpack() {
+        public static void SetupDS3TUnpack() {
             Console.Clear();
 
             if (!File.Exists("item_dlc2.msgbnd.dcx") || !File.Exists("menu_dlc2.msgbnd.dcx")) {
@@ -228,7 +228,7 @@ namespace SoulsUnpackerConsole {
             Console.ReadKey();
         }
 
-        public static void SetupDSRTRepack() {
+        public static void SetupDS3TRepack() {
             Console.Clear();
 
             if (!File.Exists("item.DS3Text") || !File.Exists("menu.DS3Text")) {
