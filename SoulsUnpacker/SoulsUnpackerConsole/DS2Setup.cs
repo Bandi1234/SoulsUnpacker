@@ -115,5 +115,41 @@ namespace SoulsUnpackerConsole {
             Console.WriteLine("< Press any key to continue >");
             Console.ReadKey();
         }
+
+        public static void SetupDS2TRepack() {
+            Console.Clear();
+
+            if (!File.Exists("english.DS2Text")) {
+                Console.WriteLine("Couldn't find DS2Text file.");
+                Console.WriteLine("Please place your english.DS2Text file in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("english.DS2Text found!");
+
+            if (Directory.Exists("english")) {
+                Console.WriteLine("Deleting old /english folder...");
+                Directory.Delete("english", true);
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking DS2T content into english...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => { },
+                (int menuEntries, int maxMenuEntries) => { }
+            );
+            DS2Tools.RepackDS2Text("english.DS2Text", "english", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking DS2Text content into /english");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
     }
 }

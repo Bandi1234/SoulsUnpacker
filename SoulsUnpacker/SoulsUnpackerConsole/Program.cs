@@ -73,7 +73,7 @@ namespace SoulsUnpackerConsole {
 
             ds2RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS2Setup.SetupRawRepack(), true));
             //ds2RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS2Setup.SetupPureRepack(), true));
-            //ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDS2TRepack(), true));
+            ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDS2TRepack(), true));
             ds2RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3Menu.options.Add(new ConsoleOption("Unpack text", () => ds3UnpackMenu.Show(), false));
