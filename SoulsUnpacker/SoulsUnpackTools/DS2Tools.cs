@@ -109,6 +109,10 @@ namespace SoulsUnpackTools {
             }
         }
 
+        //TODO pure unpack
+
+        //TODO pure repack
+
         public static void UnpackDS2Text(string sourceFolder, string targetFile, CommonUtils.TextObserver observer) {
             string[] baseFmgs = Directory.GetFiles(sourceFolder, "*.fmg", SearchOption.TopDirectoryOnly);
             string[] talkFmgs = Directory.GetFiles(Path.Combine(sourceFolder, "talk"), "*.fmg", SearchOption.TopDirectoryOnly);
@@ -280,6 +284,147 @@ namespace SoulsUnpackTools {
                 File.WriteAllBytes(handler.fmgFile, handler.fmgData.Write());
             }
             sr.Close();
+        }
+
+        public static void UnpackFont(string smallSource, string bigSource, string smallTarget, string bigTarget, CommonUtils.FontObserver2 observer) {
+            BND4 smallFont = BND4.Read(smallSource);
+            Directory.CreateDirectory(smallTarget);
+
+            int smallEntries = 0;
+            int maxSmallEntries = smallFont.Files.Count;
+
+            observer.onSmallFontStart(maxSmallEntries);
+
+            foreach (BinderFile file in smallFont.Files) {
+                if (file.Name.EndsWith(".ccm")) {
+                    string name = Path.Combine(smallTarget, file.ID + "€" + file.Name);
+                    File.Create(name).Close();
+                    File.WriteAllBytes(name, file.Bytes);
+                } else {
+                    string folderName = Path.Combine(smallTarget, file.ID + "€" + file.Name.Split('.')[0]);
+                    Directory.CreateDirectory(folderName);
+                    TPF tpf = TPF.Read(file.Bytes);
+                    foreach (TPF.Texture texture in tpf.Textures) {
+                        string path = Path.Combine(folderName, texture.Name + ".dds");
+                        File.Create(path).Close();
+                        File.WriteAllBytes(path, texture.Bytes);
+                    }
+                }
+                smallEntries++;
+                observer.onSmallFontProgress(smallEntries, maxSmallEntries);
+            }
+
+            BND4 bigFont = BND4.Read(bigSource);
+            Directory.CreateDirectory(bigTarget);
+
+            int bigEntries = 0;
+            int maxBigEntries = bigFont.Files.Count;
+
+            observer.onBigFontStart(maxBigEntries);
+
+            foreach (BinderFile file in bigFont.Files) {
+                if (file.Name.EndsWith(".ccm")) {
+                    string name = Path.Combine(bigTarget, file.ID + "€" + file.Name);
+                    File.Create(name).Close();
+                    File.WriteAllBytes(name, file.Bytes);
+                } else {
+                    string folderName = Path.Combine(bigTarget, file.ID + "€" + file.Name.Split('.')[0]);
+                    Directory.CreateDirectory(folderName);
+                    TPF tpf = TPF.Read(file.Bytes);
+                    foreach (TPF.Texture texture in tpf.Textures) {
+                        string path = Path.Combine(folderName, texture.Name + ".dds");
+                        File.Create(path).Close();
+                        File.WriteAllBytes(path, texture.Bytes);
+                    }
+                }
+                bigEntries++;
+                observer.onBigFontProgress(bigEntries, maxBigEntries);
+            }
+        }
+
+        public static void RepackFont(string smallSource, string bigSource, string smallTarget, string bigTarget, CommonUtils.FontObserver2 observer) {
+            BND4 smallFont = new BND4();
+            smallFont.Version = "14M18O9";
+
+            int smallEntries = 0;
+            int maxSmallEntries = Directory.GetDirectories(smallSource).Length + 1;
+
+            observer.onSmallFontStart(maxSmallEntries);
+
+            string smallCCMFile = Directory.GetFiles(smallSource, "*.ccm").First();
+            BinderFile smallCCM = new BinderFile();
+            smallCCM.Name = smallCCMFile.Split('\\').Last().Split('€')[1];
+            smallCCM.ID = int.Parse(smallCCMFile.Split('\\').Last().Split('€')[0]);
+            smallCCM.CompressionType = DCX.Type.Zlib;
+            smallCCM.Bytes = File.ReadAllBytes(smallCCMFile);
+            smallFont.Files.Add(smallCCM);
+            smallEntries++;
+            observer.onSmallFontProgress(smallEntries, maxSmallEntries);
+
+            foreach (string directory in Directory.GetDirectories(smallSource)) {
+                TPF tpf = new TPF();
+                tpf.Encoding = 2;
+                tpf.Flag2 = 3;
+                tpf.Platform = TPF.TPFPlatform.PC;
+                foreach (string file in Directory.GetFiles(directory)) {
+                    byte format = 5;
+                    if (int.Parse(directory.Split('\\').Last().Split('€')[0]) != 1) {
+                        format = 3;
+                    }
+                    TPF.Texture texture = new TPF.Texture(Path.GetFileName(file).Split('.')[0], format, 0, File.ReadAllBytes(file));
+                    tpf.Textures.Add(texture);
+                }
+                BinderFile bFile = new BinderFile();
+                bFile.Name = directory.Split('\\').Last().Split('€')[1] + ".tpf";
+                bFile.ID = int.Parse(directory.Split('\\').Last().Split('€')[0]);
+                bFile.CompressionType = DCX.Type.Zlib;
+                bFile.Bytes = tpf.Write();
+                smallFont.Files.Add(bFile);
+                smallEntries++;
+                observer.onSmallFontProgress(smallEntries, maxSmallEntries);
+            }
+            File.Create(smallTarget).Close();
+            File.WriteAllBytes(smallTarget, DCX.Compress(smallFont.Write(), DCX.Type.DCX_DFLT_10000_24_9));
+
+            BND4 bigFont = new BND4();
+            bigFont.Version = "14M18O9";
+
+            int bigEntries = 0;
+            int maxBigEntries = Directory.GetDirectories(bigSource).Length + 1;
+
+            observer.onBigFontStart(maxBigEntries);
+
+            string bigCCMFile = Directory.GetFiles(bigSource, "*.ccm").First();
+            BinderFile bigCCM = new BinderFile();
+            bigCCM.Name = bigCCMFile.Split('\\').Last().Split('€')[1];
+            bigCCM.ID = int.Parse(bigCCMFile.Split('\\').Last().Split('€')[0]);
+            bigCCM.CompressionType = DCX.Type.Zlib;
+            bigCCM.Bytes = File.ReadAllBytes(bigCCMFile);
+            bigFont.Files.Add(bigCCM);
+            bigEntries++;
+            observer.onBigFontProgress(bigEntries, maxBigEntries);
+
+            foreach (string directory in Directory.GetDirectories(bigSource)) {
+                TPF tpf = new TPF();
+                tpf.Encoding = 2;
+                tpf.Flag2 = 3;
+                tpf.Platform = TPF.TPFPlatform.PC;
+                foreach (string file in Directory.GetFiles(directory)) {
+                    byte format = 5;
+                    TPF.Texture texture = new TPF.Texture(Path.GetFileName(file).Split('.')[0], format, 0, File.ReadAllBytes(file));
+                    tpf.Textures.Add(texture);
+                }
+                BinderFile bFile = new BinderFile();
+                bFile.Name = directory.Split('\\').Last().Split('€')[1] + ".tpf";
+                bFile.ID = int.Parse(directory.Split('\\').Last().Split('€')[0]);
+                bFile.CompressionType = DCX.Type.Zlib;
+                bFile.Bytes = tpf.Write();
+                bigFont.Files.Add(bFile);
+                bigEntries++;
+                observer.onBigFontProgress(bigEntries, maxBigEntries);
+            }
+            File.Create(bigTarget).Close();
+            File.WriteAllBytes(bigTarget, DCX.Compress(bigFont.Write(), DCX.Type.DCX_DFLT_10000_24_9));
         }
 
         private class PureDS2FMGHandler {

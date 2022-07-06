@@ -44,6 +44,8 @@ namespace SoulsUnpackerConsole {
             Console.ReadKey();
         }
 
+        //TODO pure unpack
+
         public static void SetupRawRepack() {
             Console.Clear();
 
@@ -79,6 +81,8 @@ namespace SoulsUnpackerConsole {
             Console.WriteLine("< Press any key to continue >");
             Console.ReadKey();
         }
+
+        //TODO pure repack
 
         public static void SetupDS2TUnpack() {
             Console.Clear();
@@ -148,6 +152,93 @@ namespace SoulsUnpackerConsole {
 
             Console.Clear();
             Console.WriteLine("Finished repacking DS2Text content into /english");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        public static void SetupFontUnpack() {
+            Console.Clear();
+
+            if (!File.Exists("FeFont_Small.fontbnd.dcx") || !File.Exists("FeFont_Big.fontbnd.dcx")) {
+                Console.WriteLine("Couldn't find FeFont files.");
+                Console.WriteLine("Please place both FeFont_Small.fontbnd.dcx and FeFont_Big.fontbnd.dcx in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("FeFont_Small.fontbnd.dcx and FeFont_Big.fontbnd.dcx found!");
+
+            if (Directory.Exists("FeFont_Small")) {
+                Console.WriteLine("Deleting old /FeFont_Small...");
+                Directory.Delete("FeFont_Small", true);
+            }
+            if (Directory.Exists("FeFont_Big")) {
+                Console.WriteLine("Deleting old /FeFont_Big...");
+                Directory.Delete("FeFont_Big", true);
+            }
+            ConsoleLoadingBar lb = null;
+            CommonUtils.FontObserver2 observer = new CommonUtils.FontObserver2(
+                (int maxSmallFEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking font textures from FeFont_Small.fontbnd.dcx...", 0, maxSmallFEntries);
+                },
+                (int smallFEntries, int maxSmallFEntries) => {
+                    lb.Update(smallFEntries);
+                },
+                (int maxBigFEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking font textures from FeFont_Big.fontbnd.dcx...", 0, maxBigFEntries);
+                },
+                (int bigFEntries, int maxBigFEntries) => {
+                    lb.Update(bigFEntries);
+                }
+            );
+            DS2Tools.UnpackFont("FeFont_Small.fontbnd.dcx", "FeFont_Big.fontbnd.dcx", "FeFont_Small", "FeFont_Big", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished unpacking fonts into /FeFont_Small and /FeFont_Big");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        public static void SetupFontRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("FeFont_Small") || !Directory.Exists("FeFont_Big")) {
+                Console.WriteLine("Couldn't find FeFont libraries.");
+                Console.WriteLine("Please place both your FeFont_Small and FeFont_big folders in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+            }
+            Console.WriteLine("FeFont_Small and FeFont_big folders found!");
+
+            if (File.Exists("FeFont_Small.fontbnd.dcx")) {
+                Console.WriteLine("Deleting old FeFont_Small.fontbnd.dcx...");
+                File.Delete("FeFont_Small.fontbnd.dcx");
+            }
+
+            if (File.Exists("FeFont_Big.fontbnd.dcx")) {
+                Console.WriteLine("Deleting old FeFont_Big.fontbnd.dcx...");
+                File.Delete("FeFont_Big.fontbnd.dcx");
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.FontObserver2 observer = new CommonUtils.FontObserver2(
+                (int maxSmallFEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking font textures into DSFont24.tpf.dcx...", 0, maxSmallFEntries);
+                },
+                (int smallFEntries, int maxSmallFEntries) => {
+                    lb.Update(smallFEntries);
+                },
+                (int maxBigFEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking font textures into TalkFont24.tpf.dcx...", 0, maxBigFEntries);
+                },
+                (int bigFEntries, int maxBigFEntries) => {
+                    lb.Update(bigFEntries);
+                }
+            );
+            DS2Tools.RepackFont("FeFont_Small", "FeFont_Big", "FeFont_Small.fontbnd.dcx", "FeFont_Big.fontbnd.dcx", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking fonts into FeFont_Small.fontbnd.dcx and FeFont_Big.fontbnd.dcx");
             Console.WriteLine("< Press any key to continue >");
             Console.ReadKey();
         }

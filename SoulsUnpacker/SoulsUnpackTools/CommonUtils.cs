@@ -43,6 +43,24 @@ namespace SoulsUnpackTools {
             }
         }
 
+        public class FontObserver2 {
+            public Action<int> onSmallFontStart;
+            public Action<int, int> onSmallFontProgress;
+            public Action<int> onBigFontStart;
+            public Action<int, int> onBigFontProgress;
+
+            public FontObserver2(
+                Action<int> onSmallFontStart, 
+                Action<int, int> onSmallFontProgress, 
+                Action<int> onBigFontStart, 
+                Action<int, int> onBigFontProgress) {
+                this.onSmallFontStart = onSmallFontStart;
+                this.onSmallFontProgress = onSmallFontProgress;
+                this.onBigFontStart = onBigFontStart;
+                this.onBigFontProgress = onBigFontProgress;
+            }
+        }
+
         public static string FindEntryIn(string infoFile, string entryName) {
             using (StreamReader reader = new StreamReader(infoFile)) {
                 while (!reader.EndOfStream) {

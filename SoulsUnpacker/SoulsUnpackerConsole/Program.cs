@@ -64,6 +64,8 @@ namespace SoulsUnpackerConsole {
             //TODO DS2
             ds2Menu.options.Add(new ConsoleOption("Unpack text", () => ds2UnpackMenu.Show(), false));
             ds2Menu.options.Add(new ConsoleOption("Repack text", () => ds2RepackMenu.Show(), false));
+            ds2Menu.options.Add(new ConsoleOption("Unpack font", () => DS2Setup.SetupFontUnpack(), false));
+            ds2Menu.options.Add(new ConsoleOption("Repack font", () => DS2Setup.SetupFontRepack(), false));
             ds2Menu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS2Setup.SetupRawUnpack(), true));
