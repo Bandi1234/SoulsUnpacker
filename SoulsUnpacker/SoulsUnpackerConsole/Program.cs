@@ -61,7 +61,6 @@ namespace SoulsUnpackerConsole {
             dsrRepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DSRSetup.SetupDSRTRepack(), true));
             dsrRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //TODO DS2
             ds2Menu.options.Add(new ConsoleOption("Unpack text", () => ds2UnpackMenu.Show(), false));
             ds2Menu.options.Add(new ConsoleOption("Repack text", () => ds2RepackMenu.Show(), false));
             ds2Menu.options.Add(new ConsoleOption("Unpack font", () => DS2Setup.SetupFontUnpack(), false));
@@ -69,12 +68,12 @@ namespace SoulsUnpackerConsole {
             ds2Menu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS2Setup.SetupRawUnpack(), true));
-            //ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS2Setup.SetupPureUnpack(), true));
+            ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS2Setup.SetupPureUnpack(), true));
             ds2UnpackMenu.options.Add(new ConsoleOption("Unpack to DS2Text format", () => DS2Setup.SetupDS2TUnpack(), true));
             ds2UnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds2RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS2Setup.SetupRawRepack(), true));
-            //ds2RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS2Setup.SetupPureRepack(), true));
+            ds2RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS2Setup.SetupPureRepack(), true));
             ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDS2TRepack(), true));
             ds2RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 

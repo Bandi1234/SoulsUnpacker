@@ -44,7 +44,41 @@ namespace SoulsUnpackerConsole {
             Console.ReadKey();
         }
 
-        //TODO pure unpack
+        public static void SetupPureUnpack() {
+            Console.Clear();
+
+            if (!Directory.Exists("english")) {
+                Console.WriteLine("Couldn't find 'english' folder containing ds2 fmgs.");
+                Console.WriteLine("Please place your 'english' folder in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("'english' folder found!");
+
+            if (Directory.Exists("english_UP")) {
+                Console.WriteLine("Deleting old /english_UP folder...");
+                Directory.Delete("english_UP", true);
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Unpacking pure text from english...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => { },
+                (int menuEntries, int maxMenuEntries) => { }
+            );
+            DS2Tools.UnpackPureText("english", "english_UP", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished unpacking pure text into english_UP");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
 
         public static void SetupRawRepack() {
             Console.Clear();
@@ -82,7 +116,41 @@ namespace SoulsUnpackerConsole {
             Console.ReadKey();
         }
 
-        //TODO pure repack
+        public static void SetupPureRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("english_UP")) {
+                Console.WriteLine("Couldn't find pure text library.");
+                Console.WriteLine("Please place your 'english_UP' folder in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("'english_UP' folder found!");
+
+            if (Directory.Exists("english")) {
+                Console.WriteLine("Deleting old /english folder...");
+                Directory.Delete("english", true);
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking pure text into english...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => { },
+                (int menuEntries, int maxMenuEntries) => { }
+            );
+            DS2Tools.RepackPureText("english_UP", "english", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking pure text into 'english'");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
 
         public static void SetupDS2TUnpack() {
             Console.Clear();

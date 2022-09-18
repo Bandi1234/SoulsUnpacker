@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="CommonUtils.cs" />
     <Compile Include="DS2Tools.cs" />
+    <Compile Include="DS2Utils.cs" />
     <Compile Include="DS3Tools.cs" />
     <Compile Include="DS3Utils.cs" />
     <Compile Include="DSRTools.cs" />

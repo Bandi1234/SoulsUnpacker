@@ -109,9 +109,218 @@ namespace SoulsUnpackTools {
             }
         }
 
-        //TODO pure unpack
+        public static void UnpackPureText(string sourceFolder, string targetFolder, CommonUtils.TextObserver observer) {
+            string[] baseFmgs = Directory.GetFiles(sourceFolder, "*.fmg", SearchOption.TopDirectoryOnly);
+            string[] talkFmgs = Directory.GetFiles(Path.Combine(sourceFolder, "talk"), "*.fmg", SearchOption.TopDirectoryOnly);
+            string[] bmFmgs = Directory.GetFiles(Path.Combine(sourceFolder, "bloodmes"), "*.fmg", SearchOption.TopDirectoryOnly);
+            Directory.CreateDirectory(targetFolder);
+            Directory.CreateDirectory(Path.Combine(targetFolder, "base"));
+            Directory.CreateDirectory(Path.Combine(targetFolder, "talk"));
+            Directory.CreateDirectory(Path.Combine(targetFolder, "bloodmes"));
+            List<DS2FMGHandler> handlers = new List<DS2FMGHandler>();
 
-        //TODO pure repack
+            int maxEntries = 0;
+            int entries = 0;
+
+            foreach (string file in baseFmgs) {
+                FMG fmg = FMG.Read(file);
+                maxEntries += fmg.Entries.Count;
+                string name = file.Split('\\').Last().Split('.')[0];
+                string target = Path.Combine(targetFolder, "base", name);
+                handlers.Add(new DS2FMGHandler(file, fmg, target));
+            }
+            foreach (string file in talkFmgs) {
+                FMG fmg = FMG.Read(file);
+                maxEntries += fmg.Entries.Count;
+                string name = file.Split('\\').Last().Split('.')[0];
+                string target = Path.Combine(targetFolder, "talk", name);
+                handlers.Add(new DS2FMGHandler(file, fmg, target));
+            }
+            foreach (string file in bmFmgs) {
+                FMG fmg = FMG.Read(file);
+                maxEntries += fmg.Entries.Count;
+                string name = file.Split('\\').Last().Split('.')[0];
+                string target = Path.Combine(targetFolder, "bloodmes", name);
+                handlers.Add(new DS2FMGHandler(file, fmg, target));
+            }
+
+            observer.onItemStart(maxEntries);
+
+            foreach (DS2FMGHandler handler in handlers) {
+                Directory.CreateDirectory(handler.textDir);
+                StreamWriter emptyWriter = new StreamWriter(Path.Combine(handler.textDir, "empty.DS2Info"));
+                StreamWriter spaceWriter = new StreamWriter(Path.Combine(handler.textDir, "spaces.DS2Info"));
+                string path = "";
+                foreach (FMG.Entry entry in handler.fmgData.Entries) {
+                    if (entry.Text == "" || entry.Text == null) {
+                        emptyWriter.WriteLine(entry.ID);
+                        entries++;
+                        observer.onItemProgress(entries, maxEntries);
+                        continue;
+                    }
+                    if (entry.Text == " ") {
+                        spaceWriter.WriteLine(entry.ID);
+                        entries++;
+                        observer.onItemProgress(entries, maxEntries);
+                        continue;
+                    }
+                    string name = entry.ID + ".txt";
+                    string target = Path.Combine(handler.textDir, name);
+                    string text = entry.Text;
+                    string fmgName = handler.textDir.Split('\\').Last();
+                    switch (fmgName) {
+                        case "itemname":
+                        case "simpleexplanation":
+                        case "detailedexplanation":
+                            string iType = DS2Utils.GetItemBaseType(name);
+                            string iSType = DS2Utils.GetItemSubType(name, iType);
+                            string iName = DS2Utils.GetItemName(name, iType);
+                            path = Path.Combine(handler.textDir, iType, iSType, iName);
+                            if (!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                            target = Path.Combine(path, name);
+                            break;
+                        case "bonfirename":
+                            string bName = DS2Utils.GetBonfireName(name);
+                            path = Path.Combine(handler.textDir, bName);
+                            if (!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                            target = Path.Combine(path, name);
+                            break;
+                        case "mapname":
+                            string mName = DS2Utils.GetMapName(name);
+                            path = Path.Combine(handler.textDir, mName);
+                            if (!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                            target = Path.Combine(path, name);
+                            break;
+                        case "m10_02_00_00":
+                        case "m10_04_00_00":
+                        case "m10_10_00_00":
+                        case "m10_14_00_00":
+                        case "m10_15_00_00":
+                        case "m10_16_00_00":
+                        case "m10_17_00_00":
+                        case "m10_18_00_00":
+                        case "m10_19_00_00":
+                        case "m10_23_00_00":
+                        case "m10_25_00_00":
+                        case "m10_27_00_00":
+                        case "m10_29_00_00":
+                        case "m10_31_00_00":
+                        case "m10_32_00_00":
+                        case "m10_33_00_00":
+                        case "m10_34_00_00":
+                        case "m20_10_00_00":
+                        case "m20_11_00_00":
+                        case "m20_21_00_00":
+                        case "m20_24_00_00":
+                        case "m50_35_00_00":
+                        case "m50_36_00_00":
+                        case "m50_37_00_00":
+                        case "m50_38_00_00":
+                            if (handler.textDir.Split('\\')[handler.textDir.Split('\\').Length - 2] == "talk") {
+                                string npcName = DS2Utils.GetConversationNpcName(name);
+                                string diaName = DS2Utils.GetConversationDiaName(name);
+                                path = Path.Combine(handler.textDir, npcName, diaName);
+                                if (!Directory.Exists(path))
+                                    Directory.CreateDirectory(path);
+                                target = Path.Combine(path, name);
+                            }
+                            break;
+                        case "charaname":
+                            if (handler.textDir.Split('\\')[handler.textDir.Split('\\').Length - 2] == "talk") {
+                                string bossName = DS2Utils.GetBossName(name);
+                                path = Path.Combine(handler.textDir, bossName);
+                                if (!Directory.Exists(path))
+                                    Directory.CreateDirectory(path);
+                                target = Path.Combine(path, name);
+                            }
+                            break;
+                    }
+                    StreamWriter sw = new StreamWriter(target);
+                    sw.Write(text);
+                    sw.Close();
+                    entries++;
+                    observer.onItemProgress(entries, maxEntries);
+                }
+                emptyWriter.Close();
+                spaceWriter.Close();
+            }
+        }
+
+        public static void RepackPureText(string sourceFolder, string targetFolder, CommonUtils.TextObserver observer) {
+            string[] baseDirectories = Directory.GetDirectories(Path.Combine(sourceFolder, "base"), "*", SearchOption.TopDirectoryOnly);
+            string[] talkDirectores = Directory.GetDirectories(Path.Combine(sourceFolder, "talk"), "*", SearchOption.TopDirectoryOnly);
+            string[] bmDirectores = Directory.GetDirectories(Path.Combine(sourceFolder, "bloodmes"), "*", SearchOption.TopDirectoryOnly);
+            Directory.CreateDirectory(targetFolder);
+            Directory.CreateDirectory(Path.Combine(targetFolder, "talk"));
+            Directory.CreateDirectory(Path.Combine(targetFolder, "bloodmes"));
+            List<DS2FMGHandler> handlers = new List<DS2FMGHandler>();
+
+            int maxEntries = 0;
+            int entries = 0;
+
+            foreach (string dir in baseDirectories) {
+                maxEntries += Directory.GetFiles(dir, "*", SearchOption.AllDirectories).Length;
+                string name = dir.Split('\\').Last();
+                string fmgFile = Path.Combine(targetFolder, name + ".fmg");
+                handlers.Add(new DS2FMGHandler(fmgFile, new FMG(), dir));
+            }
+            foreach (string dir in talkDirectores) {
+                maxEntries += Directory.GetFiles(dir, "*", SearchOption.AllDirectories).Length;
+                string name = dir.Split('\\').Last();
+                string fmgFile = Path.Combine(targetFolder, "talk", name + ".fmg");
+                handlers.Add(new DS2FMGHandler(fmgFile, new FMG(), dir));
+            }
+            foreach (string dir in bmDirectores) {
+                maxEntries += Directory.GetFiles(dir, "*", SearchOption.AllDirectories).Length;
+                string name = dir.Split('\\').Last();
+                string fmgFile = Path.Combine(targetFolder, "bloodmes", name + ".fmg");
+                handlers.Add(new DS2FMGHandler(fmgFile, new FMG(), dir));
+            }
+
+            observer.onItemStart(maxEntries);
+
+            foreach (DS2FMGHandler handler in handlers) {
+                handler.fmgData.Version = FMG.FMGVersion.DarkSouls1;
+                handler.fmgData.Compression = DCX.Type.None;
+                using (StreamReader reader = new StreamReader(Path.Combine(handler.textDir, "empty.DS2Info"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry = new FMG.Entry(int.Parse(line), "");
+                            handler.fmgData.Entries.Add(entry);
+                        }
+                    }
+                }
+                entries++;
+                observer.onItemProgress(entries, maxEntries);
+                using (StreamReader reader = new StreamReader(Path.Combine(handler.textDir, "spaces.DS2Info"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry = new FMG.Entry(int.Parse(line), " ");
+                            handler.fmgData.Entries.Add(entry);
+                        }
+                    }
+                }
+                entries++;
+                observer.onItemProgress(entries, maxEntries);
+                foreach (string file in Directory.GetFiles(handler.textDir, "*.txt", SearchOption.AllDirectories)) {
+                    StreamReader sr = new StreamReader(file);
+                    string text = sr.ReadToEnd();
+                    sr.Close();
+                    int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
+                    FMG.Entry entry = new FMG.Entry(id, text);
+                    handler.fmgData.Entries.Add(entry);
+                    entries++;
+                    observer.onItemProgress(entries, maxEntries);
+                }
+                File.Create(handler.fmgFile).Close();
+                File.WriteAllBytes(handler.fmgFile, handler.fmgData.Write());
+            }
+        }
 
         public static void UnpackDS2Text(string sourceFolder, string targetFile, CommonUtils.TextObserver observer) {
             string[] baseFmgs = Directory.GetFiles(sourceFolder, "*.fmg", SearchOption.TopDirectoryOnly);
