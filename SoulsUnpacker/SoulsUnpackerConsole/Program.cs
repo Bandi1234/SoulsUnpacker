@@ -33,11 +33,15 @@ namespace SoulsUnpackerConsole {
             ConsoleMenu sekMenu = new ConsoleMenu(new string[] {"Sekiro"});
             ConsoleMenu sekUnpackMenu = new ConsoleMenu(new string[] {"Unpack Sekiro text"});
             ConsoleMenu sekRepackMenu = new ConsoleMenu(new string[] {"Repack Sekiro text"});
+            ConsoleMenu erMenu = new ConsoleMenu(new string[] {"Elden Ring"});
+            ConsoleMenu erUnpackMenu = new ConsoleMenu(new string[] {"Unpack Elden Ring text"});
+            ConsoleMenu erRepackMenu = new ConsoleMenu(new string[] {"Repack Elden Ring text"});
 
             gameMenu.options.Add(new ConsoleOption("Dark Souls Remastered", () => dsrMenu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Dark souls 2 SOTFS", () => ds2Menu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Dark Souls 3", () => ds3Menu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Sekiro", () => sekMenu.Show(), false));
+            gameMenu.options.Add(new ConsoleOption("Elden Ring", () => erMenu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("About", () => aboutMenu.Show(), false));
             gameMenu.options.Add(new ConsoleOption("Exit", () => { }, true));
 
@@ -74,7 +78,7 @@ namespace SoulsUnpackerConsole {
 
             ds2RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS2Setup.SetupRawRepack(), true));
             ds2RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS2Setup.SetupPureRepack(), true));
-            ds2RepackMenu.options.Add(new ConsoleOption("Repack from D2RText format", () => DS2Setup.SetupDS2TRepack(), true));
+            ds2RepackMenu.options.Add(new ConsoleOption("Repack from DS2Text format", () => DS2Setup.SetupDS2TRepack(), true));
             ds2RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3Menu.options.Add(new ConsoleOption("Unpack text", () => ds3UnpackMenu.Show(), false));
@@ -83,12 +87,12 @@ namespace SoulsUnpackerConsole {
 
             ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => DS3Setup.SetupRawUnpack(), true));
             ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => DS3Setup.SetupPureUnpack(), true));
-            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to DSRText format", () => DS3Setup.SetupDS3TUnpack(), true));
+            ds3UnpackMenu.options.Add(new ConsoleOption("Unpack to DS3Text format", () => DS3Setup.SetupDS3TUnpack(), true));
             ds3UnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             ds3RepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => DS3Setup.SetupRawRepack(), true));
             ds3RepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => DS3Setup.SetupPureRepack(), true));
-            ds3RepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => DS3Setup.SetupDS3TRepack(), true));
+            ds3RepackMenu.options.Add(new ConsoleOption("Repack from DS3Text format", () => DS3Setup.SetupDS3TRepack(), true));
             ds3RepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             sekMenu.options.Add(new ConsoleOption("Unpack text", () => sekUnpackMenu.Show(), false));
@@ -105,7 +109,20 @@ namespace SoulsUnpackerConsole {
             sekRepackMenu.options.Add(new ConsoleOption("Repack from SEKTExt format", () => SEKSetup.SetupSEKTRepack(), true));
             sekRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //TODO Elden Ring!!!
+            //TODO Elden Ring
+            erMenu.options.Add(new ConsoleOption("Unpack text", () => erUnpackMenu.Show(), false));
+            erMenu.options.Add(new ConsoleOption("Repack text", () => erRepackMenu.Show(), false));
+            erMenu.options.Add(new ConsoleOption("Back", () => { }, true));
+
+            erUnpackMenu.options.Add(new ConsoleOption("Unpack to raw text", () => ERSetup.SetupRawUnpack(), true));
+            erUnpackMenu.options.Add(new ConsoleOption("Unpack to pure text", () => ERSetup.SetupPureUnpack(), true));
+            erUnpackMenu.options.Add(new ConsoleOption("Unpack to ERText format", () => ERSetup.SetupERTUnpack(), true));
+            erUnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
+
+            //erRepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => ERSetup.SetupRawRepack(), true));
+            //erRepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => ERSetup.SetupPureRepack(), true));
+            //erRepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => ERSetup.SetupDS3TRepack(), true));
+            erRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             gameMenu.Show();
         }

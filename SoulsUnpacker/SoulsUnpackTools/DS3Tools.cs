@@ -284,7 +284,7 @@ namespace SoulsUnpackTools {
 
             int maxMenuEntries = 0;
             int menuEntries = 0;
-            foreach (BinderFile file in item_dlc2.Files) {
+            foreach (BinderFile file in menu_dlc2.Files) {
                 maxMenuEntries += FMG.Read(file.Bytes).Entries.Count;
             }
 
@@ -554,6 +554,8 @@ namespace SoulsUnpackTools {
             foreach (BinderFile file in menu_dlc2.Files) {
                 maxMenuEntries += FMG.Read(file.Bytes).Entries.Count;
             }
+
+            observer.onMenuStart(maxMenuEntries);
 
             foreach (BinderFile file in menu_dlc2.Files) {
                 string fmgName = file.Name.Split('\\').Last().Split('.')[0];
