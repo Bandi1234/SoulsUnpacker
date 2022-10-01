@@ -96,12 +96,92 @@ namespace SoulsUnpackerConsole {
             Console.ReadKey();
         }
 
-        public static void SetupRawRepack() { 
-            //TODO this
+        public static void SetupRawRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("item") || !Directory.Exists("menu")) {
+                Console.WriteLine("Couldn't find raw text libraries.");
+                Console.WriteLine("Please place both your item and menu folders in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item and menu folders found!");
+
+            if (File.Exists("item.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old item dcx...");
+                File.Delete("item.msgbnd.dcx");
+            }
+            if (File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old menu dcx...");
+                File.Delete("menu.msgbnd.dcx");
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking raw text into item.msgbnd.dcx...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking raw text into menu.msgbnd.dcx...", 0, maxMenuEntries);
+                },
+                (int menuEntries, int maxMenuEntries) => {
+                    lb.Update(menuEntries);
+                }
+            );
+            ERTools.RepackRawText("item", "menu", "item.msgbnd.dcx", "menu.msgbnd.dcx", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking raw text into item.msgbnd.dcx and menu.msgbnd.dcx");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
         }
 
-        public static void SetupPureRepack() { 
-            //Todo this
+        public static void SetupPureRepack() {
+            Console.Clear();
+
+            if (!Directory.Exists("item") || !Directory.Exists("menu")) {
+                Console.WriteLine("Couldn't find raw text libraries.");
+                Console.WriteLine("Please place both your item and menu folders in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item and menu folders found!");
+
+            if (File.Exists("item.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old item dcx...");
+                File.Delete("item.msgbnd.dcx");
+            }
+            if (File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old menu dcx...");
+                File.Delete("menu.msgbnd.dcx");
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking pure text into item.msgbnd.dcx...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking pure text into menu.msgbnd.dcx...", 0, maxMenuEntries);
+                },
+                (int menuEntries, int maxMenuEntries) => {
+                    lb.Update(menuEntries);
+                }
+            );
+            ERTools.RepackPureText("item", "menu", "item.msgbnd.dcx", "menu.msgbnd.dcx", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking pure text into item.msgbnd.dcx and menu.msgbnd.dcx");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
         }
 
         public static void SetupERTUnpack() {
@@ -144,6 +224,50 @@ namespace SoulsUnpackerConsole {
 
             Console.Clear();
             Console.WriteLine("Finished unpacking ERT into item.ERText and menu.ERText");
+            Console.WriteLine("< Press any key to continue >");
+            Console.ReadKey();
+        }
+
+        public static void SetupERTRepack() {
+            Console.Clear();
+
+            if (!File.Exists("item.ERText") || !File.Exists("menu.ERText")) {
+                Console.WriteLine("Couldn't find ERText files.");
+                Console.WriteLine("Please place both your item.ERText and menu.ERText files in the same folder as this tool.");
+                Console.WriteLine("< Press any key to continue >");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("item.ERText and menu.ERText found!");
+
+            if (File.Exists("item.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old item dcx...");
+                File.Delete("item.msgbnd.dcx");
+            }
+            if (File.Exists("menu.msgbnd.dcx")) {
+                Console.WriteLine("Deleting old menu dcx...");
+                File.Delete("menu.msgbnd.dcx");
+            }
+
+            ConsoleLoadingBar lb = null;
+            CommonUtils.TextObserver observer = new CommonUtils.TextObserver(
+                (int maxItemEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking ERText content into item.msgbnd.dcx...", 0, maxItemEntries);
+                },
+                (int itemEntries, int maxItemEntries) => {
+                    lb.Update(itemEntries);
+                },
+                (int maxMenuEntries) => {
+                    lb = new ConsoleLoadingBar("Repacking ERText content into menu.msgbnd.dcx...", 0, maxMenuEntries);
+                },
+                (int menuEntries, int maxMenuEntries) => {
+                    lb.Update(menuEntries);
+                }
+            );
+            ERTools.RepackERText("item.ERText", "menu.ERText", "item.msgbnd.dcx", "menu.msgbnd.dcx", observer);
+
+            Console.Clear();
+            Console.WriteLine("Finished repacking ERText content into item.msgbnd.dcx and menu.msgbnd.dcx");
             Console.WriteLine("< Press any key to continue >");
             Console.ReadKey();
         }

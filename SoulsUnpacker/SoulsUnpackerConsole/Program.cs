@@ -119,9 +119,9 @@ namespace SoulsUnpackerConsole {
             erUnpackMenu.options.Add(new ConsoleOption("Unpack to ERText format", () => ERSetup.SetupERTUnpack(), true));
             erUnpackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
-            //erRepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => ERSetup.SetupRawRepack(), true));
-            //erRepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => ERSetup.SetupPureRepack(), true));
-            //erRepackMenu.options.Add(new ConsoleOption("Repack from DSRText format", () => ERSetup.SetupDS3TRepack(), true));
+            erRepackMenu.options.Add(new ConsoleOption("Repack from raw text", () => ERSetup.SetupRawRepack(), true));
+            erRepackMenu.options.Add(new ConsoleOption("Repack from pure text", () => ERSetup.SetupPureRepack(), true));
+            erRepackMenu.options.Add(new ConsoleOption("Repack from ERText format", () => ERSetup.SetupERTRepack(), true));
             erRepackMenu.options.Add(new ConsoleOption("Back", () => { }, true));
 
             gameMenu.Show();
