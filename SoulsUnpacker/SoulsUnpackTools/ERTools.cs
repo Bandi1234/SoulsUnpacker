@@ -160,6 +160,7 @@ namespace SoulsUnpackTools {
                 Directory.CreateDirectory(dirName);
                 StreamWriter emptyWriter = new StreamWriter(Path.Combine(dirName, "empty.ERInfo"));
                 StreamWriter spaceWriter = new StreamWriter(Path.Combine(dirName, "spaces.ERInfo"));
+                StreamWriter errorWriter = new StreamWriter(Path.Combine(dirName, "errors.ERInfo"));
                 FMG fmg = FMG.Read(file.Bytes);
                 foreach (FMG.Entry entry in fmg.Entries) {
                     if (entry.Text == "" || entry.Text == null) {
@@ -170,6 +171,12 @@ namespace SoulsUnpackTools {
                     }
                     if (entry.Text == " ") {
                         spaceWriter.WriteLine(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        continue;
+                    }
+                    if (entry.Text == "[ERROR]") {
+                        errorWriter.WriteLine(entry.ID);
                         itemEntries++;
                         observer.onItemProgress(itemEntries, maxItemEntries);
                         continue;
@@ -188,6 +195,7 @@ namespace SoulsUnpackTools {
                 }
                 emptyWriter.Close();
                 spaceWriter.Close();
+                errorWriter.Close();
             }
             compIdWriter.Close();
 
@@ -211,6 +219,7 @@ namespace SoulsUnpackTools {
                 Directory.CreateDirectory(dirName);
                 StreamWriter emptyWriter = new StreamWriter(Path.Combine(dirName, "empty.ERInfo"));
                 StreamWriter spaceWriter = new StreamWriter(Path.Combine(dirName, "spaces.ERInfo"));
+                StreamWriter errorWriter = new StreamWriter(Path.Combine(dirName, "errors.ERInfo"));
                 FMG fmg = FMG.Read(file.Bytes);
                 foreach (FMG.Entry entry in fmg.Entries) {
                     if (entry.Text == "" || entry.Text == null) {
@@ -223,6 +232,12 @@ namespace SoulsUnpackTools {
                         spaceWriter.WriteLine(entry.ID);
                         menuEntries++;
                         observer.onMenuProgress(menuEntries, maxMenuEntries);
+                        continue;
+                    }
+                    if (entry.Text == "[ERROR]") {
+                        errorWriter.WriteLine(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
                         continue;
                     }
                     string name = entry.ID + ".txt";
@@ -239,6 +254,7 @@ namespace SoulsUnpackTools {
                 }
                 emptyWriter.Close();
                 spaceWriter.Close();
+                errorWriter.Close();
             }
             compIdWriter.Close();
         }
@@ -290,6 +306,17 @@ namespace SoulsUnpackTools {
                         string line = reader.ReadLine();
                         if (line != "") {
                             FMG.Entry entry = new FMG.Entry(int.Parse(line), " ");
+                            fmg.Entries.Add(entry);
+                        }
+                    }
+                }
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
+                using (StreamReader reader = new StreamReader(Path.Combine(folder, "errors.ERInfo"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry = new FMG.Entry(int.Parse(line), "[ERROR]");
                             fmg.Entries.Add(entry);
                         }
                     }
@@ -353,6 +380,19 @@ namespace SoulsUnpackTools {
                         }
                     }
                 }
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
+                using (StreamReader reader = new StreamReader(Path.Combine(folder, "errors.ERInfo"))) {
+                    while (!reader.EndOfStream) {
+                        string line = reader.ReadLine();
+                        if (line != "") {
+                            FMG.Entry entry = new FMG.Entry(int.Parse(line), "[ERROR]");
+                            fmg.Entries.Add(entry);
+                        }
+                    }
+                }
+                menuEntries++;
+                observer.onItemProgress(menuEntries, maxMenuEntries);
                 string[] files = Directory.GetFiles(folder, "*.txt", SearchOption.AllDirectories);
                 foreach (string file in files) {
                     int id = int.Parse(file.Split('\\').Last().Split('.')[0]);
@@ -393,6 +433,7 @@ namespace SoulsUnpackTools {
                 itemWriter.WriteLine(engName + "\t" + file.ID);
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
+                List<int> errorIds = new List<int>();
                 FMG fmg = FMG.Read(file.Bytes);
 
                 foreach (FMG.Entry entry in fmg.Entries) {
@@ -404,6 +445,12 @@ namespace SoulsUnpackTools {
                     }
                     if (entry.Text == " ") {
                         spaceIds.Add(entry.ID);
+                        itemEntries++;
+                        observer.onItemProgress(itemEntries, maxItemEntries);
+                        continue;
+                    }
+                    if (entry.Text == "[ERROR]") {
+                        errorIds.Add(entry.ID);
                         itemEntries++;
                         observer.onItemProgress(itemEntries, maxItemEntries);
                         continue;
@@ -431,6 +478,14 @@ namespace SoulsUnpackTools {
                     }
                 }
                 itemWriter.WriteLine(spaceLine);
+                string errorLine = "";
+                for (int i = 0; i < errorIds.Count; i++) {
+                    errorLine += errorIds[i];
+                    if (i < errorIds.Count - 1) {
+                        errorLine += "\t";
+                    }
+                }
+                itemWriter.WriteLine(errorLine);
             }
             itemWriter.Write("€€€€€");
             itemWriter.Close();
@@ -452,6 +507,7 @@ namespace SoulsUnpackTools {
                 menuWriter.WriteLine(engName + "\t" + file.ID);
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
+                List<int> errorIds = new List<int>();
                 FMG fmg = FMG.Read(file.Bytes);
 
                 foreach (FMG.Entry entry in fmg.Entries) {
@@ -466,6 +522,11 @@ namespace SoulsUnpackTools {
                         menuEntries++;
                         observer.onMenuProgress(menuEntries, maxMenuEntries);
                         continue;
+                    }
+                    if (entry.Text == "[ERROR]") {
+                        errorIds.Add(entry.ID);
+                        menuEntries++;
+                        observer.onMenuProgress(menuEntries, maxMenuEntries);
                     }
                     menuWriter.WriteLine(entry.ID);
                     menuWriter.WriteLine(entry.Text);
@@ -490,6 +551,14 @@ namespace SoulsUnpackTools {
                     }
                 }
                 menuWriter.WriteLine(spaceLine);
+                string errorLine = "";
+                for (int i = 0; i < errorIds.Count; i++) {
+                    errorLine += errorIds[i];
+                    if (i < errorIds.Count - 1) {
+                        errorLine += "\t";
+                    }
+                }
+                menuWriter.WriteLine(errorLine);
             }
             menuWriter.Write("€€€€€");
             menuWriter.Close();
@@ -568,6 +637,16 @@ namespace SoulsUnpackTools {
                     string[] spaces = spacesLine.Split('\t');
                     foreach (string space in spaces) {
                         FMG.Entry entry = new FMG.Entry(int.Parse(space), " ");
+                        fmg.Entries.Add(entry);
+                    }
+                }
+                string errorLine = itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
+                if (errorLine != "") {
+                    string[] errors = errorLine.Split('\t');
+                    foreach (string error in errors) {
+                        FMG.Entry entry = new FMG.Entry(int.Parse(error), "[ERROR]");
                         fmg.Entries.Add(entry);
                     }
                 }
@@ -654,6 +733,16 @@ namespace SoulsUnpackTools {
                     string[] spaces = spacesLine.Split('\t');
                     foreach (string space in spaces) {
                         FMG.Entry entry = new FMG.Entry(int.Parse(space), " ");
+                        fmg.Entries.Add(entry);
+                    }
+                }
+                string errorLine = menuReader.ReadLine();
+                menuEntries++;
+                observer.onItemProgress(menuEntries, maxMenuEntries);
+                if (errorLine != "") {
+                    string[] errors = errorLine.Split('\t');
+                    foreach (string error in errors) {
+                        FMG.Entry entry = new FMG.Entry(int.Parse(error), "[ERROR]");
                         fmg.Entries.Add(entry);
                     }
                 }
