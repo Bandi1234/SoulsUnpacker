@@ -1,0 +1,450 @@
+100	Dagger
+1000	Twinblade
+1001	Godskin Peeler
+1003	Twinned Knight Swords
+1005	Eleonora's Poleblade
+1006	Abundance and Decay Twinblade
+1007	Abundance Twinblade
+1008	Gargoyle's Twinblade
+1009	Gargoyle's Black Blades
+101	Black Knife
+102	Parrying Dagger
+103	Miséricorde
+104	Reduvia
+105	Crystal Knife
+106	Celebrant's Sickle
+107	Glintstone Kris
+108	Scorpion's Stinger
+109	Great Knife
+11	Unarmed
+110	Wakizashi
+1100	Mace
+1101	Club
+1103	Curved Club
+1104	Warpick
+1105	Morning Star
+1106	Varré's Bouquet
+1107	Spiked Club
+1108	Hammer
+1109	Monk's Flamemace
+111	Cinquedea
+1110	Envoy's Horn
+1111	Scepter of the All-Knowing
+1112	Nox Flowing Hammer
+1113	Ringed Finger
+1114	Stone Club
+1115	Marika's Hammer
+1116	Father Marika's Hammer
+113	Ivory Sickle
+114	Bloodstained Dagger
+115	Erdsteel Dagger
+116	Blade of Calling
+1200	Large Club
+1201	Greathorn Hammer
+1202	Battle Hammer
+1206	Great Mace
+1208	Curved Great Club
+1213	Celebrant's Skull
+1214	Pickaxe
+1215	Beastclaw Greathammer
+1216	Envoy's Long Horn
+1217	Cranial Vessel Candlestand
+1218	Great Stars
+1219	Brick Hammer
+1220	Devourer's Scepter
+1221	Rotten Battle Hammer
+1300	Nightrider Flail
+1301	Flail
+1302	Family Heads
+1303	Bastard's Stars
+1304	Chainlink Flail
+1400	Battle Axe
+1401	Forked Hatchet
+1402	Hand Axe
+1403	Jawbone Axe
+1404	Iron Cleaver
+1405	Ripple Blade
+1406	Celebrant's Cleaver
+1408	Icerind Hatchet
+1410	Highland Axe
+1411	Sacrificial Axe
+1412	Rosus' Axe
+1413	Burial Axe
+1414	Stormhawk Axe
+1500	Greataxe
+1501	Warped Axe
+1502	Great Omenkiller Cleaver
+1503	Crescent Moon Axe
+1504	Axe of Godrick
+1505	Longhaft Axe
+1506	Rusted Anchor
+1508	Executioner's Greataxe
+1511	Winged Greathorn
+1512	Butchering Knife
+1513	Gargoyle's Great Axe
+1514	Gargoyle's Black Axe
+1600	Short Spear
+1601	Spear
+1602	Crystal Spear
+1603	Clayman's Harpoon
+1604	Cleanrot Spear
+1605	Partisan
+1606	Celebrant's Rib-Rake
+1607	Pike
+1608	Torchpole
+1609	Bolt of Gransax
+1611	Cross-Naginata
+1612	Death Ritual Spear
+1613	Inquisitor's Girandole
+1614	Spiked Spear
+1615	Iron Spear
+1616	Rotten Crystal Spear
+1701	Mohgwyn's Sacred Spear
+1702	Siluria's Tree
+1703	Serpent-Hunter
+1705	Vyke's War Spear
+1706	Lance
+1707	Treespear
+1800	Halberd
+1801	Pest's Glaive
+1802	Lucerne
+1803	Banished Knight's Halberd
+1804	Commander's Standard
+1805	Nightrider Glaive
+1806	Ripple Crescent Halberd
+1807	Vulgar Militia Saw
+1808	Golden Halberd
+1809	Glaive
+1810	Loretta's War Sickle
+1811	Guardian's Swordspear
+1813	Vulgar Militia Shotel
+1814	Dragon Halberd
+1815	Gargoyle's Halberd
+1816	Gargoyle's Black Halberd
+1900	Scythe
+1901	Grave Scythe
+1902	Halo Scythe
+1905	Heretic's Hook
+1906	Winged Scythe
+200	Longsword
+2000	Whip
+2002	Thorned Whip
+2003	Magma Whip Candlestick
+2005	Hoslow's Petal Whip
+2006	Giant's Red Braid
+2007	Urumi
+201	Short Sword
+202	Broadsword
+203	Royal Soldier Straight Sword
+204	Lordsworn's Straight Sword
+205	Weathered Straight Sword
+206	Ornamental Straight Sword
+207	Golden Epitaph
+208	Nox Flowing Sword
+209	Inseparable Sword
+2100	Caestus
+2101	Spiked Caestus
+2106	Grafted Dragon
+2107	Iron Ball
+2108	Star Fist
+211	Coded Sword
+2110	Katar
+2111	Clinging Bone
+2112	Veteran's Prosthesis
+2113	Cipher Pata
+214	Sword of Night and Flame
+215	Crystal Sword
+218	Carian Knight's Sword
+219	Sword of St. Trina
+220	Miquellan Knight's Sword
+2200	Hookclaws
+2201	Venomous Fang
+2202	Bloodhound Claws
+2203	Raptor Talons
+221	Cane Sword
+222	Regalia of Eochaid
+223	Noble's Slender Sword
+224	Warhawk's Talon
+225	Lazuli Glintstone Sword
+226	Rotten Crystal Sword
+2300	Prelate's Inferno Crozier
+2301	Watchdog's Staff
+2302	Great Club
+2303	Envoy's Greathorn
+2304	Duelist Greataxe
+2305	Axe of Godfrey
+2306	Dragon Greatclaw
+2307	Staff of the Avatar
+2308	Fallingstar Beast Jaw
+2310	Ghiza's Wheel
+2311	Giant-Crusher
+2312	Golem's Halberd
+2313	Troll's Hammer
+2314	Rotten Staff
+2315	Rotten Greataxe
+2400	Torch
+2402	Steel-Wire Torch
+2404	St. Trina's Torch
+2405	Ghostflame Torch
+2406	Beast-Repellent Torch
+2407	Sentry's Torch
+300	Bastard Sword
+3000	Buckler
+3001	Perfumer's Shield
+3002	Man-Serpent's Shield
+3003	Rickety Shield
+3004	Pillory Shield
+3006	Beastman's Jar-Shield
+3007	Red Thorn Roundshield
+3008	Scripture Wooden Shield
+3009	Riveted Wooden Shield
+301	Forked Greatsword
+3010	Blue-White Wooden Shield
+3011	Rift Shield
+3012	Iron Roundshield
+3013	Gilded Iron Shield
+3014	Ice Crest Shield
+3015	Smoldering Shield
+3019	Spiralhorn Shield
+302	Iron Greatsword
+3020	Coil Shield
+303	Lordsworn's Greatsword
+304	Knight's Greatsword
+305	Flamberge
+306	Ordovis's Greatsword
+307	Alabaster Lord's Sword
+308	Banished Knight's Greatsword
+309	Dark Moon Greatsword
+310	Sacred Relic Sword
+3100	Kite Shield
+3101	Marred Leather Shield
+3102	Marred Wooden Shield
+3103	Banished Knight's Shield
+3104	Albinauric Shield
+3105	Sun Realm Shield
+3106	Silver Mirrorshield
+3107	Round Shield
+3108	Scorpion Kite Shield
+3109	Twinbird Kite Shield
+3110	Blue-Gold Kite Shield
+3113	Brass Shield
+3114	Great Turtle Shell
+3117	Shield of the Guilty
+3119	Carian Knight's Shield
+3123	Large Leather Shield
+3124	Horse Crest Wooden Shield
+3125	Candletree Wooden Shield
+3126	Flame Crest Wooden Shield
+3127	Hawk Crest Wooden Shield
+3128	Beast Crest Heater Shield
+3129	Red Crest Heater Shield
+313	Helphen's Steeple
+3130	Blue Crest Heater Shield
+3131	Eclipse Crest Heater Shield
+3132	Inverted Hawk Heater Shield
+3133	Heater Shield
+3134	Black Leather Shield
+314	Blasphemous Blade
+315	Marais Executioner's Sword
+316	Sword of Milos
+317	Golden Order Greatsword
+318	Claymore
+319	Gargoyle's Greatsword
+320	Death's Poker
+3200	Dragon Towershield
+3202	Distinguished Greatshield
+3203	Crucible Hornshield
+3204	Dragonclaw Shield
+3205	Briar Greatshield
+3208	Erdtree Greatshield
+3209	Golden Beast Crest Shield
+321	Gargoyle's Blackblade
+3212	Jellyfish Shield
+3213	Fingerprint Stone Shield
+3214	Icon Shield
+3215	One-Eyed Shield
+3216	Visage Shield
+3217	Spiked Palisade Shield
+3219	Manor Towershield
+3220	Crossed-Tree Towershield
+3221	Inverted Hawk Towershield
+3222	Ant's Skull Plate
+3223	Redmane Greatshield
+3224	Eclipse Crest Greatshield
+3225	Cuckoo Greatshield
+3226	Golden Greatshield
+3227	Gilded Greatshield
+3228	Haligtree Crest Greatshield
+3229	Wooden Greatshield
+3230	Lordsworn's Shield
+3300	Glintstone Staff
+3304	Crystal Staff
+3305	Gelmir Glintstone Staff
+3306	Demi-Human Queen's Staff
+3309	Carian Regal Scepter
+3312	Digger's Staff
+3313	Astrologer's Staff
+3317	Carian Glintblade Staff
+3318	Prince of Death's Staff
+3319	Albinauric Staff
+3320	Academy Glintstone Staff
+3321	Carian Glintstone Staff
+3323	Azur's Glintstone Staff
+3324	Lusat's Glintstone Staff
+3325	Meteorite Staff
+3326	Staff of the Guilty
+3327	Rotten Crystal Staff
+3328	Staff of Loss
+3400	Finger Seal
+3401	Godslayer's Seal
+3402	Giant's Seal
+3403	Gravel Stone Seal
+3404	Clawmark Seal
+3406	Golden Order Seal
+3407	Erdtree Seal
+3408	Dragon Communion Seal
+3409	Frenzied Flame Seal
+400	Greatsword
+4000	Shortbow
+4001	Misbegotten Shortbow
+4002	Red Branch Shortbow
+4003	Harp Bow
+4005	Composite Bow
+401	Watchdog's Greatsword
+402	Maliketh's Black Blade
+403	Troll's Golden Sword
+404	Zweihander
+405	Starscourge Greatsword
+406	Royal Greatsword
+407	Godslayer's Greatsword
+408	Ruins Greatsword
+410	Grafted Blade Greatsword
+4100	Longbow
+4101	Albinauric Bow
+4102	Horn Bow
+4103	Erdtree Bow
+4104	Serpent Bow
+4106	Pulley Bow
+4107	Black Bow
+411	Troll Knight's Sword
+4200	Lion Greatbow
+4201	Golem Greatbow
+4203	Erdtree Greatbow
+4204	Greatbow
+4300	Soldier's Crossbow
+4302	Light Crossbow
+4303	Heavy Crossbow
+4305	Pulley Crossbow
+4306	Full Moon Crossbow
+4308	Arbalest
+4310	Buckshot Crossbow
+4311	Crepus's Black-Key Crossbow
+4400	Hand Ballista
+4401	Jar Cannon
+500	Estoc
+5000	Arrow
+5001	Fire Arrow
+5002	Serpent Arrow
+5003	Bone Arrow (Fletched)
+5004	St. Trina's Arrow
+5006	Shattershard Arrow (Fletched)
+5008	Rainbow Stone Arrow (Fletched)
+5009	Golden Arrow
+501	Cleanrot Knight's Sword
+5010	Dwelling Arrow
+5011	Bone Arrow
+5013	Firebone Arrow (Fletched)
+5014	Firebone Arrow
+5015	Poisonbone Arrow (Fletched)
+5016	Poisonbone Arrow
+5017	Sleepbone Arrow (Fletched)
+5018	Sleepbone Arrow
+5019	Stormwing Bone Arrow
+502	Rapier
+5020	Lightningbone Arrow (Fletched)
+5021	Lightningbone Arrow
+5022	Rainbow Stone Arrow
+5023	Shattershard Arrow
+5024	Spiritflame Arrow
+5025	Storm Arrow
+5026	Magicbone Arrow (Fletched)
+5027	Magicbone Arrow
+5028	Haligbone Arrow (Fletched)
+5029	Haligbone Arrow
+503	Rogier's Rapier
+5030	Bloodbone Arrow (Fletched)
+5031	Bloodbone Arrow
+5032	Coldbone Arrow (Fletched)
+5033	Coldbone Arrow
+5034	Rotbone Arrow (Fletched)
+5035	Rotbone Arrow
+504	Antspur Rapier
+505	Frozen Needle
+506	Noble's Estoc
+5100	Great Arrow
+5101	Golem's Great Arrow
+5102	Golden Great Arrow
+5103	Golem's Magic Arrow
+5104	Radahn's Spear
+5105	Bone Great Arrow (Fletched)
+5106	Bone Great Arrow
+5200	Bolt
+5201	Lightning Bolt
+5202	Perfumer's Bolt
+5203	Black-Key Bolt
+5204	Burred Bolt
+5205	Meteor Bolt
+5206	Explosive Bolt
+5207	Golden Bolt
+5208	Lordsworn's Bolt
+5209	Bone Bolt
+5210	Firebone Bolt
+5211	Lightningbone Bolt
+5212	Magicbone Bolt
+5213	Haligbone Bolt
+5214	Poisonbone Bolt
+5215	Bloodbone Bolt
+5216	Coldbone Bolt
+5217	Rotbone Bolt
+5218	Sleepbone Bolt
+5219	Flaming Bolt
+5300	Ballista Bolt
+5301	Lightning Greatbolt
+5302	Explosive Greatbolt
+5303	Bone Ballista Bolt
+600	Bloody Helice
+601	Godskin Stitcher
+602	Great Épée
+604	Dragon King's Cragblade
+700	Falchion
+701	Beastman's Curved Sword
+702	Shotel
+703	Shamshir
+704	Bandit's Curved Sword
+705	Magma Blade
+706	Flowing Curved Sword
+707	Wing of Astel
+708	Scavenger's Curved Sword
+709	Sharktooth Curved Sword
+710	Eclipse Shotel
+711	Serpent-God's Curved Sword
+712	Mantis Blade
+714	Scimitar
+715	Grossmesser
+801	Onyx Lord's Greatsword
+802	Dismounter
+803	Bloodhound's Fang
+804	Magma Wyrm's Scalesword
+805	Zamor Curved Sword
+806	Omen Cleaver
+807	Monk's Flameblade
+808	Beastman's Cleaver
+810	Morgott's Cursed Sword
+811	Holy Inferno Greatsword
+900	Uchigatana
+901	Nagakiba
+902	Hand of Malenia
+903	Meteoric Ore Blade
+904	Rivers of Blood
+906	Moonveil
+907	Dragonscal

@@ -67,6 +67,7 @@
     <Compile Include="DSRTools.cs" />
     <Compile Include="DSRUtils.cs" />
     <Compile Include="ERTools.cs" />
+    <Compile Include="ERUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SEKTools.cs" />
     <Compile Include="SEKUtils.cs" />

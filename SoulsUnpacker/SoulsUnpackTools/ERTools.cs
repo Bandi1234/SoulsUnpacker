@@ -184,7 +184,72 @@ namespace SoulsUnpackTools {
                     string name = entry.ID + ".txt";
                     string target = Path.Combine(dirName, name);
                     switch (engName) {
-                        //TODO filters
+                        case "WeaponName":
+                        case "WeaponInfo":
+                        case "WeaponCaption":
+                            string wType = "";
+                            string wName = ERUtils.GetWeaponNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, wType, wName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, wType, wName));
+                            target = Path.Combine(dirName, wType, wName, name);
+                            break;
+                        case "ProtectorName":
+                        case "ProtectorInfo":
+                        case "ProtectorCaption":
+                            string arSet = ERUtils.GetArmorSetFolder(name);
+                            string arName = ERUtils.GetArmorNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, arSet, arName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, arSet, arName));
+                            target = Path.Combine(dirName, arSet, arName, name);
+                            break;
+                        case "PlaceName":
+                            string pName = ERUtils.GetPlaceNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, pName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, pName));
+                            target = Path.Combine(dirName, pName, name);
+                            break;
+                        case "NpcName":
+                            string npcType = ERUtils.GetNPCTypeFolder(name);
+                            string npcName = ERUtils.GetNPCNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, npcType, npcName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, npcType, npcName));
+                            target = Path.Combine(dirName, npcType, npcName, name);
+                            break;
+                        case "GoodsName":
+                        case "GoodsInfo":
+                        case "GoodsInfo2":
+                        case "GoodsCaption":
+                            string gType = "";
+                            string gName = ERUtils.GetGoodsNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, gType, gName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, gType, gName));
+                            target = Path.Combine(dirName, gType, gName, name);
+                            break;
+                        case "GemName":
+                        case "GemInfo":
+                        case "GemCaption":
+                            string geName = ERUtils.GetArtNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, geName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, geName));
+                            target = Path.Combine(dirName, geName, name);
+                            break;
+                        case "ArtsName":
+                        case "ArtsCaption":
+                            string artType = ERUtils.GetArtTypeFolder(name);
+                            string artName = ERUtils.GetArtNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, artType, artName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, artType, artName));
+                            target = Path.Combine(dirName, artType, artName, name);
+                            break;
+                        case "AccessoryName":
+                        case "AccessoryInfo":
+                        case "AccessoryCaption":
+                            string accName = ERUtils.GetAccessoryNameFolder(name);
+                            if (!Directory.Exists(Path.Combine(dirName, accName)))
+                                Directory.CreateDirectory(Path.Combine(dirName, accName));
+                            target = Path.Combine(dirName, accName, name);
+                            break;
+
                     }
                     File.Create(target).Close();
                     StreamWriter sw = new StreamWriter(target);
