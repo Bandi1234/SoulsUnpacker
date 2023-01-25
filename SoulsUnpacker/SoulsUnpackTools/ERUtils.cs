@@ -8,7 +8,17 @@ using System.Threading.Tasks;
 namespace SoulsUnpackTools {
     public static class ERUtils {
 
-        //TODO Weapon types
+        public static string GetWeaponTypeFolder(string name) {
+            name = name.Split('.')[0];
+            string type = "";
+            if (name.Length == 7) {
+                type = name.Substring(0, 1);
+            } else if (name.Length == 8) {
+                type = name.Substring(0, 2);
+            }
+            return CommonUtils.FindEntryIn("pureInfo/WeaponTypes.ERInfo", type);
+
+        }
 
         public static string GetWeaponNameFolder(string name) {
             name = name.Split('.')[0];
@@ -33,9 +43,9 @@ namespace SoulsUnpackTools {
                 name = name.Substring(0, 3);
                 return CommonUtils.FindEntryIn("pureInfo/AccessoryNames.ERInfo", name);
             } else if (name == "100") {
-                return "100";
+                return "Petition for Help";
             } else if (name == "101") {
-                return "101";
+                return "Broken Finger Stalker Contract";
             }
             return "";
         }
@@ -94,6 +104,9 @@ namespace SoulsUnpackTools {
 
         public static string GetGemNameFolder(string name) {
             name = name.Split('.')[0];
+            if (name.Length < 3) {
+                return "";
+            }
             name = name.Substring(0, 3);
             return CommonUtils.FindEntryIn("pureInfo/ArtNames.ERInfo", name);
         }

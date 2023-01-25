@@ -187,7 +187,7 @@ namespace SoulsUnpackTools {
                         case "WeaponName":
                         case "WeaponInfo":
                         case "WeaponCaption":
-                            string wType = "";
+                            string wType = ERUtils.GetWeaponTypeFolder(name);
                             string wName = ERUtils.GetWeaponNameFolder(name);
                             if (!Directory.Exists(Path.Combine(dirName, wType, wName)))
                                 Directory.CreateDirectory(Path.Combine(dirName, wType, wName));
@@ -228,7 +228,7 @@ namespace SoulsUnpackTools {
                         case "GemName":
                         case "GemInfo":
                         case "GemCaption":
-                            string geName = ERUtils.GetArtNameFolder(name);
+                            string geName = ERUtils.GetGemNameFolder(name);
                             if (!Directory.Exists(Path.Combine(dirName, geName)))
                                 Directory.CreateDirectory(Path.Combine(dirName, geName));
                             target = Path.Combine(dirName, geName, name);
