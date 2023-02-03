@@ -534,6 +534,7 @@ namespace SoulsUnpackTools {
             foreach (PureFmgHandler handler in itemFmgs) {
                 string hName = handler.name.Split('\\').Last().Split('.')[0];
                 itemWriter.WriteLine(hName + "\t" + handler.id1 + "\t" + handler.id2);
+                itemWriter.WriteLine("€€€");
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
 
@@ -573,6 +574,7 @@ namespace SoulsUnpackTools {
                     }
                 }
                 itemWriter.WriteLine(spaceLine);
+                itemWriter.WriteLine("€€€€");
             }
             itemWriter.Write("€€€€€");
             itemWriter.Close();
@@ -600,6 +602,7 @@ namespace SoulsUnpackTools {
             foreach (PureFmgHandler handler in menuFmgs) {
                 string hName = handler.name.Split('\\').Last().Split('.')[0];
                 menuWriter.WriteLine(hName + "\t" + handler.id1 + "\t" + handler.id2);
+                menuWriter.WriteLine("€€€");
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
 
@@ -639,6 +642,7 @@ namespace SoulsUnpackTools {
                     }
                 }
                 menuWriter.WriteLine(spaceLine);
+                menuWriter.WriteLine("€€€€");
             }
             menuWriter.Write("€€€€€");
             menuWriter.Close();
@@ -668,6 +672,9 @@ namespace SoulsUnpackTools {
                 if (fmgLine == "€€€€€") {
                     break;
                 }
+                itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
                 FmgInfo fmgInfo = new FmgInfo(fmgLine);
                 FMG fmg1 = new FMG();
                 FMG fmg2 = new FMG();
@@ -732,6 +739,9 @@ namespace SoulsUnpackTools {
                         }
                     }
                 }
+                itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
                 BinderFile bFile1 = new BinderFile();
                 BinderFile bFile2 = new BinderFile();
                 bFile1.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fmgInfo.name + ".fmg";
@@ -774,6 +784,9 @@ namespace SoulsUnpackTools {
                 if (fmgLine == "€€€€€") {
                     break;
                 }
+                menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
                 FmgInfo fmgInfo = new FmgInfo(fmgLine);
                 FMG fmg1 = new FMG();
                 FMG fmg2 = new FMG();
@@ -838,6 +851,9 @@ namespace SoulsUnpackTools {
                         }
                     }
                 }
+                menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
                 BinderFile bFile1 = new BinderFile();
                 BinderFile bFile2 = new BinderFile();
                 bFile1.Name = @"N:\FRPG\data\Msg\DATA_ENGLISH\" + fmgInfo.name + ".fmg";

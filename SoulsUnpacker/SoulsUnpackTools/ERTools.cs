@@ -496,6 +496,7 @@ namespace SoulsUnpackTools {
                 string fmgName = file.Name.Split('\\').Last().Split('.')[0];
                 string engName = fmgName;
                 itemWriter.WriteLine(engName + "\t" + file.ID);
+                itemWriter.WriteLine("€€€");
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
                 List<int> errorIds = new List<int>();
@@ -551,6 +552,7 @@ namespace SoulsUnpackTools {
                     }
                 }
                 itemWriter.WriteLine(errorLine);
+                itemWriter.WriteLine("€€€€");
             }
             itemWriter.Write("€€€€€");
             itemWriter.Close();
@@ -570,6 +572,7 @@ namespace SoulsUnpackTools {
                 string fmgName = file.Name.Split('\\').Last().Split('.')[0];
                 string engName = fmgName;
                 menuWriter.WriteLine(engName + "\t" + file.ID);
+                menuWriter.WriteLine("€€€");
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
                 List<int> errorIds = new List<int>();
@@ -624,6 +627,7 @@ namespace SoulsUnpackTools {
                     }
                 }
                 menuWriter.WriteLine(errorLine);
+                menuWriter.WriteLine("€€€€");
             }
             menuWriter.Write("€€€€€");
             menuWriter.Close();
@@ -652,6 +656,9 @@ namespace SoulsUnpackTools {
                 if (fmgLine == "€€€€€") {
                     break;
                 }
+                itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
                 string engName = fmgLine.Split('\t')[0];
                 string fmgName = engName;
                 int fmgId = int.Parse(fmgLine.Split('\t')[1]);
@@ -715,6 +722,9 @@ namespace SoulsUnpackTools {
                         fmg.Entries.Add(entry);
                     }
                 }
+                itemReader.ReadLine();
+                itemEntries++;
+                observer.onItemProgress(itemEntries, maxItemEntries);
                 BinderFile bFile = new BinderFile();
                 bFile.Name = @"N:\GR\data\INTERROOT_win64\msg\engUS\" + fmgName + ".fmg";
                 bFile.ID = fmgId;
@@ -748,6 +758,9 @@ namespace SoulsUnpackTools {
                 if (fmgLine == "€€€€€") {
                     break;
                 }
+                menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
                 string engName = fmgLine.Split('\t')[0];
                 string fmgName = engName;
                 int fmgId = int.Parse(fmgLine.Split('\t')[1]);
@@ -811,6 +824,9 @@ namespace SoulsUnpackTools {
                         fmg.Entries.Add(entry);
                     }
                 }
+                menuReader.ReadLine();
+                menuEntries++;
+                observer.onMenuProgress(menuEntries, maxMenuEntries);
                 BinderFile bFile = new BinderFile();
                 bFile.Name = @"N:\GR\data\INTERROOT_win64\msg\engUS\" + fmgName + ".fmg";
                 bFile.ID = fmgId;

@@ -359,6 +359,7 @@ namespace SoulsUnpackTools {
                 } else {
                     sw.WriteLine(handler.fmgDir + "\t" + handler.fmgName);
                 }
+                sw.WriteLine("€€€");
                 List<int> emptyIds = new List<int>();
                 List<int> spaceIds = new List<int>();
 
@@ -398,6 +399,7 @@ namespace SoulsUnpackTools {
                     }
                 }
                 sw.WriteLine(spaceLine);
+                sw.WriteLine("€€€€");
             }
             sw.Write("€€€€€");
             sw.Close();
@@ -427,6 +429,9 @@ namespace SoulsUnpackTools {
                 if (fmgLine == "€€€€€") {
                     break;
                 }
+                sr.ReadLine();
+                entries++;
+                observer.onItemProgress(entries, maxEntries);
                 string[] nameParts = fmgLine.Split('\t');
                 string fmgName = "";
                 string fmgDir = "";
@@ -489,6 +494,9 @@ namespace SoulsUnpackTools {
                         handler.fmgData.Entries.Add(entry);
                     }
                 }
+                sr.ReadLine();
+                entries++;
+                observer.onItemProgress(entries, maxEntries);
                 File.Create(handler.fmgFile).Close();
                 File.WriteAllBytes(handler.fmgFile, handler.fmgData.Write());
             }
